@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>about.html</title>
+<meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+
+<link href="../../style_unit.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="./lib_Actions.js"></script>
+<script src="./lib_cDraw1.js"></script>
+
+<script>
+var probapp = angular.module('probApp', []);
+probapp.controller('probCtrl', function($scope,$http)
+{
+// on load action ------------------------------------------------------------->
+onloadInit();
+function onloadInit()
+{
+	$scope.caller= "app4_main";
+	$scope.ftrstr= "app4STATICS";	
+}
+
+})
+</script>
+
+<script>
+function myMouseClick(arg) {
+	var msg= arg;
+	alert("mouseClick= "+msg);
+}
+</script>
+
+</head>
+<!----------------------------------------------------------------------------->
+
+
+<body id="bodywrap" ng-app="probApp" ng-controller="probCtrl">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div style="width:804px; border:2px solid gray; background-color:ivory;">
+
+<!-- Header section ----------------------------------------------------------->
+<div>
+<br>
+<h1 class="h1style" style="text-align:center">About app4STATICS</h1>
+<h2 class="h2style" style="text-align: center"><i>Using this active problem pool for STATICS to build your skills and test yourself!</i></h2>
+</div>
+
+<div id="topimage" style="text-align:center; border:solid red 0px; 
+      cursor:pointer" onclick="myMouseClick('img_main_1');">
+  <img src="../../img_main_1.JPG" alt="img_main_1" style="width:790px;height:150px;">
+</div>
+ 
+<!-- Questions and answers ----------------------------------------------------> 
+<br>
+<div>
+  <div class="about1"><b>What is 'app4STATICS'?</b></div>
+  <div class="about2"><b>app4STATICS is a rich collection of <u>active</u>
+  problems for building and verifying your STATICS skills.</b></div>
+</div>
+
+<br>
+<div>
+  <div class="about1"><b>What is an active problem?</b></div>
+  <p class="p45" style="border:1px solid red">An active problem has a set of parameters which vary with each instance. Parameters are chosen randomly within ranges. In this way you can try as many variations of the the same problem type as you wish.</p>
+</div>
+
+<br>
+<div style="width:800px; border:solid red 0px;">
+  <div class="about1"><b>What about active problem answers?</b></div>
+  <p class="p45">Each problem instance has its answer set generated immediately. Then you can enter your answers and get immediate feedback.</p>
+</div>
+
+<br>
+<div>
+  <div class="about1"><b>What do I need to know to use 'app4STATICS' 
+  effectively?</b></div>
+  <div class="about2"><b>Use app4STATICS while you are learning the principles
+  and methods of Statics to earn how to apply them. And use app4STATICS at any
+  time to review and refresh your skills. Use app4STATICS to assess for yourself
+  how competent you are in Statics problem-solving.</b></div>
+</div>
+
+<br>
+<div>
+  <div class="about1"><b>How are the problems organized?</b></div>
+  <div class="about2"><b>The problems are organized by units which match the
+  most commonly used topics or chapters in popular texts and videos.</b></div>
+</div>
+
+<br>
+<div>
+  <div class="about1"><b>Who controls the use of app4STATICS?</b></div>
+  <div class="about2"><b>YOU ARE IN COMPLETE CONTROL OF HOW YOU USE app4STATICS.</b></div>
+  <div class="about2"><b>(1) You get immediate feedback when you enter an
+  answer.</b></div>
+  <div class="about2"><b>(2) You can ask for an answer at any time.</b></div>
+  <div class="about2"><b>(3) You can ask for a worked solution at any time.</b></div>  
+  <div class="about2"><b>(4) You can ask for a new set of <i>instance
+  variables</i>, such as loads, lengths, masses, etc. By running multiple
+  instances of a problem you can understand the structure of the problem
+  type, not just how to solve for a particular set of numbers.</b></div> 
+</div>
+
+<hr>
+<!-- Footer ------------------------------------------------------------------->
+<div id="ftrwrap">
+<p id="ftrlin1"><b>{{ftrstr}}</b></p>
+</div>
+
+</div>
+
+<!-- Inline scripts -----------------------------------------------------------
+<script type="text/javascript">
+</script> -->	
+
+</body>
+</html>

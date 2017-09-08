@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>Frames</title>
+
+<link href="../../style_unit.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<script src="../../lib_utils_js.js"></script>
+<script src="../../lib_cDraw1.js"></script>
+
+<script>
+var probapp = angular.module('probApp', []);
+probapp.controller('probCtrl', function($scope,$http)
+{
+// on load action ------------------------------------------------------------->
+onloadInit();
+function onloadInit()
+{
+	var sysdat=    init_sys_data();
+	$scope.hdrstr= sysdat.hdrstr;
+	$scope.ftrstr= sysdat.ftrstr;
+
+	$scope.unitid= "Frames";
+	$scope.prbnum= "";
+	$scope.nprobs= 10;
+	$scope.msgtxt= "none";
+	$scope.setupreturn= "";
+}
+
+$scope.myMouseClick= function(arg)
+{
+	if (arg <= $scope.nprobs) {
+		$scope.prbnum= arg;
+		$http({
+			method: 'POST',
+			data:	{ unitid: $scope.unitid,
+					  prbnum: $scope.prbnum  },
+			url:    '../../cpSetup.php'
+		}).then(function successCallback(response) {
+			var result=   response.data; 	// returned object is 'result'
+			var probfile= "../../prob_run.php";
+			window.open(probfile);
+		}, function errorCallback(response) {
+			var status=     response.status;
+			var statusText= response.statusText;			
+			var errout=     "error= ".concat(status,", ",statusText);
+			console.log(errout);	
+		})						
+	}	
+}
+})
+</script>
+
+</head>
+
+
+<body id="bodywrap" ng-app="probApp" ng-controller="probCtrl">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- Show title --------------------------------------------------------------->
+<div>
+<h1 class="h1style" style="text-align:center"><b>{{hdrstr}}: Frames and Machines</b></h1>
+</div>
+
+<hr class="std1" />
+<br>
+<div>
+<p class="p30"><b>Click on the figure to select a problem.</b></p>
+</div>
+
+<br>
+<!-- FIGURES ------------------------------------------------------------------>
+<div id="figureswrap" style="text-align:center; border:dashed blue 0px;">
+
+<div>
+  <p class="p30" style="text-align:left"><b>1 to 3</b></p>
+</div>
+<div class="imagrow">
+<img class="imgcol1" ng-click="myMouseClick('1')" src="./Frames_1/Frames_1_thumb.JPG" alt="figure 1">
+<img class="imgcol2" ng-click="myMouseClick('2')" src="./Frames_2/Frames_2_thumb.JPG" alt="figure 2">
+<img class="imgcol3" ng-click="myMouseClick('3')" src="./Frames_3/Frames_3_thumb.JPG" alt="figure 3">
+</div>
+
+<br>
+<div>
+  <p class="p30" style="text-align:left"><b>4 to 6</b></p>
+</div>
+<div class="imagrow">
+<img class="imgcol1" ng-click="myMouseClick('4')" src="./Frames_4/Frames_4_thumb.JPG" alt="figure 4">
+<img class="imgcol2" ng-click="myMouseClick('5')" src="./Frames_5/Frames_5_thumb.JPG" alt="figure 5">
+<img class="imgcol3" ng-click="myMouseClick('6')" src="./Frames_6/Frames_6_thumb.JPG" alt="figure 6">
+</div>
+
+<br>
+<div>
+  <p class="p30" style="text-align:left"><b>7 to 9</b></p>
+</div>
+<div class="imagrow">
+<img class="imgcol1" ng-click="myMouseClick('7')" src="./Frames_7/Frames_7_thumb.JPG" alt="figure 7">
+<img class="imgcol2" ng-click="myMouseClick('8')" src="./Frames_8/Frames_8_thumb.JPG" alt="figure 8">
+<img class="imgcol3" ng-click="myMouseClick('9')" src="./Frames_9/Frames_9_thumb.JPG" alt="figure 9">
+</div>
+
+<br>
+<div>
+  <p class="p30" style="text-align:left"><b>10</b></p>
+</div>
+<div class="imagrow">
+<img class="imgcol1" ng-click="myMouseClick('10')" src="./Frames_10/Frames_10_thumb.JPG" alt="figure 10">
+</div>
+
+</div>
+
+<br>
+<hr>
+<!-- MESSAGE line instance request -------------------------------------------->
+<div> 
+ <p class="p30" id="noteline">NOTES:<i>(img is 240x150)</i></p>
+</div>
+
+<br>
+<!-- General control requests -------------------------------------------------> 
+<div style="height:30px;">
+ <div class="divsub" id="RETURN1"><button onclick="doRETURN()"><b>RETURN</b>
+ </button></div>
+ <div class="divsub" id="HELP1"><button onclick="doHELP()"><b>HELP</b></button>
+ </div>
+ <div class="divsub" id="CLRMSG1"><button onclick="doCLRMSG()"><b>CLEAR MSG</b>
+ </button></div>
+</div>
+
+<hr class="std1" />
+<!-- Footer ------------------------------------------------------------------->
+<div>
+ <p id="pftr"><b>{{ftrstr}}</b></p>
+</div>
+
+</div>
+
+<!-- Page must load completely before this can run properly ------------------->
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+{"unitid":"Coords","prbnum":"1","prblin":["A point (x,y) is shown in Cartesian coordinates below.","(1) What is the radius r of the point (x,y)?","(2) What is the angle @theta| of the point (x,y), in degrees?"],"ivlin":["x,,-250,250,RU","y,,-150,150,RU"],"avlin":["r","@theta|"]}

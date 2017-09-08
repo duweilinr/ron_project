@@ -1,0 +1,38 @@
+
+
+// drawCvs3
+function drawCvs3(trydata)
+{
+	var cid= "layer3";
+	var c=   document.getElementById(cid);
+	var ctx= c.getContext('2d');
+
+	var list=    trydata.split(",");
+	var drawloc= list[0];
+	var nparts=  list[1];
+	var tryn=    list[2];
+	var goodn=   list[3];
+
+	// set up default draw location ("ur")
+	var xs= 695;
+	var ys= 5;
+	var xe= 795;
+	var ye= 105;
+	if (drawloc == "lr") {
+		ye= 495;
+		ys= 395;
+	}	
+	cDrawRectxy(cid,xs,ys,xe,ye,"gray",2,"none");
+	cDrawLine(cid,xs,ye,xe,ys,"blue",1,"butt");
+
+	// draw dot for result
+	var xd= xs+(tryn/nparts)*(xe-xs);
+	var yd= ye-(goodn/nparts)*(ye-ys);	alert(xd+", "+yd);	
+	cDrawDot(cid,xd,yd,3,"blue");
+	
+	//	Labels
+	ctx.fillStyle= "black";
+	ctx.font= "12px Arial";
+	ctx.fillText("OKs vs ntries",xs+5,ys+15);
+
+}

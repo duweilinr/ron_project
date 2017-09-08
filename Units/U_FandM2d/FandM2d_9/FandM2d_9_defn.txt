@@ -1,0 +1,1 @@
+{"unitid":"FandM2d","prbnum":"9","prblin":["A beam carries exponentially-distributed loading, w lb\/ft, in the interval between B and C.","(1) What is FR, the equivalent concentrated load force, in lb and @deg|?","(2) What is xR, the x location of FR in ft?"],"ivlin":["a,lb\/ft,80,100,RU","b,.\/ft,-0.5,-0.3,RU","L1,ft,3,5,RU","L2,ft,4,8,RU"],"avlin":["FRmag,FRdeg","xR"]}

@@ -1,0 +1,1 @@
+{"unitid":"FandM2d","prbnum":"8","prblin":["A beam carries a complex distributed load, as shown below. Units are N and m.","(1) What is FR, the equivalent concentrated load force, in N and @deg|?","(2) What is xR, the x location of FR in m?"],"ivlin":["w1,N\/m,100,150,RU","w2,N\/m,150,200,RU","LB,m,3,5,RU","LC,m,9,12,RU","L,m,15,15,RU"],"avlin":["FRmag,FRdeg","xR"]}

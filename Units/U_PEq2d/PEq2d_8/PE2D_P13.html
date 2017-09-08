@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>U02_P04.html</title>
+<link href="../style_ipp_prob.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../lib_gvSetup.js"></script>
+
+<script>
+gvprobid= "U02_P04";
+gvgridon= false;
+
+// Geometric variables for active display
+
+// Instance variables
+var gvNinst= 0;		// counter
+var gvIV1= {nam:"F", val:0,min:-50,max:50  };
+var gvIV2= {nam:"k", val:0,min:90, max:110 };
+var gvIV3= {nam:"Lf",val:0,min:1.3,max:1.7 };
+var gvIV=  [3,gvIV1,gvIV2,gvIV3];
+
+// Answers
+var gvPart1= {act:"enter",nam:"L",typ:"N",ansS:"",ansP:"",ntries:0};
+var gvPart=  [1,gvPart1];
+
+//alert("gv completed");
+</script>
+
+<script type="text/javascript" src="../lib_Actions.js"></script>
+<script type="text/javascript" src="../lib_cDraw1.js"></script>
+ 
+</head>
+
+<body id="bodywrap" onload="initialize2()">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- Wrap for header and canvas ----------------------------------------------->
+<div>
+<div id="hdrwrap"> <!-- postioned relative to parent div-->
+<p class="hdr2">ip4STATICS Problem U02_P04</p>
+<p>A spring is shown below in two states: before force F is applied ( state AB)
+ and after force F is applied (state CD). The spring free length is Lf feet.
+ The length when force F is applied is L feet. Note that F may be positive
+ (tension) or negative (compression).</p>
+</div>
+
+<!-- Canvases ----------------------------------------------------------------->
+<div id="cvswrap" style="width:804px; height:504px;">
+ <canvas id="layer1" width="800px" height="500px"></canvas>
+ <canvas id="layer2" width="800px" height="500px"></canvas>
+ <script>
+	gvgrid.xmax= 800;
+	gvgrid.ymax= 500;
+	gvgrid.dx=   20;
+	gvgrid.dy=   20;
+ </script>	
+</div>
+</div>
+
+<!-- New Instance section -----------------------------------------------------> 
+<div id="instwrap">
+ <div id="INST"><button onclick="doINSTANCE('new')"><b>INSTANCE</b></button></div>
+ <div id="instmsg"><p id="msgInstance">&#160;</p></div>
+</div>
+
+<!-- Set IV section -----------------------------------------------------------> 
+<div id="ivsetctrl">
+ <div id="ivSET_IV"><button onclick="setIVs('set')"><b>SET IVs</b></button></p></div> 
+ <div id="ivSUBMIT"><button onclick="setIVs('submit')"><b>SUBMIT IVs</b></button></p></div>
+ <div id="ivCLR_IV"><button onclick="setIVs('clr')"><b>CLR MSG</b></button></div>
+ <div id="ivmsgline"><p id="ivmsg"></p></div>
+</div>
+<!-- header block -->
+<div id="ivsethdr">
+ <div class="ivnam"><p id="ivnamh">Name</p></div>
+ <div class="ivmin"><p id="ivminh">Min</p></div>
+ <div class="ivmax"><p id="ivmaxh">Max</p></div>
+ <div class="ivval"><p id="ivvalh">Value</p></div> 
+</div>
+<!-- entry blocks -->
+<div id="ivsetwrap"> 
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam1"></p></div>
+  <div class="ivmin"><p id="ivmin1"></p></div>
+  <div class="ivmax"><p id="ivmax1"></p></div>
+  <div class="ivval"><input type="text" size="16" id="enteriv1" value=""></p></div>
+ </div>
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam2"></p></div>
+  <div class="ivmin"><p id="ivmin2"></p></div>
+  <div class="ivmax"><p id="ivmax2"></p></div>
+  <div class="ivval"><input type="text" size="16" id="enteriv2" value=""></p></div>
+ </div> 
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam3"></p></div>
+  <div class="ivmin"><p id="ivmin3"></p></div>
+  <div class="ivmax"><p id="ivmax3"></p></div>
+  <div class="ivval"><input type="text" size="16" id="enteriv3" value=""></p></div>
+ </div>
+</div>
+<hr>
+
+<!-- Part 1 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p>(1) What is the length of the spring, L, in feet?</p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP1" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(1)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP1"></p></div>
+ <div class="ntries"><p id="tryP1"></p></div>
+ <div class="ANS"><button onclick="doANS(1)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(1)"><b>CLR</b></button></div> 
+</div>
+
+<hr>
+<!-- MESSAGE line instance request -------------------------------------------->
+<div id="msgwrap"> 
+ <p id="msgline"><b>&#160;&#160;&#160;Message:</b></p>
+</div>
+<br>
+<!-- General control requests -------------------------------------------------> 
+<div id="ctlwrap">
+ <div id="FEEDBACK1"><button onclick="doFEEDBACK()"><b>FEEDBACK</b></button></div>
+ <div id="HELP1">  <button onclick="doHELP()"><b>HELP</b></button></div>
+ <div id="CLRMSG1"><button onclick="doCLRMSG()"><b>CLEAR MSG</b></button></div>
+ <div id="WORKSH1"><button onclick="doWORKSHEET()"><b>WORKSHEET</b></button></div>
+ <div id="SOLUTION1"><button onclick="doSOLUTION()"><b>SOLUTION</b></button></div>
+</div>
+
+<hr>
+<!-- Footer ------------------------------------------------------------------->
+<div id="ftrwrap">
+<p id="ftrlin1"><b>MSU - CoE</b></p>
+</div>
+ 
+
+<!-- Inline scripts specific to this problem ---------------------------------->
+<script type="text/javascript">
+
+// doINSTANCE ----------------------------------------------------------------->
+function doINSTANCE(act)
+{
+	if (act == "new") {
+		// generate new instance vbls
+		var F=  -50 +100*Math.random();
+		var k=  90 +20*Math.random();
+		var Lf= 1.3 +0.4*Math.random();	
+		gvIV1.val= F;
+		gvIV2.val= k;
+		gvIV3.val= Lf;	
+		gvNinst=   gvNinst +1;
+	}
+	else if ((act == "set")||(act == "grid")) {
+		F=  Number(gvIV1.val);
+		k=  Number(gvIV2.val);
+		Lf= Number(gvIV3.val);
+		if (act == "grid") {
+			gridon=   !gridon;
+			gvgridon= gridon;
+		}
+	}
+	var ninst= gvNinst;
+	
+	// display instance line text	
+	var Ffmt=  F.toPrecision(3);
+	var kfmt=  k.toPrecision(3);
+	var Lffmt= Lf.toPrecision(3);
+	var strb=  " ".concat(ninst,": F= ",Ffmt," lb,&#160; k= ",kfmt," lb/ft");
+	strb=      strb.concat(",&#160; Lf= ",Lffmt," ft.");
+	document.getElementById("msgInstance").innerHTML= strb.bold();
+
+	// clear all enter and message data text
+	doCLR(0);
+
+	// set scale and display instance data
+	gvFscal= 100/200;
+	drawINSTANCE('INSTANCE');
+
+	// get new solution and save it
+	var L= F/k +Lf;
+	
+	var Lfmt= L.toPrecision(3);
+	gvPart[1].ansS= String(Lfmt);
+}	
+	
+// Draw body1 only once, on load ---------------------------------------------->
+function drawBody1()
+{
+	var cid= "layer1";
+	var c1=   document.getElementById(cid);
+	var ctx = c1.getContext('2d');
+	
+	var x0=  160;
+	var y0=  80;
+	gv00.x0= x0;
+	gv00.y0= y0;
+	
+	var xd= 100;
+	var xAp= x0+xd;
+	var yAp= y0;
+	var xBp= x0+xd;
+	var yBp= y0+200;
+	var xCp= x0+2*xd;
+	var yCp= y0;
+	var xDp= x0+2*xd;
+	var yDp= yBp+60;	
+		
+	cDrawArrow(cid,x0-80,y0,xCp+160,y0,"gray",1,false);	// x axis
+
+	cDrawDot(cid,xAp,yAp,8,"black");
+	cDrawDot(cid,xAp,yAp,4,"white");
+	cDrawLine(cid,xAp-20,yAp-8,xAp+20,yAp-8,"black",8,"butt");
+	cDrawDot(cid,xCp,yCp,8,"black");
+	cDrawDot(cid,xCp,yCp,4,"white");
+	cDrawLine(cid,xCp-20,yCp-8,xCp+20,yCp-8,"black",8,"butt");
+	
+	var w= 10;
+	var n= 26;
+	cDrawSpringR(cid,xAp,yAp,xBp,yBp,w,n);	// spring 1
+	cDrawDot(cid,xBp,yBp,4,"black");	
+	cDrawSpringR(cid,xCp,yCp,xDp,yDp,w,n);	// spring 2
+	cDrawDot(cid,xDp,yDp,4,"black");
+	
+	ctx.fillStyle="black";
+	ctx.font="bold 16px Arial";
+	ctx.fillText("A",xAp-20,yAp+20);
+	ctx.fillText("B",xBp-20,yBp+20);
+	ctx.fillText("C",xCp-20,yCp+20);
+	ctx.fillText("D",xDp-20,yDp+20);	
+	
+	cDrawLine(cid,xBp-100,yBp,xBp-10,yBp,"gray",1,"butt");
+	cDrawDoubleArrow(cid,xBp-50,yBp,xBp-50,yAp,"black",1,true)
+	cDrawLine(cid,xDp+10,yDp,xDp+100,yDp,"gray",1,"butt");
+	cDrawDoubleArrow(cid,xDp+50,yDp,xDp+50,yCp,"black",1,true)
+	
+	ctx.fillStyle="black";
+	ctx.font="bold 16px Arial";	
+	cDrawTextBG(cid,"Lf",xBp-55,(yBp+yAp)/2);
+	cDrawTextBG(cid,"L",xDp+45,(yDp+yCp)/2);
+
+	cDrawForce2(cid,xDp,yDp+3,xDp,yDp+80,3,"red","round",12);	// F
+	ctx.fillStyle="red";
+	ctx.fillText("F",xDp-20,yDp+60);		
+
+}
+
+// doANS -------------------------------------------------------------------->
+function doANS(partn)
+{	
+	var strb= "&#160;&#160;&#160;Answer ".concat(partn,": ");
+	gvcid=    "layer2";
+		
+	if (partn < 2) {
+		var ansS=     gvPart[partn].ansS;
+		//var ansSlist= ansS.split(","); 
+		
+		strb=    strb.concat(ansS," ft");
+		document.getElementById("msgline").innerHTML= strb;
+
+		// option to draw answer
+
+	} 	
+}
+</script>
+
+<!-- Page must load completely before this can run properly ------------------->
+<script>
+	var Ninst= gvNinst;
+	if (Ninst == 0 ) {
+		setIVs("hide");
+		drawBody1();
+		doINSTANCE("new");
+	}
+</script>
+ 
+</body>
+</html>

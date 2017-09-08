@@ -1,0 +1,110 @@
+Development log for /app4STATICS v0 08_2017
+
+This directory records development of app4STATICs, v0.1
+
+Development protocol:
+1. Dropbox version is the reference. 
+	Backups kept there. Unit directories kept there.
+2. Use localhost/app4STATICS/ (office,home) to make changes.
+3. Use a [ copy_to_local/ edit_locally / return_to_dropbox ] method.
+4. Update this log to show changes.
+-------------------------------------------------------------------------------
+
+08_01
+1.	Frames		Convert problem 1 to new format.
+
+08_02
+1.	Frames		Build problems 2 - 6.
+
+08_03
+1.	Frames		Build problems 7 - 10.
+2.	Friction	Build problems 1 - 7.
+	
+08_04
+1.	Friction	Fix solution to problem 6.
+
+08_05
+1.	Trusses		Build problems 1-10.
+2.	doEVAL		Add length check for comma-separated list answers.
+
+08_06
+1.	Centroids	Build problems 1 - 6.
+
+08_07
+1.	Centroids	Build problems 7 - 8.
+2.	AreaMoments	Build problems 1 - 8.
+3.	Beams		Build problems 1 - 3.
+
+08_08
+1.	Beams		Build problems 4 - 8.
+
+08_09
+1.	prob_run	Splits prblin text into aptext and prtext by line.
+				Displays prtext without the part text.
+				Displays aptext as part of each answer part.
+				Requires each part in original prblin text to start with "(".
+2.	style_prob	Adds classes for modified part display.
+
+08_11
+1.	prob_run	Added doConvertSpecSymb handling for prblin data. Not done.
+				Testing w/zzTest_1.
+	
+08_17
+1.	doConvertSpecSymb in lib_utils_js.js	Enable processing of prblin data.
+
+08_19
+1.	doINST		Add spacing to ivstr.
+2.	prob_run	Enabled conversion handling of ivstr.
+3.	prob_run	Enabled conversion handling of av display data.
+4.	Vecs3d_1	Tested conversion handling. Okay.
+
+08_20
+1.	style_prob.css	Revised answer section display formatting.
+2.	prob_run		Uses revised css.
+3.	Friction_3		Fixed bug in solver.
+4.	Friction_4		Tested revised answer display. Okay.	
+
+08_21
+1.	app4STATICS package	Installed on web at www.egr.msu.edu/~statics-web/app4STATICS/.
+
+08_22
+1.	Unit change:	Converted 'Basics' to 'Coordinate Systems'.
+2.	U_Coords		New directory.
+3.	Coords_1		Created.
+	Coords_2		  ""
+	
+08_23
+1.	U_Coords		Completed problems 1-6.
+2.	lib_utils_js		Added get_unit_index() for title,label,nprob data.
+	app4STATICS.html	Uses get_unit_index.
+	unit_main.php		  ""
+	prob_run.php		  ""
+
+08_24
+1.	prob_run	Fixed footer spacing.
+2.	U_Coords	Added problems 7-10.
+
+08_27
+1.	unit_main	Converting to prob_run display style for answer part.
+
+08_28
+1.	unit_main	Uses angularjs method for display of thumbs.
+
+09_03
+1.	Name this version as v0.1. It is debugged.
+	
+				
+NEXT:
+
+TO DO:	
+	
+				
+ITEM:	Are there Beams_9 and _10 problems?
+	
+-------------------------------------------------------------------------------
+NOTE. Errors in solntext that cause EVAL problems can lead to difficulty
+	  in debugging. *** esp see if 'ivstr' not defined. ***
+	  *** ALWAYS check solntext code carefully for syntax and vbl labeling
+			errors. ***
+
+EOF ---------------------------------------------------------------------------]

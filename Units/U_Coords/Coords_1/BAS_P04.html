@@ -1,0 +1,527 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html" charset="UTF-8">
+<title>U00_P04.html</title>
+<link href="../style_ipp_prob.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../lib_gvSetup.js"></script>
+<script>
+var gvprobid= "U00_P04";
+var gvgridon= false;
+var gvFscal=  100/100;
+
+// Geometric variables for active display
+
+// Instance variables
+var gvNinst= 0;		// counter
+
+// Answers
+var gvPart1= {act:"enter",nam:"n1",typ:"m2.N.N",ansS:"",ansP:"",ntries:0};
+var gvPart2= {act:"enter",nam:"n2",typ:"m2.N.N",ansS:"",ansP:"",ntries:0};
+var gvPart3= {act:"enter",nam:"n3",typ:"m2.N.N",ansS:"",ansP:"",ntries:0};
+var gvPart4= {act:"enter",nam:"n4",typ:"m2.N.N",ansS:"",ansP:"",ntries:0};
+var gvPart5= {act:"enter",nam:"n5",typ:"m3.N.N.N",ansS:"",ansP:"",ntries:0};
+var gvPart6= {act:"enter",nam:"n6",typ:"m3.N.N.N",ansS:"",ansP:"",ntries:0};
+var gvPart7= {act:"enter",nam:"n7",typ:"m3.N.N.N",ansS:"",ansP:"",ntries:0};
+var gvPart8= {act:"enter",nam:"n8",typ:"m3.N.N.N",ansS:"",ansP:"",ntries:0};
+var gvPart=  [8,gvPart1,gvPart2,gvPart3,gvPart4,gvPart5,gvPart6,gvPart7,
+				gvPart8];
+
+//alert("gv completed");
+</script>
+
+<script type="text/javascript" src="../lib_Actions.js"></script>
+<script type="text/javascript" src="../lib_cDraw1.js"></script>
+ 
+</head>
+
+
+<body id="bodywrap" onload="initialize2()">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- Wrap for header and canvas ----------------------------------------------->
+<div>
+<div id="hdrwrap"> <!-- postioned relative to parent div-->
+<p class="hdr2">ip4STATICS Problem U00_P04</p>
+<p>Coordinate conversions: Cartesian (i, j, k), polar (r, &theta;), and spherical (r, &theta;, &phi;).</p><br>
+<p>Use 3 significant figures in your answers below.</p><br>
+</div>
+
+<!-- Canvases ----------------------------------------------------------------->
+<div id="cvswrap" style="width:804px; height:264px;">
+ <canvas id="layer1" width="800px" height="260px"></canvas>
+ <canvas id="layer2" width="800px" height="260px"></canvas>
+ <script>
+	gvgrid.xmax= 800;
+	gvgrid.ymax= 260;
+	gvgrid.dx=   20;
+	gvgrid.dy=   20;
+ </script>	
+</div>
+</div>
+
+<hr>
+<!-- New Instance section -----------------------------------------------------> 
+<div id="instwrap">
+ <div id="INST"><button onclick="doINSTANCE('new')"><b>INSTANCE</b></button></div>
+ <div id="instmsg"><p id="msgInstance">&#160;</p></div>
+</div>
+
+<!-- section A ---------------------------------------------------------------->
+<div class="parthdr">
+ <h3 class="parthdr"><b> Convert these 2d vectors from Cartesian to polar coordinates (r, &theta;).</b></h3>
+</div>
+
+<!-- Part 1 -------------------------------------------------------------------> 
+<div class="partans">
+ <div class="partseg" style="left:3%; width:20%;"><p id="data1"></p></div>
+ <div class="partseg" style="left:21%;width:9%;">
+ <input type="text" size="6" id="enterP1.1" value=" "></div>
+ <div class="partseg" style="left:30.5%; width:0.5%;"><p id="data1a"><b></b></p></div>
+ <div class="partseg" style="left:31.5%;width:9%;">
+ <input type="text" size="6" id="enterP1.2" value=" "></div>
+ <div class="partseg" style="left:41%;width:8%;"><button onclick="doENTERn(1,2)"><b>ENTER</b></button></div>
+ <div class="partseg" style="left:50%;width:28%;"><p id="resP1"></p></div>
+ <div class="ntries"><p id="tryP1"></p></div>
+ <div class="ANS"><button onclick="doANS(1)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(1)"><b>CLR</b></button></div> 
+</div>
+
+<!-- Part 2 ------------------------------------------------------------------->
+<div class="partans">
+ <div class="partseg" style="left:3%; width:20%;"><p id="data2"></p></div>
+ <div class="partseg" style="left:21%;width:9%;">
+ <input type="text" size="6" id="enterP2.1" value=" "></div>
+ <div class="partseg" style="left:30.5%; width:0.5%;"><p id="data2a"><b></b></p></div>
+ <div class="partseg" style="left:31.5%;width:9%;">
+ <input type="text" size="6" id="enterP2.2" value=" "></div>
+ <div class="partseg" style="left:41%;width:8%;">
+ <button onclick="doENTERn(2,2)"><b>ENTER</b></button></div>
+ <div class="partseg" style="left:50%;width:28%;"><p id="resP2"></p></div>
+ <div class="ntries"><p id="tryP2"></p></div>
+ <div class="ANS"><button onclick="doANS(2)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(2)"><b>CLR</b></button></div> 
+</div>
+
+<!-- section B ---------------------------------------------------------------->
+<div class="parthdr">
+ <h3 class="parthdr"><b> Convert these 2d vectors from polar to Cartesian coordinates (i, j).</b></h3>
+</div>
+
+<!-- Part 3 -------------------------------------------------------------------> 
+<div class="partans">
+ <div class="partseg" style="left:3%; width:20%;"><p id="data3"></p></div>
+ <div class="partseg" style="left:21%;width:9%;">
+ <input type="text" size="6" id="enterP3.1" value=" "></div>
+ <div class="partseg" style="left:30.5%; width:0.5%;"><p id="data3a"><b></b></p></div>
+ <div class="partseg" style="left:31.5%;width:9%;">
+ <input type="text" size="6" id="enterP3.2" value=" "></div>
+ <div class="partseg" style="left:41%;width:8%;"><button onclick="doENTERn(3,2)"><b>ENTER</b></button></div>
+ <div class="partseg" style="left:50%;width:28%;"><p id="resP3"></p></div>
+ <div class="ntries"><p id="tryP3"></p></div>
+ <div class="ANS"><button onclick="doANS(3)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(3)"><b>CLR</b></button></div> 
+</div>
+
+<!-- Part 4 -------------------------------------------------------------------> 
+<div class="partans">
+ <div class="partseg" style="left:3%; width:20%;"><p id="data4"></p></div>
+ <div class="partseg" style="left:21%;width:9%;">
+ <input type="text" size="6" id="enterP4.1" value=" "></div>
+ <div class="partseg" style="left:30.5%; width:0.5%;"><p id="data4a"><b></b></p></div>
+ <div class="partseg" style="left:31.5%;width:9%;">
+ <input type="text" size="6" id="enterP4.2" value=" "></div>
+ <div class="partseg" style="left:41%;width:8%;"><button onclick="doENTERn(4,2)"><b>ENTER</b></button></div>
+ <div class="partseg" style="left:50%;width:28%;"><p id="resP4"></p></div>
+ <div class="ntries"><p id="tryP4"></p></div>
+ <div class="ANS"><button onclick="doANS(4)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(4)"><b>CLR</b></button></div> 
+</div>
+
+<!-- section C ---------------------------------------------------------------->
+<div class="parthdr">
+ <h3 class="parthdr"><b> Convert these 3d vectors from Cartesian to 
+ spherical coordinates (r, &theta;, &phi;)</b></h3>
+</div>
+
+<!-- Part 5 -(Note. ntries field starts at 83% ) ------------------------------> 
+<div class="partans">
+ <div class="partseg" style="left:3%; width:20%;"><p id="data5"></p></div>
+ <div class="partseg" style="left:21%; width:9%; border:solid red 0px;">
+ <input type="text" size="6" id="enterP5.1" value=" "></div>
+ <div class="partseg" style="left:30.5%; width:0.5%; border:solid red 0px;"><p id="data5a"><b></b></p></div>
+ <div class="partseg" style="left:31.5%;width:9%; border:solid red 0px;">
+ <input type="text" size="6" id="enterP5.2" value=" "></div>
+ <div class="partseg" style="left:41%; width:0.5%; border:solid red 0px;"><p id="data5b"><b></b></p></div>
+ <div class="partseg" style="left:42%;width:9%; border:solid red 0px;">
+ <input type="text" size="6" id="enterP5.3" value=" "></div>
+ <div class="partseg" style="left:51.5%;width:8%; border:solid red 0px;"><button onclick="doENTERn(5,3)"><b>ENTER</b></button></div>
+ <div class="partseg" style="left:60%;width:22%; border:solid red 0px;"><p id="resP5"></p></div>
+ <div class="ntries" style="border:solid red 0px;"><p id="tryP5"></p></div>
+ <div class="ANS"><button onclick="doANS(5)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(5)"><b>CLR</b></button></div> 
+</div>
+
+
+<!-- Part 6 -------------------------------------------------------------------> 
+<div class="partans">
+ <div class="partseg" style="left:3%; width:20%;"><p id="data6"></p></div>
+ <div class="partseg" style="left:21%; width:9%;">
+ <input type="text" size="6" id="enterP6.1" value=" "></div>
+ <div class="partseg" style="left:30.5%; width:0.5%;"><p id="data6a"><b></b></p></div>
+ <div class="partseg" style="left:31.5%;width:9%;">
+ <input type="text" size="6" id="enterP6.2" value=" "></div>
+ <div class="partseg" style="left:41%; width:0.5%;"><p id="data6b"><b></b></p></div>
+ <div class="partseg" style="left:42%;width:9%;">
+ <input type="text" size="6" id="enterP6.3" value=" "></div>
+ <div class="partseg" style="left:51.5%;width:8%;">
+ <button onclick="doENTERn(6,3)"><b>ENTER</b></button></div>
+ <div class="partseg" style="left:60%;width:22%;"><p id="resP6"></p></div>
+ <div class="ntries""><p id="tryP6"></p></div>
+ <div class="ANS"><button onclick="doANS(6)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(6)"><b>CLR</b></button></div> 
+</div>
+
+<!-- section D ---------------------------------------------------------------->
+<div class="parthdr">
+ <h3 class="parthdr"><b> Convert these 3d vectors from spherical to
+ Cartesian coordinates.</b></h3>
+</div>
+
+<!-- Part 7 -------------------------------------------------------------------> 
+<div class="partans">
+ <div class="partseg" style="left:3%; width:20%;"><p id="data7"></p></div>
+ <div class="partseg" style="left:21%; width:9%;">
+ <input type="text" size="6" id="enterP7.1" value=" "></div>
+ <div class="partseg" style="left:30.5%; width:0.5%;"><p id="data7a"><b></b></p></div>
+ <div class="partseg" style="left:31.5%;width:9%;">
+ <input type="text" size="6" id="enterP7.2" value=" "></div>
+ <div class="partseg" style="left:41%; width:0.5%;"><p id="data7b"><b></b></p></div>
+ <div class="partseg" style="left:42%;width:9%;">
+ <input type="text" size="6" id="enterP7.3" value=" "></div>
+ <div class="partseg" style="left:51.5%;width:8%;">
+ <button onclick="doENTERn(7,3)"><b>ENTER</b></button></div>
+ <div class="partseg" style="left:60%;width:22%;"><p id="resP7"></p></div>
+ <div class="ntries""><p id="tryP7"></p></div>
+ <div class="ANS"><button onclick="doANS(7)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(7)"><b>CLR</b></button></div> 
+</div>
+
+<!-- Part 8 ------------------------------------------------------------------->
+<div class="partans">
+ <div class="partseg" style="left:3%; width:20%;"><p id="data8"></p></div>
+ <div class="partseg" style="left:21%; width:9%;">
+ <input type="text" size="6" id="enterP8.1" value=" "></div>
+ <div class="partseg" style="left:30.5%; width:0.5%;"><p id="data8a"><b></b></p></div>
+ <div class="partseg" style="left:31.5%;width:9%;">
+ <input type="text" size="6" id="enterP8.2" value=" "></div>
+ <div class="partseg" style="left:41%; width:0.5%;"><p id="data8b"><b></b></p></div>
+ <div class="partseg" style="left:42%;width:9%;">
+ <input type="text" size="6" id="enterP8.3" value=" "></div>
+ <div class="partseg" style="left:51.5%;width:8%;">
+ <button onclick="doENTERn(8,3)"><b>ENTER</b></button></div>
+ <div class="partseg" style="left:60%;width:22%;"><p id="resP8"></p></div>
+ <div class="ntries""><p id="tryP8"></p></div>
+ <div class="ANS"><button onclick="doANS(8)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(8)"><b>CLR</b></button></div> 
+</div>
+
+<hr>
+<!-- MESSAGE line instance request -------------------------------------------->
+<div id="msgwrap"> 
+ <p id="msgline"><b>&#160;&#160;&#160;Message:</b></p>
+</div>
+<br>
+<!-- General control requests -------------------------------------------------> 
+<div id="ctlwrap">
+ <div id="FEEDBACK1"><button onclick="doFEEDBACK()"><b>FEEDBACK</b></button></div>
+ <div id="HELP1">  <button onclick="doHELP()"><b>HELP</b></button></div>
+ <div id="CLRMSG1"><button onclick="doCLRMSG()"><b>CLEAR MSG</b></button></div>
+ <div id="WORKSH1"><button onclick="doWORKSHEET()"><b>WORKSHEET</b></button></div>
+ <div id="SOLUTION1"><button onclick="doSOLUTION()"><b>SOLUTION</b></button></div>
+</div>
+
+<hr>
+<!-- Footer ------------------------------------------------------------------->
+<div id="ftrwrap">
+<p id="ftrlin1"><b>MSU - CoE</b></p>
+</div>
+
+<!-- Inline scripts specific to this problem ---------------------------------->
+<script type="text/javascript">
+
+// doINSTANCE ----------------------------------------------------------------->
+function doINSTANCE(act)
+{
+	// initialize
+	var strb= "";
+	var part= "";
+	var nbr=  0;
+
+	if ( act == "new" ) {
+		var nparts= gvPart[0];
+		for (var i=1; i<nparts+1; i++ ) {
+			gvPart[i].ntries= 0;	
+		}
+	}
+	
+	// generate new instance vbls and solutions ------------------------------->
+	// Part 1
+	strb=   "(1) ";
+	var vx= 0.5 +1*Math.random();;
+	var vy= 1+ 2*Math.random();
+	vx=     vx.toPrecision(3);
+	vy=     vy.toPrecision(3);
+	part=   String(vx).concat("i +",String(vy),"j");
+	strb=   strb.concat(part);
+	document.getElementById("data1").innerHTML= strb.bold();
+	var r=       Math.sqrt(vx*vx+vy*vy);
+	var thetar=  Math.atan2(vy,vx);
+	var thetad=  thetar*180/Math.PI;
+	var rf=      r.toPrecision(3);
+	var thetadf= thetad.toPrecision(3);
+	gvPart[1].ansS= String(rf).concat(",",String(thetadf));	
+
+	// Part 2
+	strb= "(2) ";
+	vx=   -8+2*Math.random();
+	vy=   -4+6*Math.random();
+	vx=   vx.toPrecision(3);
+	vy=   vy.toPrecision(3);
+	part= String(vx).concat("i ",String(vy),"j");
+	strb= strb.concat(part);
+	document.getElementById("data2").innerHTML= strb.bold();
+
+	r=       Math.sqrt(vx*vx+vy*vy);
+	thetar=  Math.atan2(vy,vx);
+	thetad=  thetar*180/Math.PI;
+	rf=      r.toPrecision(3);
+	thetadf= thetad.toPrecision(3);
+	gvPart[2].ansS= String(rf).concat(",",String(thetadf));	
+
+	// Part 3
+	strb=   "(3) ";
+	r=      20 +6*Math.random();
+	thetad= 30 +30*Math.random();
+	r=      r.toPrecision(3);
+	thetad= thetad.toPrecision(3);
+	part=   String(r).concat(", ",String(thetad),"&deg;");
+	strb=   strb.concat(part);
+	document.getElementById("data3").innerHTML= strb.bold();
+	
+	vx= r*Math.cos(thetad*Math.PI/180);
+	vy= r*Math.sin(thetad*Math.PI/180);
+	vx= vx.toPrecision(3);
+	vy= vy.toPrecision(3);
+	gvPart[3].ansS= String(vx).concat(", ",String(vy));	
+
+	// Part 4
+	strb= "(4) ";
+	r=      8 +4*Math.random();
+	thetad= -90 -45*Math.random();
+	r=      r.toPrecision(3);
+	thetad= thetad.toPrecision(3);
+	part=   String(r).concat(", ",String(thetad),"&deg;");
+	strb=   strb.concat(part);
+	document.getElementById("data4").innerHTML= strb.bold();
+	
+	vx= r*Math.cos(thetad*Math.PI/180);
+	vy= r*Math.sin(thetad*Math.PI/180);
+	vx= vx.toPrecision(3);
+	vy= vy.toPrecision(3);
+	gvPart[4].ansS= String(vx).concat(", ",String(vy));		
+
+	// Part 5
+	strb= "(5) ";
+	vx=     100*(0.1 +0.6*Math.random());
+	vy=     100*(0.4 +0.5*Math.random());
+	var vz= 100*(0.2 +0.6*Math.random());
+	vx=     vx.toPrecision(2);
+	vy=     vy.toPrecision(2);
+	vz=     vz.toPrecision(2);
+	part=   String(vx).concat("i +",String(vy),"j +",String(vz),"k");
+	strb=   strb.concat(part);
+	document.getElementById("data5").innerHTML= strb.bold();
+
+	r=        Math.sqrt(vx*vx +vy*vy +vz*vz);	
+	thetar=   Math.atan2(vy,vx);
+	thetad=   thetar*180/Math.PI;
+	var phir= Math.acos(vz/r);
+	var phid= phir*180/Math.PI;
+	r=        r.toPrecision(3);
+	thetad=   thetad.toPrecision(3);
+	phid=     phid.toPrecision(3);	
+	gvPart[5].ansS= String(r).concat(",",String(thetad),",",String(phid));	
+
+	// Part 6
+	strb= "(6) ";
+	vx=     100*(0.1 +0.6*Math.random());
+	vy=     0;
+	vz=     -100*(0.2 +0.6*Math.random());
+	vx=     vx.toPrecision(2);
+	vy=     vy.toPrecision(2);
+	vz=     vz.toPrecision(2);
+	part=   String(vx).concat("i +",String(vy),"j ",String(vz),"k");
+	strb=   strb.concat(part);
+	document.getElementById("data6").innerHTML= strb.bold();		
+
+	r=        Math.sqrt(vx*vx +vy*vy +vz*vz);	
+	thetar=   Math.atan2(vy,vx);
+	thetad=   thetar*180/Math.PI;
+	var phir= Math.acos(vz/r);
+	var phid= phir*180/Math.PI;
+	r=        r.toPrecision(3);
+	thetad=   thetad.toPrecision(3);
+	phid=     phid.toPrecision(3);	
+	gvPart[6].ansS= String(r).concat(", ",String(thetad),", ",String(phid));	
+
+	// Part 7
+	strb= "(7) ";
+	r=      100;
+	thetad= 45;
+	phid=   30 +30*Math.random();
+	r=      r.toPrecision(3);
+	thetad= thetad.toPrecision(3);
+	phid=   phid.toPrecision(3);
+	part=   String(r).concat(", ",String(thetad),"&deg;");
+	part=   part.concat(", ",String(phid),"&deg;");
+	strb=   strb.concat(part);
+	document.getElementById("data7").innerHTML= strb.bold();
+	
+	vz=    r*Math.cos(phid*Math.PI/180);
+	var d= r*Math.sin(phid*Math.PI/180);
+	vx=    d*Math.cos(thetad*Math.PI/180);
+	vy=    d*Math.sin(thetad*Math.PI/180);
+	vx=    vx.toPrecision(3);
+	vy=    vy.toPrecision(3);
+	vz=    vz.toPrecision(3);
+	gvPart[7].ansS= String(vx).concat(", ",String(vy),", ",String(vz));		
+
+
+	// Part 8
+	strb= "(8) ";
+	r=      200;
+	thetad= -45;
+	phid=   40 +10*Math.random();
+	r=      r.toPrecision(3);
+	thetad= thetad.toPrecision(3);
+	phid=   phid.toPrecision(3);
+	part=   String(r).concat(", ",String(thetad),"&deg;");
+	part=   part.concat(", ",String(phid),"&deg;");
+	strb=   strb.concat(part);
+	document.getElementById("data8").innerHTML= strb.bold();
+	
+	vz=    r*Math.cos(phid*Math.PI/180);
+	var d= r*Math.sin(phid*Math.PI/180);
+	vx=    d*Math.cos(thetad*Math.PI/180);
+	vy=    d*Math.sin(thetad*Math.PI/180);
+	vx=    vx.toPrecision(3);
+	vy=    vy.toPrecision(3);
+	vz=    vz.toPrecision(3);
+	gvPart[8].ansS= String(vx).concat(", ",String(vy),", ",String(vz));		
+
+	// up the try counter
+	gvNinst=   gvNinst +1;
+	var ninst= gvNinst;
+	strb=      " Instance ".concat(String(ninst));
+	document.getElementById("msgInstance").innerHTML= strb.bold();
+	
+	// clear all enter and message data text
+	doCLR(0);
+}	
+	
+// Draw body1 only once, on load ---------------------------------------------->
+function drawBody1()
+{
+	var cid= "layer1";
+	var c1=   document.getElementById(cid);
+	var ctx = c1.getContext('2d');
+	
+	var x0=  0;
+	var y0=  0;
+	gv00.x0= x0;
+	gv00.y0= y0;
+	
+	// polar axes ------------------------------------------------------
+	var x0p= 100;
+	var y0p= 120;	
+	cDrawLine(cid,x0p-20,y0p,x0p+120,y0p,"black",1,"round");
+	cDrawLine(cid,x0p,y0p+20,x0p,y0p-120,"black",1,"round");
+	ctx.fillStyle="black";
+	ctx.font="bold 16px Arial";
+	ctx.fillText("O",x0p-20,y0p+20);	
+	ctx.fillText("X",x0p+110,y0p+20);
+	ctx.fillText("Y",x0p-20,y0p-105);
+	ctx.fillText("polar",x0p+30,y0p+40);
+	
+	cDrawArrow(cid,x0p,y0p,x0p+100,y0p-100,"blue",3,true);	
+	ctx.fillText("r",x0p+65,y0p-80);
+	cDrawArc3(cid,x0p,y0p,90,-45,0,"cw","black",1,"none",true,false);
+	var xalpha=    "03B8";		// hexadecimal for small 'theta'
+	var hex=       cDrawHexText(xalpha);
+	ctx.fillText(hex,x0p+90,y0p-40);	
+	
+	// spherical axes ------------------------------------------------------
+	var x0s= 340;
+	var y0s= 120;	
+	cDrawLine(cid,x0s+5,y0s-5,x0s-60,y0s+60,"black",1,"round");	// x axis	
+	cDrawLine(cid,x0s-5,y0s,x0s+140,y0s,"black",1,"round");	// y axis
+	cDrawLine(cid,x0s,y0s+20,x0s,y0s-120,"black",1,"round");	// z axis
+
+	ctx.fillStyle="black";
+	ctx.font="bold 16px Arial";
+	ctx.fillText("O",x0s-20,y0s-30);	
+	ctx.fillText("X",x0s-70,y0s+50);
+	ctx.fillText("Y",x0s+130,y0s+20);
+	ctx.fillText("Z",x0s-20,y0s-100);	
+	ctx.fillText("spherical",x0s,y0s+90);
+	// vector and guidelines
+	cDrawLine(cid,x0s,y0s,x0s+100,y0s+30,"gray",1,"round");
+	cDrawLine(cid,x0s+100,y0s+30,x0s+100,y0s-120,"gray",1,"round");
+	cDrawArrow(cid,x0s,y0s,x0s+100,y0s-120,"blue",3,true);	
+	ctx.fillText("r",x0s+55,y0s-85);
+	// theta arc
+	cDrawArc3(cid,x0s,y0s-100,140,60,105,"cw","black",1,"none",true,false);
+	var xalpha=    "03B8";		// unicode hexadecimal for small 'theta'
+	var hex=       cDrawHexText(xalpha);
+	ctx.fillText(hex,x0s+20,y0s+55);	
+	// phi arc
+	cDrawArc3(cid,x0s-80,y0s+80,180,-63,-47,"cw","black",1,"none",false,true);	
+	var xalpha=    "03C6";		// unicode hexadecimal for small 'phi'
+	var hex=       cDrawHexText(xalpha);
+	ctx.fillText(hex,x0s+18,y0s-74);
+
+	ctx.fillStyle="red";
+	ctx.font="bold 16px Arial";
+	ctx.fillText("2d and 3d coordinates",x0+60,y0s+120);		
+}
+
+// doANS -------------------------------------------------------------------->
+function doANS(partn)
+{	
+	var strb= "&#160;&#160;&#160;Answer ".concat(String(partn),": ");
+	//alert(strb);	
+	var ansS=     gvPart[partn].ansS;
+	var nparts= gvPart[0];
+	if (partn < 9) {		
+		strb= strb.concat(ansS);
+	}
+	document.getElementById("msgline").innerHTML= strb;
+}
+</script>
+
+<!-- Page must load completely before this can run properly ------------------->
+<script>
+	var Ninst= gvNinst;
+	if (Ninst == 0 ) {
+		drawBody1();
+		doINSTANCE("new");
+	}
+</script>
+
+</body>
+</html>

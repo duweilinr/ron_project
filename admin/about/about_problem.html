@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>about_problem.html</title>
+
+<link href="../style_ipp_unit.css" rel="stylesheet" type="text/css">
+
+<script>
+// Global variables ---must be declared first in file ------------------------->
+</script>
+
+<script type="text/javascript" src="../lib_gvSetup.js"></script>
+<script>
+gvgridon= false;
+</script>
+
+<script type="text/javascript" src="../lib_Actions.js"></script>
+<script type="text/javascript" src="../lib_cDraw1.js"></script>
+
+<!-- Inline scripts ----------------------------------------------------------->
+<script type="text/javascript">
+
+// Draw body ------------------------------------------------------------------>
+function drawBody1()
+{
+	var cid=  "layer1";
+	var c=    document.getElementById(cid);
+	var ctx = c.getContext('2d');
+	var cwid= c.width;
+	var cht=  c.height;
+	ctx.clearRect(0,0,cwid,cht);
+	ctx.fillStyle="white";
+	ctx.fillRect(0,0,cwid,cht);
+
+	var gridon= gvgridon;
+	if ( gridon ) { mydrawGrid(cid); }		
+	
+	// set up geometry scale	
+	var x0=  300;
+	var y0=  120;
+	gv00.x0= x0;
+	gv00.y0= y0;
+
+	// draw x and y axes
+	cDrawArrow(cid,x0-260,y0+80,x0-220,y0+80,"gray",1,true);	// x axis
+	cDrawArrow(cid,x0-260,y0+80,x0-260,y0+40,"gray",1,true);	// y axis
+	ctx.fillStyle="black";
+	ctx.font="bold 16px Arial";
+	ctx.fillText( "X",x0-230,y0+100);		// y value true pos top
+	ctx.fillText( "Y",x0-280,y0+52);
+	//cDrawDot(cid,x0-260,y0+80,2,'gray');
+		
+	cDrawRectxy(cid,x0-160,y0-15,x0+160,y0+15,"black",2,"silver")
+
+	cDrawArrow(cid,x0,y0-77,x0,y0-17,"red",3,true);	// load force
+	cDrawMoment(cid,x0+160,y0+30,x0+160,y0-30,"red",3,"ccw")
+	cDrawArrow(cid,x0-150,y0+77,x0-150,y0+17,"blue",3,true);
+	cDrawArrow(cid,x0+130,y0+57,x0+130,y0+17,"blue",3,true);
+	
+	// label fixed points
+	ctx.fillStyle="black";
+	ctx.font="bold 16px Arial";				
+	var txt=          "How to run a problem in ip4STATICS";
+    ctx.fillStyle=    'white';		// background color
+    var width=        ctx.measureText(txt).width +20;
+    ctx.fillRect(x0-280,y0-100,width,16);	
+    ctx.fillStyle=    'black';		// text color
+    ctx.fillText(txt,x0-280,y0-87);
+}
+
+// Toggle grid - local version only  ------------------------------------------>
+function toggleGrid2() {	
+	var gridon= gvgridon;
+	if (gridon) {
+		gvgridon= false;
+	}
+	else {
+		gvgridon= true
+	}
+	drawBody1();
+}
+</script>	
+
+</head>
+<!----------------------------------------------------------------------------->
+
+
+<body id="bodywrap">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div style="width:604px; border:2px solid black; background-color:ivory;">
+
+<!-- Header section ----------------------------------------------------------->
+<div>
+<h1 class="h1style" style="text-align:center">&#160;&#160 ip4STATICS:
+ interactive problems for STATICS</h1>
+</div>
+
+<div>
+<h3 class="h3style" style="text-align:center"><b><i>Use ip4STATICS to build
+ skill and confidence in your STATICS know-how.</i></b></h3>
+</div>
+
+<!-- Canvas 1 ----------------------------------------------------------------->
+<div style="height:244px; border:solid black 0px;">
+ <canvas id="layer1" width="560px" height="240px"></canvas>
+ <canvas id="layer2" width="560px" height="240px"></canvas>
+ <script>
+	gvgrid.xmax= 600;
+	gvgrid.ymax= 240;
+	gvgrid.dx=   20;
+	gvgrid.dy=   20;
+	drawBody1();
+ </script>	
+</div>
+
+<br>
+<!-- Problem buttons ----------------------------------------------------------> 
+<div class="aboutwrap">
+  <div class="about1"><b>Each problem has the following action buttons:</b></div>
+  <div class="about2"><b>INSTANCE, ENTER, ANS, WORKSHEET, SOLUTION.</b></div>
+</div>
+
+<br>
+<!-- Questions and answers ----------------------------------------------------> 
+<div class="aboutwrap">
+  <div class="about1"><b><a href="./about_INSTANCE.pdf" target="_blank">
+  Using INSTANCE to generate new instance variables</b></a></div>
+</div>
+
+<br>
+<div class="aboutwrap">
+  <div class="about1"><b><a href="./about_ENTER.pdf" target="_blank">
+  Using ENTER to enter answers and get feedback</b></a></div>
+</div>
+
+<br>
+<div class="aboutwrap">
+  <div class="about1"><b><a href="./about_ANS.pdf" target="_blank">
+  Using ANS to call for an instance-specific answer</b></a></div>
+</div>
+
+<br>
+<div class="aboutwrap">
+  <div class="about1"><b>Using WORKSHEET to get a worksheet</b></div>
+  <div class="about2"><b>A WORKSHEET is available for every problem. The idea
+  is to print it and work your solution on it.</b></div>
+</div>
+
+<br>
+<div class="aboutwrap">
+  <div class="about1"><b>Using SOLUTION to get a problem solution</b></div>
+  <div class="about2"><b>A SOLUTION is available for every problem. The idea
+  is to use it as a validation if you feel you need it.</b></div>
+</div>
+<br>
+
+<!-- Footer ------------------------------------------------------------------->
+<div class="hline"></div>
+<div style="height:30px;">
+ <div id="pftrm"><b>Michigan State University - College of Engineering</b></div> 
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+{"unitid":"Trusses","prbnum":"7","prblin":["A truss carries three load, each of F kips, as shown below.","(1) Find the reaction FA at A.","(2) Find the reaction FB at B.","(3)-(9) Find the force in each member. (Enter +:compression,-:tension.)"],"ivlin":["F,kips,1,3,RU","d,ft,5,7,RU","h,ft,5,7,RU"],"avlin":["FAx,FAy","FBx,FBy","FAC","FAD","FBD","FBE","FCD","FCE","FDE"]}

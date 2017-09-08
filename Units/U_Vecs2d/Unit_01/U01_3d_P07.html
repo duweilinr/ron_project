@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>U01_3d_P07.html</title>
+<link href="../style_ipp_prob.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../lib_gvSetup.js"></script>
+<script>
+// Geometric variables for active display
+
+// Instance variables
+var gvNinst= 0;		// counter
+var gvIV1= { typ:"N",nam:"FA",val:0 };
+var gvIV2= { typ:"N",nam:"FB",val:0 };
+var gvIV3= { typ:"N",nam:"FC",val:0 };
+var gvIV=  [ 3, gvIV1,gvIV2,gvIV3 ];
+
+// Answers
+var gvPart1= {act:"enter",nam:"FR",typ:"ijk",ansS:"",ansP:"",ntries:0};
+var gvPart2= {act:"enter",nam:"FR",typ:"ijk",ansS:"",ansP:"",ntries:0};
+var gvPart=  [2,gvPart1,gvPart2];
+
+//alert("gv completed");
+</script>
+
+<script type="text/javascript" src="../lib_Actions.js"></script>
+<script type="text/javascript" src="../lib_cDraw1.js"></script>
+ 
+</head>
+
+
+<body id="bodywrap" onload="initialize2()">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- Wrap for header and canvas ----------------------------------------------->
+<div>
+<div id="hdrwrap"> <!-- postioned relative to parent div-->
+<h3 class="h3style">Unit_01_3d_P07.&#160;&#160;&#160;A simple space truss has three forces acting on it, namely, FA, FB and FC. FA is parallel to the x axis; FB is parallel to the y axis; FC is parallel to the z axis. Point A is at the origin. The coordinates of points B, C and D are given.</h3>
+</div>
+
+<!-- Canvases ----------------------------------------------------------------->
+<div id="cvswrap" style="width:804px; height:504px;">
+ <canvas id="layer1" width="800px" height="500px"></canvas>
+ <canvas id="layer2" width="800px" height="500px"></canvas>
+ <script>
+	gvgrid.xmax= 800;
+	gvgrid.ymax= 500;
+	gvgrid.dx=   20;
+	gvgrid.dy=   20;
+ </script>	
+</div>
+</div>
+
+<!-- New Instance section -----------------------------------------------------> 
+<div id="instwrap">
+<div id="INST"><button onclick="doINSTANCE()"><b>INSTANCE</b></button></div>
+<div id="instmsg"><p id="msgInstance">&#160;</p></div>
+<div id="REDRAW"><button onclick="drawINSTANCE('REDRAW')"><b>REDRAW</b></button></div>
+<div id="GRID"><button onclick="drawINSTANCE('GRID')"><b>GRID</b></button></div>
+</div>
+
+<hr>
+
+<!-- Part 1 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(1) What is the resultant force, FR(i,j,k), acting on the truss?</b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP1" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(1)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP1"></p></div>
+ <div class="ntries"><p id="tryP1"></p></div>
+ <div class="ANS"><button onclick="doANS(1)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(1)"><b>CLR</b></button></div> 
+</div>
+
+<!-- Part 2 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(2) What is FR(i,j,k) if point D is now at (2,2,8)?</b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP2" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(2)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP2"></p></div>
+ <div class="ntries"><p id="tryP2"></p></div>
+ <div class="ANS"><button onclick="doANS(2)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(2)"><b>CLR</b></button></div> 
+</div>
+
+<hr>
+<!-- MESSAGE line instance request -------------------------------------------->
+<div id="msgwrap"> 
+ <p id="msgline"><b>&#160;&#160;&#160;Message:</b></p>
+</div>
+<br>
+<!-- General control requests -------------------------------------------------> 
+<div id="ctlwrap">
+ <div id="RETURN1"><button onclick="doRETURN()"><b>RETURN</b></button></div>
+ <div id="HELP1">  <button onclick="doHELP()"><b>HELP</b></button></div>
+ <div id="CLRMSG1"><button onclick="doCLRMSG()"><b>CLEAR MSG</b></button></div>
+</div>
+
+<hr>
+<!-- Footer ------------------------------------------------------------------->
+<div id="ftrwrap">
+ <div id="pftr1" class="h2style"><b>ip4STATICS</b></div> 
+ <div id="pftr2" class="h3style">Last update: 05/10/2016</button></div>
+</div>
+
+
+<!-- Inline scripts specific to this problem ---------------------------------->
+<script type="text/javascript">
+
+// doINSTANCE ----------------------------------------------------------------->
+function doINSTANCE()
+{
+	// generate new instance vbls
+	var FA= 100 +20*Math.random();
+	var FB= 100 +20*Math.random();
+	var FC= 100 +20*Math.random();
+
+	gvIV1.val= FA;
+	gvIV2.val= FB;		
+	gvIV3.val= FC;
+
+	gvNinst=   gvNinst +1;
+	var ninst= gvNinst;
+	
+	// display instance line text	
+	var FAf=  FA.toPrecision(3);
+	var FBf=  FB.toPrecision(3);
+	var FCf=  FC.toPrecision(3);
+	var strb=  " ".concat(ninst,": FA= ",FAf," lb,&#160; FB= ",FBf," lb");
+	strb=      strb.concat(",&#160; FC= ",FCf," lb.");
+	document.getElementById("msgInstance").innerHTML= strb.bold();
+
+	// clear all enter and message data text
+	doCLR(0);
+
+	// set scale and display instance data
+	gvDscal= 100/1;
+	gvFscal= 100/1;
+	drawINSTANCE('INSTANCE');
+
+	// get new solution and save it
+	var FRx= FA;
+	var FRy= FB;
+	var FRz= FC;
+	
+	FRx= FRx.toPrecision(3);
+	FRy= FRy.toPrecision(3);
+	FRz= FRz.toPrecision(3);
+
+	gvPart[1].ansS= String(FRx).concat(",",String(FRy),",",String(FRz));
+	
+	gvPart[2].ansS= String(FRx).concat(",",String(FRy),",",String(FRz));
+
+}	
+
+// drawINSTANCE --------------------------------------------------------------->
+function drawINSTANCE(act)
+{	
+	// see if grid toggle called for	
+	var gridon= gvgridon;
+	if (act==="GRID") {
+		gridon=   !gridon;
+		gvgridon= gridon;
+	}
+
+	// initialize layer2 canvas
+	var cid=   "layer2";
+	var c=     document.getElementById(cid);
+	var ctx=   c.getContext("2d");
+	ctx.clearRect(0,0,c.width,c.height);
+	//gridon= gvgridon;
+	if (gridon) {mydrawGrid(cid);}	
+
+	// recover the inst vbls
+
+	// draw the forces
+}
+	
+// Draw body1 only once, on load ---------------------------------------------->
+function drawBody1()
+{
+	var cid= "layer1";
+	var c1=   document.getElementById(cid);
+	var ctx = c1.getContext('2d');
+	
+	var x0=  380;
+	var y0=  280;
+	gv00.x0= x0;
+	gv00.y0= y0;
+
+	var A= {x:x0,y:y0};
+	var B= {x:x0-80,y:y0+80};
+	var C= {x:x0+120,y:y0+40};
+	var D= {x:x0,y:y0-140};	
+	
+	ctx.font="normal 14px Arial";
+	ctx.fillStyle="black";	
+	cDrawDot(cid,A.x,A.y,4,"gray");
+	cDrawDot(cid,B.x,B.y,4,"gray");	
+	cDrawDot(cid,C.x,C.y,4,"gray");
+	cDrawDot(cid,D.x,D.y,4,"gray");	
+	
+	
+	cDrawArrow(cid,x0,y0+150,x0,y0-220,"grey",1.5,true); //z-axis
+	cDrawArrow(cid,x0-225,y0,x0+225,y0,"grey",1.5,true); //y-axis
+	cDrawArrow(cid,x0+100,y0-100,x0-125,y0+125,"grey",1.5,true); //x-axis
+	ctx.font="normal 14px Arial";
+	ctx.fillStyle="gray";
+	ctx.fillText("Z", x0-25,y0-190);
+	ctx.fillText("Y", x0+200,y0+25);
+	ctx.fillText("X", x0-145,y0+120);
+
+	cDrawLine(cid,A.x,A.y,B.x,B.y,"gray",5,"round");
+	cDrawLine(cid,A.x,A.y,C.x,C.y,"gray",5,"round");
+	cDrawLine(cid,C.x,C.y,B.x,B.y,"gray",5,"round");
+	cDrawLine(cid,D.x,D.y,B.x,B.y,"gray",5,"round");
+	cDrawLine(cid,C.x,C.y,D.x,D.y,"gray",5,"round");
+	cDrawLine(cid,D.x,D.y,A.x,A.y,"gray",5,"round");
+	
+	cDrawDot(cid,A.x,A.y,4,"black");
+	cDrawDot(cid,B.x,B.y,4,"black");	
+	cDrawDot(cid,C.x,C.y,4,"black");
+	cDrawDot(cid,D.x,D.y,4,"black");		
+	
+	ctx.fillText("A",A.x-18,A.y-6);
+	ctx.fillText("B(6,0,0)",B.x-60,B.y+5);
+	ctx.fillText("C(3,6,0)",C.x+10,C.y+10);
+	ctx.fillText("D(0,0,8)",D.x+10,D.y);	
+		
+	//	Draw forces
+	cDrawArrow(cid,A.x+40,A.y-40,A.x,A.y,"red",3,true);
+	cDrawArrow(cid,B.x,B.y,B.x+70,B.y,"red",3,true);
+	cDrawArrow(cid,C.x,C.y,C.x,C.y-70,"red",3,true);
+	ctx.fillStyle="red";	
+	ctx.fillText("FA",A.x+10,A.y-35);
+	ctx.fillText("FB",B.x+50,B.y+20);
+	ctx.fillText("FC",C.x+10,C.y-60);
+	
+	
+	gvgridon= false;
+}
+
+// doANS -------------------------------------------------------------------->
+function doANS(partn)
+{	
+	var strb= "&#160;&#160;&#160;Answer ".concat(partn,": ");
+	gvcid=    "layer2";
+		
+	var ansS= gvPart[partn].ansS;
+	if (partn < 3) {
+		strb=    strb.concat(ansS," lb");
+		document.getElementById("msgline").innerHTML= strb;
+	}	
+}
+
+</script>
+
+<!-- Page must load completely before this can run properly ------------------->
+<script>
+	var Ninst= gvNinst;
+	if (Ninst == 0 ) {
+		drawBody1();
+		doINSTANCE();
+	}
+</script>
+ 
+</body>
+</html>

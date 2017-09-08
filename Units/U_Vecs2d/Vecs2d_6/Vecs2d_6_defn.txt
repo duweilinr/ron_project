@@ -1,0 +1,1 @@
+{"unitid":"Vecs2d","prbnum":"6","prblin":["Forces F1 and F2 act on a hinge pin, as shown below.","(1) What is FRmag, the magnitude of resultant force FR, in lb?","(2) What is FRdeg, the angle of the resultant force FR, in degrees?"],"ivlin":["F1m,lb,300,500,RU","F1d,@deg|,25,65,RU","F2m,lb,200,300,RU","F2d,@deg|,-85,-25,RU"],"avlin":["FRmag","FRdeg"]}

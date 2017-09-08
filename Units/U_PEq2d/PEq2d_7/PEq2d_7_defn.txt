@@ -1,0 +1,1 @@
+{"unitid":"PEq2d","prbnum":"7","prblin":["A spring is shown below in two states: before force F is applied ( state AB) and after force F is applied (state CD). The spring free length is Lf feet. The length when force F is applied is L feet.","(1) What is the spring stiffness, k, in lb\/ft?"],"ivlin":["F,lb,100,200,RU","L,ft,1.6,2.0,RU","Lf,ft,1.5,1.5,RU"],"avlin":["k"]}

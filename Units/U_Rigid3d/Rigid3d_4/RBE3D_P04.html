@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>U04_3d_P04.html</title>
+<link href="../style_ipp_prob.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../lib_gvSetup.js"></script>
+<script>
+gvprobid= "U04_3d_P04";
+gvgridon= false;
+
+// Geometric variables for active display
+
+// Instance variables
+var gvNinst= 0;		// counter
+var gvIV1= { typ:"N",nam:"Fmag",val:0, min:200,max:300 };
+var gvIV2= { typ:"N",nam:"a",   val:0, min:3,  max:5   };
+var gvIV3= { typ:"N",nam:"b",   val:0, min:2,  max:4   };
+var gvIV4= { typ:"N",nam:"c",   val:0, min:3,  max:5   };
+var gvIV=  [ 4,gvIV1,gvIV2,gvIV3,gvIV4 ];
+
+// Answers
+var gvPart1= {act:"enter",nam:"FB",typ:"ijk",ansS:"",ansP:"",ntries:0};
+var gvPart2= {act:"enter",nam:"FC",typ:"ijk",ansS:"",ansP:"",ntries:0};
+var gvPart3= {act:"enter",nam:"FD",typ:"ijk",ansS:"",ansP:"",ntries:0};
+var gvPart=  [3,gvPart1,gvPart2,gvPart3];
+
+//alert("gv completed");
+</script>
+
+<script type="text/javascript" src="../lib_Actions.js"></script>
+<script type="text/javascript" src="../lib_cDraw1.js"></script>
+ 
+</head>
+
+
+<body id="bodywrap" onload="initialize2()">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- Wrap for header and canvas ----------------------------------------------->
+<div>
+<div id="hdrwrap">
+
+<p class="hdr2">ip4STATICS Problem U04_3d_P04</p>
+<p>A space truss supports load force F at point A. Point B is a ball joint. Force FB can act in any direction; the moment is zero. Point C is a sliding restraint. The FCy component is zero; the moment is zero. At point D the truss rests against the wall. FDy and FDz are zero; the moment is zero. Units are lbf and ft.</p>
+</div>
+
+<!-- Canvases ----------------------------------------------------------------->
+<div id="cvswrap" style="width:804px; height:504px;">
+ <canvas id="layer1" width="800px" height="500px"></canvas>
+ <canvas id="layer2" width="800px" height="500px"></canvas>
+ <script>
+	gvgrid.xmax= 800;
+	gvgrid.ymax= 500;
+	gvgrid.dx=   20;
+	gvgrid.dy=   20;
+ </script>	
+</div>
+</div>
+
+<!-- New Instance section -----------------------------------------------------> 
+<div id="instwrap">
+ <div id="INST"><button onclick="doINSTANCE('new')"><b>INSTANCE</b></button></div>
+ <div id="instmsg"><p id="msgInstance">&#160;</p></div>
+</div>
+
+<!-- Set IV section -----------------------------------------------------------> 
+<div id="ivsetctrl">
+ <div id="ivSET_IV"><button onclick="setIVs('set')"><b>SET IVs</b></button></p></div> 
+ <div id="ivSUBMIT"><button onclick="setIVs('submit')"><b>SUBMIT IVs</b></button></p></div>
+ <div id="ivCLR_IV"><button onclick="setIVs('clr')"><b>CLR MSG</b></button></div>
+ <div id="ivmsgline"><p id="ivmsg"></p></div>
+</div>
+<!-- header block -->
+<div id="ivsethdr">
+ <div class="ivnam"><p id="ivnamh">Name</p></div>
+ <div class="ivmin"><p id="ivminh">Min</p></div>
+ <div class="ivmax"><p id="ivmaxh">Max</p></div>
+ <div class="ivval"><p id="ivvalh">Value</p></div> 
+</div>
+<!-- entry blocks -->
+<div id="ivsetwrap"> 
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam1"></p></div>
+  <div class="ivmin"><p id="ivmin1"></p></div>
+  <div class="ivmax"><p id="ivmax1"></p></div>
+  <div class="ivval"><input type="text" size="16" id="enteriv1" value=""></p></div>
+ </div>
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam2"></p></div>
+  <div class="ivmin"><p id="ivmin2"></p></div>
+  <div class="ivmax"><p id="ivmax2"></p></div>
+  <div class="ivval"><input type="text" size="16" id="enteriv2" value=""></p></div>
+ </div>
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam3"></p></div>
+  <div class="ivmin"><p id="ivmin3"></p></div>
+  <div class="ivmax"><p id="ivmax3"></p></div>
+  <div class="ivval"><input type="text" size="16" id="enteriv3" value=""></p></div>
+ </div>
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam4"></p></div>
+  <div class="ivmin"><p id="ivmin4"></p></div>
+  <div class="ivmax"><p id="ivmax4"></p></div>
+  <div class="ivval"><input type="text" size="16" id="enteriv4" value=""></p></div>
+ </div>
+</div>
+<hr>
+
+<!-- Part 1 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p>(1) What is the wall force FB(i,j,k) on the frame?</p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP1" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(1)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP1"></p></div>
+ <div class="ntries"><p id="tryP1"></p></div>
+ <div class="ANS"><button onclick="doANS(1)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(1)"><b>CLR</b></button></div> 
+</div>
+
+<!-- Part 2 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p>(2) What is the wall force FC(i,j,k) on the frame?</p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP2" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(2)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP2"></p></div>
+ <div class="ntries"><p id="tryP2"></p></div>
+ <div class="ANS"><button onclick="doANS(2)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(2)"><b>CLR</b></button></div> 
+</div>
+
+<!-- Part 3 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p>(3) What is the wall force FD(i,j,k) on the frame?</b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP3" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(3)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP3"></p></div>
+ <div class="ntries"><p id="tryP3"></p></div>
+ <div class="ANS"><button onclick="doANS(3)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(3)"><b>CLR</b></button></div> 
+</div>
+
+<hr>
+<!-- MESSAGE line instance request -------------------------------------------->
+<div id="msgwrap"> 
+ <p id="msgline"><b>&#160;&#160;&#160;Message:</b></p>
+</div>
+<br>
+<!-- General control requests -------------------------------------------------> 
+<div id="ctlwrap">
+ <div id="FEEDBACK1"><button onclick="doFEEDBACK()"><b>FEEDBACK</b></button></div>
+ <div id="HELP1">  <button onclick="doHELP()"><b>HELP</b></button></div>
+ <div id="CLRMSG1"><button onclick="doCLRMSG()"><b>CLEAR MSG</b></button></div>
+ <div id="WORKSH1"><button onclick="doWORKSHEET()"><b>WORKSHEET</b></button></div>
+ <div id="SOLUTION1"><button onclick="doSOLUTION()"><b>SOLUTION</b></button></div> 
+</div>
+
+<hr>
+<!-- Footer ------------------------------------------------------------------->
+<div id="ftrwrap">
+<p id="ftrlin1"><b>MSU - CoE</b></p>
+</div>
+
+
+<!-- Inline scripts specific to this problem ---------------------------------->
+<script type="text/javascript">
+
+// doINSTANCE ----------------------------------------------------------------->
+function doINSTANCE(act)
+{
+	if (act == "new") {
+		// generate new instance vbls
+		var Fmag= 200 +100*Math.random();
+		var a=    3 +2*Math.random();
+		var b=    2 +2*Math.random();
+		var c=    3 +2*Math.random();
+		gvIV1.val= Fmag;
+		gvIV2.val= a;		
+		gvIV3.val= b;
+		gvIV4.val= c;
+		gvNinst=   gvNinst +1;
+	}
+	else if ((act == "set")||(act == "grid")) {
+		Fmag= Number(gvIV1.val);
+		a=    Number(gvIV2.val);	
+		b=    Number(gvIV3.val);
+		c=    Number(gvIV4.val);
+		if (act == "grid") {
+			gridon=   !gridon;
+			gvgridon= gridon;
+		}		
+	}
+	var ninst= gvNinst;
+	
+	// display instance line text	
+	var Fmagf= Fmag.toPrecision(3);
+	var af=    a.toPrecision(3);
+	var bf=    b.toPrecision(3);
+	var cf=    c.toPrecision(3);
+	var strb=  " ".concat(ninst,": Fmag= ",Fmagf," lb,&#160; a= ",af," ft");
+	strb=      strb.concat(",&#160; b= ",bf," ft,&#160; c= ",cf," ft.");
+	document.getElementById("msgInstance").innerHTML= strb.bold();
+
+	// clear all enter and message data text
+	doCLR(0);
+
+	// set scale and display instance data
+	gvDscal= 100/1;
+	gvFscal= 100/1;
+	drawINSTANCE('INSTANCE');
+
+	// get new solution and save it
+	var Fy=  0.714*Fmag;		// load F component
+	var Fz=  -0.714*Fmag;		// load F component
+	
+	var FBx= (-a*b)*Fy +(a/(2*c))*Fz;
+	var FBy= -Fy;
+	var FBz= -Fz/2;
+
+	var FCx= (-a/b)*Fy +(a/c)*Fz;
+	var FCy= 0;
+	var FCz= -Fz/2;
+	
+	var FDx= (-a/c)*Fz;
+	var FDy= 0;	
+	var FDz= 0;
+	
+	FBx= FBx.toPrecision(3);
+	FBy= FBy.toPrecision(3);
+	FBz= FBz.toPrecision(3);
+	FCx= FCx.toPrecision(3);
+	FCy= FCy.toPrecision(3);
+	FCz= FCz.toPrecision(3);
+	FDx= FDx.toPrecision(3);
+	FDy= FDy.toPrecision(3);
+	FDz= FDz.toPrecision(3);
+
+	gvPart[1].ansS= String(FBx).concat(",",String(FBy),",",String(FBz));
+	gvPart[2].ansS= String(FCx).concat(",",String(FCy),",",String(FCz));	
+	gvPart[3].ansS= String(FDx).concat(",",String(FDy),",",String(FDz));
+}	
+	
+// Draw body1 only once, on load ---------------------------------------------->
+function drawBody1()
+{
+	var cid= "layer1";
+	var c1=   document.getElementById(cid);
+	var ctx = c1.getContext('2d');
+	
+	var x0=  400;
+	var y0=  280;
+	gv00.x0= x0;
+	gv00.y0= y0;
+
+	var a=  200;
+	var b2= 100;	// b/2
+	var c=  160;
+	
+	var A= {x:x0-180,y:y0+40};
+	var B= {x:x0-b2,y:y0-c};
+	var C= {x:x0+b2,y:y0-c};
+	var D= {x:x0,y:y0};	
+
+	// draw wall as background
+	cDrawRectxy(cid,B.x-40,B.y-30,C.x+40,D.y+30,"lightgray",1,"azure");
+	
+	// draw axes	
+	cDrawArrow(cid,x0,y0+80,x0,y0-240,"grey",1,true); 			//z-axis
+	cDrawArrow(cid,B.x-140,y0,C.x+140,y0,"grey",1,true); 		//y-axis
+	cDrawArrow(cid,x0+100,y0-100,x0-180,y0+180,"grey",1,true); 	//x-axis
+	ctx.font="normal 16px Arial";
+	ctx.fillStyle="gray";
+	ctx.fillText("Z", x0-20,y0-210);
+	ctx.fillText("Y", x0+190,y0+20);
+	ctx.fillText("X", x0-180,y0+160);
+
+	// draw force and label it
+	cDrawArrow(cid,A.x,A.y+4,A.x+80,A.y+80,"red",4,true);
+	ctx.font="bold 16px Arial";	
+	ctx.fillStyle="red";	
+	ctx.fillText("F= Fmag*(0i +0.714j -0.714k)",A.x+90,A.y+90);
+	
+	// draw the truss
+	cDrawDot(cid,B.x,B.y,10,"black");
+	cDrawDot(cid,B.x,B.y,7,"white");		
+	cDrawLine(cid,C.x-10,C.y-6,C.x+10,C.y-6,"black",4,"round");
+	cDrawLine(cid,C.x-10,C.y+6,C.x+10,C.y+6,"black",4,"round");
+	cDrawLine(cid,A.x,A.y,B.x,B.y,"gray",6,"round");
+	cDrawLine(cid,A.x,A.y,C.x,C.y,"gray",6,"round");
+	cDrawLine(cid,C.x,C.y,B.x,B.y,"gray",4,"round");
+	cDrawLine(cid,D.x,D.y,B.x,B.y,"gray",4,"round");
+	cDrawLine(cid,C.x,C.y,D.x,D.y,"gray",4,"round");
+	cDrawLine(cid,D.x,D.y,A.x,A.y,"gray",6,"round");
+	
+	cDrawDot(cid,A.x,A.y,4,"black");
+	cDrawDot(cid,B.x,B.y,4,"black");	
+	cDrawDot(cid,C.x,C.y,4,"black");	
+	cDrawDot(cid,D.x,D.y,4,"black");		
+
+	ctx.fillText("A (a,0,c)",A.x-70,A.y);
+	ctx.fillText("B (0,-b/2,c)",B.x-100,B.y);
+	ctx.fillText("C (0,b/2,c)",C.x+20,C.y);
+	ctx.fillText("D (0,0,0)",D.x+10,D.y+20);	
+	
+	gvgridon= false;
+}
+
+// doANS -------------------------------------------------------------------->
+function doANS(partn)
+{	
+	var strb= "&#160;&#160;&#160;Answer ".concat(partn,": ");
+	gvcid=    "layer2";
+		
+	var ansS= gvPart[partn].ansS;
+	if (partn < 4) {
+		strb=    strb.concat(ansS," lb ");
+		document.getElementById("msgline").innerHTML= strb;
+	}	
+}
+
+</script>
+
+<!-- Page must load completely before this can run properly ------------------->
+<script>
+	var Ninst= gvNinst;
+	if (Ninst == 0 ) {
+		setIVs("hide");
+		drawBody1();
+		doINSTANCE("new");
+	}
+</script>
+ 
+</body>
+</html>

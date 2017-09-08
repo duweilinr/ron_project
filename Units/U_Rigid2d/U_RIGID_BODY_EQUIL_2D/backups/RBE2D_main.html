@@ -1,0 +1,357 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>RBE2D_main.html</title>
+
+<link href="../style_ipp_unit.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../lib_Unitmain.js"></script>
+
+</head>
+<!----------------------------------------------------------------------------->
+
+<body id="bodywrap" onload="initialize()">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div style="width:804px; border:2px solid black; background-color:ivory">
+
+<!-- Show title --------------------------------------------------------------->
+<div>
+<h1 class="h1style" style="text-align:center"><b>RIGID BODY EQUILIBRIUM: &#160;
+2D</b></h1>
+</div>
+
+<!-- Canvas 1 ----------------------------------------------------------------->
+<div style="height:1034px; background-color:white; cursor:pointer">
+  <canvas id="cvs1" onclick="myonClick(event)" width="800px" height="1030px" >
+  </canvas>
+</div>
+
+<div>
+  <p class="ptotal"><b>2d Problems:&#160;&#160;  
+    <a href="./RBE2D_P01.html" target="_blank">1</a> &#160;&#160;
+    <a href="./RBE2D_P02.html" target="_blank">2</a> &#160;&#160; 
+    <a href="./RBE2D_P03.html" target="_blank">3</a> &#160;&#160;
+	<a href="./RBE2D_P04.html" target="_blank">4</a> &#160;&#160;	
+    <a href="./RBE2D_P05.html" target="_blank">5</a> &#160;&#160; 
+    <a href="./RBE2D_P06.html" target="_blank">6</a> &#160;&#160;
+	
+    <a href="./RBE2D_P07.html" target="_blank">7</a> &#160;&#160;
+    <a href="./RBE2D_P08.html" target="_blank">8</a> &#160;&#160;
+    <a href="./RBE2D_P09.html" target="_blank">9</a> &#160;&#160;
+    <a href="./RBE2D_P10.html" target="_blank">10</a> &#160;&#160;
+    <a href="./RBE2D_P11.html" target="_blank">11</a> &#160;&#160;
+    <a href="./RBE2D_P12.html" target="_blank">12</a> &#160;&#160;
+	
+    <a href="./RBE2D_P13.html" target="_blank">13</a> &#160;&#160;
+    <a href="./RBE2D_P14.html" target="_blank">14</a> &#160;&#160;
+    <a href="./RBE2D_P15.html" target="_blank">15</a> &#160;&#160;
+    <a href="./RBE2D_P16.html" target="_blank">16</a> &#160;&#160;
+    <a href="./RBE2D_P17.html" target="_blank">17</a> &#160;&#160;	
+  </b></p> 
+</div>
+
+<hr>
+<!-- MESSAGE line instance request -------------------------------------------->
+<div> 
+ <p id="msgline"><b>&#160;&#160;&#160;Message: img is 240x150</b></p>
+</div>
+
+<br>
+<!-- General control requests -------------------------------------------------> 
+<div style="height:30px;">
+ <div class="divsub" id="RETURN1"><button onclick="doUnitRETURN()"><b>RETURN</b>
+ </button></div>
+ <div class="divsub" id="HELP1"><button onclick="doHELP()"><b>HELP</b></button>
+ </div>
+ <div class="divsub" id="CLRMSG1"><button onclick="doCLRMSG()"><b>CLEAR MSG</b>
+ </button></div>
+</div>
+
+<hr>
+<!-- Footer ------------------------------------------------------------------->
+<div id="ftrwrap">
+<p id="ftrlin1"><b>MSU - CoE</b></p>
+</div>
+
+</div>
+</div>
+
+<!-- Inline scripts ----------------------------------------------------------->
+<script type="text/javascript">
+
+// Draw 2d problem images ----------------------------------------------------->
+function drawCvs()
+{
+	var cid=  "cvs1";
+	var c=    document.getElementById(cid);
+	var ctx = c.getContext('2d');
+	var cwid= c.width;
+	var cht=  c.height;
+	ctx.clearRect(0,0,cwid,cht);
+	ctx.fillStyle="ivory";
+	ctx.fillRect(0,0,cwid,cht);
+	
+	// set up geometry scale	
+	var x0=   0;
+	var y0=   0;
+	var w=    240;
+	var h=    150;
+	var xgap= 20;
+	var ygap= 20;
+	
+	var x1= x0 +xgap;
+	var x2= x1 +w +xgap;
+	var x3= x2 +w +xgap;
+
+ 	ctx.font=         "bold 14px Arial";	
+	ctx.textBaseline= 'top';	
+	
+	// 2d row 1 ----------------------------------------------------------------	
+	var y1= y0 +ygap;
+	cDrawRectxy(cid,x1,y1,x1+w,y1+h,"black",1,"white")
+	cDrawRectxy(cid,x2,y1,x2+w,y1+h,"black",1,"white")
+	cDrawRectxy(cid,x3,y1,x3+w,y1+h,"black",1,"white")
+	
+	ctx.fillStyle= "black";	
+	var imageObj1 = new Image();
+	imageObj1.onload = function() {
+		ctx.drawImage(imageObj1, x1+2,y1+2);
+		ctx.fillText( "1",x1+5,y1+h-20);		
+		}
+		imageObj1.src = './figs/RBE2D_P01_fig.JPG';
+	var imageObj2 = new Image();
+	imageObj2.onload = function() {
+		ctx.drawImage(imageObj2, x2+2,y1+2);
+		ctx.fillText( "2",x2+5,y1+h-20);			
+		}
+		imageObj2.src = './figs/RBE2D_P02_fig.JPG';
+	var imageObj3 = new Image();
+	imageObj3.onload = function() {
+		ctx.drawImage(imageObj3, x3+2,y1+2);
+		ctx.fillText( "3",x3+5,y1+h-20);			
+		}
+		imageObj3.src = './figs/RBE2D_P03_fig.JPG';
+	
+	// 2d row 2 ---------------------------------------------------------------	
+	var y2= y1 +ygap +h;
+	cDrawRectxy(cid,x1,y2,x1+w,y2+h,"black",1,"white")
+	cDrawRectxy(cid,x2,y2,x2+w,y2+h,"black",1,"white")
+	cDrawRectxy(cid,x3,y2,x3+w,y2+h,"black",1,"white")
+	
+	ctx.fillStyle= "black";	
+	var imageObj4 = new Image();
+	imageObj4.onload = function() {
+		ctx.drawImage(imageObj4, x1+2,y2+2);
+		ctx.fillText( "4",x1+5,y2+h-20);
+		}
+		imageObj4.src = './figs/RBE2D_P04_fig.JPG';
+	var imageObj5 = new Image();
+	imageObj5.onload = function() {
+		ctx.drawImage(imageObj5, x2+2,y2+2);
+		ctx.fillText( "5",x2+5,y2+h-20);		
+		}
+		imageObj5.src = './figs/RBE2D_P05_fig.JPG';	
+	var imageObj6 = new Image();
+	imageObj6.onload = function() {
+		ctx.drawImage(imageObj6, x3+2,y2+2);
+		ctx.fillText( "6",x3+5,y2+h-20);		
+		}
+		imageObj6.src = './figs/RBE2D_P06_fig.JPG';
+	
+	// 2d row 3 ---------------------------------------------------------------	
+	var y3= y2 +ygap +h;
+	cDrawRectxy(cid,x1,y3,x1+w,y3+h,"black",1,"white")
+	cDrawRectxy(cid,x2,y3,x2+w,y3+h,"black",1,"white")
+	cDrawRectxy(cid,x3,y3,x3+w,y3+h,"black",1,"white")
+	
+	ctx.fillStyle= "black";	
+	var imageObj7 = new Image();
+	imageObj7.onload = function() {
+		ctx.drawImage(imageObj7, x1+2,y3+2);
+		ctx.fillText( "7",x1+5,y3+h-20);
+		}
+		imageObj7.src = './figs/RBE2D_P07_fig.JPG';
+	var imageObj8 = new Image();
+	imageObj8.onload = function() {
+		ctx.drawImage(imageObj8, x2+2,y3+2);
+		ctx.fillText( "8",x2+5,y3+h-20);
+		}
+		imageObj8.src = './figs/RBE2D_P08_fig.JPG';
+	var imageObj9 = new Image();
+	imageObj9.onload = function() {
+		ctx.drawImage(imageObj9, x3+2,y3+2);
+		ctx.fillText( "9",x3+5,y3+h-20);
+		}
+		imageObj9.src = './figs/RBE2D_P09_fig.JPG';	
+
+	// 2d row 4 ---------------------------------------------------------------	
+	var y4= y3 +ygap +h;
+	cDrawRectxy(cid,x1,y4,x1+w,y4+h,"black",1,"white")
+	cDrawRectxy(cid,x2,y4,x2+w,y4+h,"black",1,"white")
+	cDrawRectxy(cid,x3,y4,x3+w,y4+h,"black",1,"white")
+	
+	ctx.fillStyle= "black";	
+	var imageObj10 = new Image();
+	imageObj10.onload = function() {
+		ctx.drawImage(imageObj10, x1+2,y4+2);
+		ctx.fillText( "10",x1+5,y4+h-20);
+		}
+		imageObj10.src = './figs/RBE2D_P10_fig.JPG';
+	var imageObj11 = new Image();
+	imageObj11.onload = function() {
+		ctx.drawImage(imageObj11, x2+2,y4+2);
+		ctx.fillText( "11",x2+5,y4+h-20);
+		}
+		imageObj11.src = './figs/RBE2D_P11_fig.JPG';
+	var imageObj12 = new Image();
+	imageObj12.onload = function() {
+		ctx.drawImage(imageObj12, x3+2,y4+2);
+		ctx.fillText( "12",x3+5,y4+h-20);
+		}
+		imageObj12.src = './figs/RBE2D_P12_fig.JPG';		
+	
+	// 2d row 5 ---------------------------------------------------------------	
+	var y5= y4 +ygap +h;
+	cDrawRectxy(cid,x1,y5,x1+w,y5+h,"black",1,"white")
+	cDrawRectxy(cid,x2,y5,x2+w,y5+h,"black",1,"white")
+	cDrawRectxy(cid,x3,y5,x3+w,y5+h,"black",1,"white")
+	
+	ctx.fillStyle= "black";	
+	var imageObj13 = new Image();
+	imageObj13.onload = function() {
+		ctx.drawImage(imageObj13, x1+2,y5+2);
+		ctx.fillText( "13",x1+5,y5+h-20);
+		}
+		imageObj13.src = './figs/RBE2D_P13_fig.JPG';
+	
+	var imageObj14 = new Image();
+	imageObj14.onload = function() {
+		ctx.drawImage(imageObj14, x2+2,y5+2);
+		ctx.fillText( "14",x2+5,y5+h-20);
+		}
+		imageObj14.src = './figs/RBE2D_P14_fig.JPG';
+
+	var imageObj15 = new Image();
+	imageObj15.onload = function() {
+		ctx.drawImage(imageObj15, x3+2,y5+2);
+		ctx.fillText( "15",x3+5,y5+h-20);
+		}
+		imageObj15.src = './figs/RBE2D_P15_fig.JPG';
+
+	
+	// 2d row 6 ---------------------------------------------------------------	
+	var y6= y5 +ygap +h;
+	cDrawRectxy(cid,x1,y6,x1+w,y6+h,"black",1,"white")
+	cDrawRectxy(cid,x2,y6,x2+w,y6+h,"black",1,"white")
+	//cDrawRectxy(cid,x3,y6,x3+w,y6+h,"black",1,"white")
+	
+	ctx.fillStyle= "black";	
+	var imageObj16 = new Image();
+	imageObj16.onload = function() {
+		ctx.drawImage(imageObj16, x1+2+30,y6+2);
+		ctx.fillText( "16",x1+5,y6+h-20);
+		}
+		imageObj16.src = './figs/RBE2D_P16_fig.JPG';
+	var imageObj17 = new Image();
+	imageObj17.onload = function() {
+		ctx.drawImage(imageObj17, x2+2,y6+2);
+		ctx.fillText( "17",x2+5,y6+h-20);
+		}
+		imageObj17.src = './figs/RBE2D_P17_fig.JPG';
+}
+
+// doMouseClick --------------------------------------------------------------->
+function doMouseClick(event)
+{
+	var clientX= event.clientX;		// mouse pos in canvas coords
+	var clientY= event.clientY;
+
+	var cid=  "cvs1";				// canvas window location
+	var cvs=  document.getElementById(cid);
+    var rect= cvs.getBoundingClientRect();
+	var rectleft= rect.left;
+	var recttop=  rect.top;
+
+	var posx=  clientX -rectleft;
+	var posy=  clientY -recttop;
+	//alert("posx,posy= "+posx+", "+posy);
+	
+	// find which problem pointed to (if any)
+	var x0=   0;
+	var y0=   0;
+	var w=    240;	
+	var h=    150;
+	var xgap= 20;
+	var ygap= 20;
+	
+	var x1= x0 +xgap;
+	var x2= x1 +w +xgap;
+	var x3= x2 +w +xgap;
+
+	// scan x direction first
+	if ( posx>x1 && posx<(x1+w) ) {
+		col= 1;
+	}
+	else if ( posx>x2 && posx<(x2+w) ) {
+		col= 2;
+	}
+	else if ( posx>x3 && posx<(x3+w) ) {
+		col= 3;	
+	}
+	else {
+		return ;
+	}
+	//alert("col= "+col);
+	
+	// now scan y direction (note 3d probs named as '50+' probid)
+	var y1= y0 +ygap;
+	var y2= y1 +h +ygap;
+	var y3= y2 +h +ygap;
+	var y4= y3 +h +ygap;
+	var y5= y4 +h +ygap;
+	var y6= y5 +h +ygap;
+	
+	// 1 to 3
+	if ( posy>y1 && posy<(y1+h) ) {
+		col= 0+col;
+	}	
+	// 4 to 6
+	else if ( posy>y2 && posy<(y2+h) ) {
+		col= 3+col;
+	}
+	// 7 to 9
+	else if ( posy>y3 && posy<(y3+h) ) {
+		col= 6+col;
+	}
+	// 10 to 12
+	else if ( posy>y4 && posy<(y4+h) ) {
+		col= 9+col;
+	}
+	// 13 to 15
+	else if ( posy>y5 && posy<(y5+h) ) {
+		col= 12+col;
+	}
+	// 16 to 18
+	else if ( posy>y6 && posy<(y6+h) ) {
+		col= 15+col;
+	}		
+	else {
+		return ;
+	}
+	//alert("col= "+col);
+	
+	// get probnam and open
+	var	idxs= String(col);	
+	if (col<10) {idxs= "0"+idxs;}
+	var probnam= "RBE2D_P".concat(idxs,".html");
+	window.open(probnam,"_blank");
+}
+
+<!-- Page must load completely before this can run properly ------------------->
+	drawCvs();
+	
+</script>
+
+</body>
+</html>

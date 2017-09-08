@@ -1,0 +1,1 @@
+{"unitid":"PEq3d","prbnum":"1","prblin":["A mass at the origin has weight W N and a load force F1 N, acting as shown below.","(1) What is the force F2 required to keep the mass in equilibrium? Express F2 in terms of F2x,F2y, and F2z components."],"ivlin":["W,N,100,160,RU","F1x,N,100,120,RU","F1y,N,80,100,RU","F1z,N,0,0,RU"],"avlin":["F2x","F2y","F2z"]}

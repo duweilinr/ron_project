@@ -1,0 +1,1 @@
+{"unitid":"Vecs2d","prbnum":"1","prblin":["A force F has x-component Fx and y-component Fy, as shown below. Force units are pounds and degrees.","(1) What is Fmag, the magnitude of the force vector?","(2) What is Fdeg, the angle of the force vector, in degrees?"],"ivlin":["Fx,lb,180,220,RU","Fy,lb,80,120,RU"],"avlin":["Fmag","Fdeg"]}

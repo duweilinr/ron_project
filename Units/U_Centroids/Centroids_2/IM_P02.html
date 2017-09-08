@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>U09_P02.html</title>
+<link href="../style_ipp_prob.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../lib_gvSetup.js"></script>
+
+<script>
+gvprobid= "U09_P02";
+gvgridon= false;
+
+// Geometric variables for active display
+
+// Instance variables
+var gvNinst= 0;		// counter
+
+var gvIV1= {typ:"N",nam:"a",val:0,min:1,max:2};
+var gvIV2= {typ:"N",nam:"h",val:0,min:4,max:6};
+var gvIV=  [2,gvIV1,gvIV2];
+
+// Answers
+var gvPart1= {act:"enter",nam:"cd",typ:"Nc",ansS:"",ansP:"",ntries:0};
+var gvPart2= {act:"enter",nam:"cm",typ:"Nc",ansS:"",ansP:"",ntries:0};
+var gvPart=  [2,gvPart1,gvPart2];
+
+//alert("gv completed");
+</script>
+
+<script type="text/javascript" src="../lib_Actions.js"></script>
+<script type="text/javascript" src="../lib_cDraw1.js"></script>
+ 
+</head>
+
+<body id="bodywrap" onload="initialize2()">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- Wrap for header and canvas ----------------------------------------------->
+<div>
+<div id="hdrwrap"> <!-- postioned relative to parent div-->
+<p class="hdr2">ip4STATICS Problem U09_P02</p>
+<p>A cross-sectional slice of a 
+pistachio snow cone is shown in the figure below. Assume the density of ice 
+cream is 0.025 lb/in<sup>3</sup> and the density of the solid cone base is 0.02
+ lb/in<sup>3</sup>. Assume the ice cream does not melt while you work on the
+ problem.</p>
+</div>
+
+<!-- Canvases ----------------------------------------------------------------->
+<div id="cvswrap" style="width:804px; height:424px;">
+ <canvas id="layer1" width="800px" height="420px"></canvas>
+ <canvas id="layer2" width="800px" height="420px"></canvas>
+ <script>
+	gvgrid.xmax= 800;
+	gvgrid.ymax= 420;
+	gvgrid.dx=   20;
+	gvgrid.dy=   20;
+ </script>	
+</div>
+</div>
+
+<!-- New Instance section -----------------------------------------------------> 
+<div id="instwrap">
+ <div id="INST"><button onclick="doINSTANCE('new')"><b>INSTANCE</b></button></div>
+ <div id="instmsg"><p id="msgInstance">&#160;</p></div>
+</div>
+
+<!-- Set IV section -----------------------------------------------------------> 
+<div id="ivsetctrl">
+ <div id="ivSET_IV"><button onclick="setIVs('set')"><b>SET IVs</b></button></p></div> 
+ <div id="ivSUBMIT"><button onclick="setIVs('submit')"><b>SUBMIT IVs</b></button></p></div>
+ <div id="ivCLR_IV"><button onclick="setIVs('clr')"><b>CLR MSG</b></button></div>
+ <div id="ivmsgline"><p id="ivmsg"></p></div>
+</div>
+<!-- header block -->
+<div id="ivsethdr">
+ <div class="ivnam"><p id="ivnamh">Name</p></div>
+ <div class="ivmin"><p id="ivminh">Min</p></div>
+ <div class="ivmax"><p id="ivmaxh">Max</p></div>
+ <div class="ivval"><p id="ivvalh">Value</p></div> 
+</div>
+<!-- entry blocks -->
+<div id="ivsetwrap"> 
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam1"></p></div>
+  <div class="ivmin"><p id="ivmin1"></p></div>
+  <div class="ivmax"><p id="ivmax1"></p></div>
+  <div class="ivval"><input type="text" size="16" id="enteriv1" value=""></p></div>
+ </div>
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam2"></p></div>
+  <div class="ivmin"><p id="ivmin2"></p></div>
+  <div class="ivmax"><p id="ivmax2"></p></div>
+  <div class="ivval"><input type="text" size="16" id="enteriv2" value=""></p></div>
+ </div>
+</div>
+<hr>
+
+<!-- Part 1 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(1) Where is cd, the centroid of the cone base plus ice
+ cream? (Enter 'cdx,cdy')</b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP1" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(1)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP1"></p></div>
+ <div class="ntries"><p id="tryP1"></p></div>
+ <div class="ANS"><button onclick="doANS(1)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(1)"><b>CLR</b></button></div> 
+</div>
+
+<!-- Part 2 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(2) Where is cm, the center of mass of the cone base
+ plus ice cream? (Enter 'cmx,cmy')</b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP2" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(2)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP2"></p></div>
+ <div class="ntries"><p id="tryP2"></p></div>
+ <div class="ANS"><button onclick="doANS(2)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(2)"><b>CLR</b></button></div> 
+</div>
+
+<hr>
+<!-- MESSAGE line instance request -------------------------------------------->
+<div id="msgwrap"> 
+ <p id="msgline"><b>&#160;&#160;&#160;Message:</b></p>
+</div>
+<br>
+<!-- General control requests -------------------------------------------------> 
+<div id="ctlwrap">
+ <div id="FEEDBACK1"><button onclick="doFEEDBACK()"><b>FEEDBACK</b></button></div>
+ <div id="HELP1">  <button onclick="doHELP()"><b>HELP</b></button></div>
+ <div id="CLRMSG1"><button onclick="doCLRMSG()"><b>CLEAR MSG</b></button></div>
+ <div id="WORKSH1"><button onclick="doWORKSHEET()"><b>WORKSHEET</b></button></div>
+ <div id="SOLUTION1"><button onclick="doSOLUTION()"><b>SOLUTION</b></button></div>
+</div>
+
+<hr>
+<!-- Footer ------------------------------------------------------------------->
+<div id="ftrwrap">
+<p id="ftrlin1"><b>MSU - CoE</b></p>
+</div>
+
+
+<!-- Inline scripts specific to this problem ---------------------------------->
+<script type="text/javascript">
+
+// doINSTANCE ----------------------------------------------------------------->
+function doINSTANCE(act)
+{
+	if (act == "new") {
+		// generate new instance vbls
+		var a= 1 +1*Math.random();
+		var h= 4 +2*Math.random();	
+		gvIV1.val= a;
+		gvIV2.val= h;	
+		gvNinst=   gvNinst +1;
+	}
+	else if ((act == "set")||(act == "grid")) {
+		a= Number(gvIV1.val);
+		h= Number(gvIV2.val);
+		if (act == "grid") {
+			gridon=   !gridon;
+			gvgridon= gridon;
+		}
+	}
+	var ninst= gvNinst;
+	
+	// display instance line text	
+	var af= a.toPrecision(3);
+	var hf= h.toPrecision(3);
+	
+	var strb=  " ".concat(ninst,": a= ",af," in, h= ",hf," in.");
+	document.getElementById("msgInstance").innerHTML= strb.bold();
+
+	// clear all enter and message data text
+	doCLR(0);
+
+	// display instance data
+	drawINSTANCE('INSTANCE');
+
+	// get new solution
+	var cdx= 0;
+	var cdy= (0.75*a*a -0.25*h*h)/(2*a +h);
+	var cmx= 0;
+	var cmy= (0.75*a*a*0.025 -0.25*h*h*0.02)/(2*a*0.025 +h*0.02);
+	
+	// save the solution
+	cdx= cdx.toPrecision(3);
+	cdy= cdy.toPrecision(3);		
+	gvPart[1].ansS= String(cdx).concat(",",String(cdy));
+	
+	cmx= cmx.toPrecision(3);
+	cmy= cmy.toPrecision(3);		
+	gvPart[2].ansS= String(cmx).concat(",",String(cmy));	
+}	
+	
+// Draw body1 only once, on load ---------------------------------------------->
+function drawBody1()
+{
+	var cid= "layer1";
+	var c1=   document.getElementById(cid);
+	var ctx = c1.getContext('2d');
+	
+	var x0=  260;
+	var y0=  180;
+	gv00.x0= x0;
+	gv00.y0= y0;
+	
+	gvDscal= 40/1;
+	gvFscal= 100/100;
+	
+	var a= 1.6*gvDscal;
+	var h= 4*gvDscal;
+	
+	// draw x and y axes
+	cDrawArrow(cid,x0-160,y0,x0+160,y0,"gray",1,true);	// x axis
+	cDrawArrow(cid,x0,y0+200,x0,y0-140,"gray",1,true);	// y axis
+	ctx.fillStyle="black";
+	ctx.font="bold 14px Arial";
+	ctx.fillText( "X",x0+180,y0+25);		// y value true pos top
+	ctx.fillText( "Y",x0-20,y0-160);
+
+	// draw scale
+	var sw= gvDscal*2;
+	var x1= 40;
+	
+	//cDrawDoubleArrow(cid,x1,y0+200,x1+sw,y0+200,"gray",2,true);
+	//cDrawTextBG(cid," 2in ",x1+sw/2-13,y0+200-8);
+	//cDrawLine(cid,x1,y0+200-10,x1,y0+200+10);
+	//cDrawLine(cid,x1+sw,y0+200-10,x1+sw,y0+200+10);	
+	
+	cDrawArc3(cid,x0,y0,a-1,0,180,"ccw","green",2,"lightgreen",false,false);
+	cDrawTriangle(cid,x0-a,y0,x0+a,y0,x0,y0+h,"brown",2,"bisque");
+	
+	cDrawDot(cid,x0,y0,2,"black");		// origin	
+	cDrawDoubleArrow(cid,x0+a+20,y0,x0+a+20,y0+h,"gray",1,true);
+	cDrawLine(cid,x0,y0+h,x0+a+40,y0+h,"gray",1,"round");
+	cDrawTextBG(cid,"h",x0+a+15,y0+h/2-5);	
+
+	cDrawDoubleArrow(cid,x0,y0-a-20,x0+a,y0-a-20,"gray",1,true);
+	cDrawLine(cid,x0+a,y0-2,x0+a,y0-a-20,"gray",1,"round");	
+	cDrawTextBG(cid," a ",x0+a/2-5,y0-a-25);	
+		
+	ctx.font="bold 14px Arial";		
+	ctx.fillText( "O",x0-15,y0+20);
+	
+	gvgridon= false;
+}
+
+// doANS -------------------------------------------------------------------->
+function doANS(partn)
+{	
+	var strb= "&#160;&#160;&#160;Answer ".concat(partn,": ");
+
+	var ansS=     gvPart[partn].ansS;
+	var ansSlist= ansS.split(",");	
+	if (partn < 3) {		
+		strb= strb.concat(ansSlist[0],",",ansSlist[1]," in");
+	}
+	document.getElementById("msgline").innerHTML= strb;
+
+}
+</script>
+
+<!-- Page must load completely before this can run properly ------------------->
+<script>
+	var Ninst= gvNinst;
+	if (Ninst == 0 ) {
+		setIVs("hide");
+		drawBody1();
+		doINSTANCE("new");
+	}
+</script>
+ 
+</body>
+</html>

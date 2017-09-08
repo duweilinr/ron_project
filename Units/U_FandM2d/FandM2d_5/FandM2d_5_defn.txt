@@ -1,0 +1,1 @@
+{"unitid":"FandM2d","prbnum":"5","prblin":["A beam carries a uniformly-distributed load, w lb\/ft, in the interval between B and C.","(1) What is W, the equivalent concentrated load force, in lb,deg?","(2) What is xW, the x location of W, in feet?"],"ivlin":["w,lb\/ft,15,25,RU","LB,ft,2,4,RU","LC,ft,9,11,RU","L,ft,12,12,RU"],"avlin":["Wmag,Wdeg","xW"]}

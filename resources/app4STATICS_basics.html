@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html>
+<!-- v.8_09_2017 -->
+<head>
+<title>app4STATICS.html</title>
+<meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+
+<link href="./style_unit.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<script src="./lib_utils_js.js"></script>
+<script src="./lib_cDraw1.js"></script>
+
+<script>
+var mainApp = angular.module('mainApp', []);
+mainApp.controller('mainCtrl', function($scope,$http)
+{
+// on load action --------------------------------------------------------------
+onloadInit();
+function onloadInit()
+{
+	var sysdat=    init_sys_data();
+	$scope.hdrstr= sysdat.hdrstr;
+	$scope.ftrstr= sysdat.ftrstr;
+
+	$scope.caller= "app4STATICS";
+	
+	$scope.unitarr= [
+	{'short':"Basics",	'title':"Basics review", 'nprobs':5},
+		
+	{'short':"Vecs2d",	'title':"Force and Position Vectors in 2d", 	'nprobs':9},
+	{'short':"Vecs3d",	'title':"Force and Position Vectors in 3d", 	'nprobs':7},
+	{'short':"PEq2d",	'title':"Particle Equilibrium in 2d", 			'nprobs':10},
+	{'short':"PEq3d",	'title':"Particle Equilibrium in 3d", 			'nprobs':2},
+	{'short':"FandM2d",	'title':"Systems of Forces and Moments in 2d", 	'nprobs':12},
+	{'short':"FandM3d",	'title':"Systems of Forces and Moments in 3d", 	'nprobs':3},
+	{'short':"Rigid2d",	'title':"Rigid Body Equilibrium in 2d", 		'nprobs':17},
+	{'short':"Rigid3d",	'title':"Rigid Body Equilibrium in 3d", 		'nprobs':7},
+		
+	{'short':"Frames",	'title':"Frames and Machines", 	'nprobs':10},
+	{'short':"Trusses",	'title':"Trusses", 			   	'nprobs':10},
+	{'short':"Beams",	'title':"Beams", 				'nprobs':8},
+	{'short':"Cables",	'title':"Cables", 				'nprobs':4},
+	{'short':"Friction",'title':"Friction", 			'nprobs':7},
+		
+	{'short':"Centroids",  'title':"Centroids and Centers of Mass",	'nprobs':8},
+	{'short':"AreaMoments",'title':"Area Moments of Inertia", 		'nprobs':8},
+		
+	{'short':"zzTest",     'title':"Testing", 'nprobs':5}
+	];					
+}
+
+$scope.doUNIT= function(arg)
+{
+	var unitobj= $scope.unitarr[arg];
+	var unitid=  unitobj.short;
+	var nprobs=  unitobj.nprobs;
+	
+	$http({
+		method: 'POST',
+		data: { caller:		  "main",     
+				unitid:		  unitid,
+				unitnp:		  nprobs,
+				prbnum:		  0,
+				showPROGRESS: "ON",
+				showANSWER:	  "ON"
+				},
+		url:    './cpWrite.php'
+		}).then(function successCallback(response) {
+			var result=   response.data; 	// returned object is 'result'
+			var output=   result.output;	// ignored			
+			var unitfile= "./unit_main.php";
+			window.open(unitfile);
+			
+		}, function errorCallback(response) {
+			var status=     response.status;
+			var statusText= response.statusText;			
+			var errout=     "error= ".concat(status,", ",statusText);
+			console.log(errout);	
+		})						
+}
+
+$scope.myMouseClick= function(arg)
+{
+	alert("myMouseClick: "+arg);
+}
+
+})
+</script>
+
+</head>
+<!----------------------------------------------------------------------------->
+
+
+<body id="bodywrap" ng-app="mainApp" ng-controller="mainCtrl">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- Header section ----------------------------------------------------------->
+<div>
+<br>
+<h1 class="h1style" style="text-align:center">{{hdrstr}}</h1>
+<h2 class="h2style" style="text-align: center"><i>Use this active problem pool for STATICS to build your skills and test yourself!</i></h2>
+</div>
+
+<div id="topimage" style="text-align:center; border:solid red 0px; 
+      cursor:pointer" onclick="myMouseClick('img_main_1');">
+  <img src="img_main_1.JPG" alt="img_main_1" style="width:790px;height:150px;">
+</div>
+ 
+<!-- Wrap for contents -------------------------------------------------------->
+<div style="width:800px; border:solid red 0px;">
+
+ <!-- About app4STATICS -------------------------------------------------------> 
+<br>
+<div style="width:800px; border:solid red 0px;">
+  <p class="p30">
+  <a href="./admin/about/about.html" target="_blank"><b>About app4STATICS</b></a>
+  &emsp; <a href="./admin/about/help_main.html" target="_blank"><b>How to run a problem</b></a> 
+  </p>
+  <br>  
+  <p class="p30">
+  <a href="./admin/login.html" target="_blank"><b>LOG IN</b></a>
+  &emsp; <a href="./admin/register.html" target="_blank"><b>REGISTER</b></a>	
+  &emsp; <a href="./admin/run_demo.html" target="_blank"><b>RUN DEMO</b></a>
+  </p>  
+</div>
+
+<!-- TOPICS -------------------------------------------------------------------> 
+<br>
+<div style="width:800px; border:solid red 0px;">
+  <h2 class="h2style">&emsp;&emsp;<b>TOPICS</b></a></h2>
+</div>
+
+<!-- Unit requests ------------------------------------------------------------> 
+<div class="titlediv" ng-app="mainApp" ng-repeat="x in unitarr">
+  <div class="titleindex" style="border:solid red 0px;">
+    <p><b>({{$index+1}})</b></p>
+  </div>
+  <div class="titleunit" style="border:solid red 0px;">
+    <p><button ng-click="doUNIT($index)"><b>{{x.title}}</b></button></p>
+  </div>
+</div>
+ 
+<br>
+<hr class="std1" />
+
+<!-- Footer ------------------------------------------------------------------->
+<div>
+<p id="pftr"><b>{{ftrstr}}</b></p>
+</div>
+
+</div>
+
+</body>
+</html>

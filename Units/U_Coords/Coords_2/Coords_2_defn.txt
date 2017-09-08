@@ -1,0 +1,1 @@
+{"unitid":"Coords","prbnum":"2","prblin":["A point (r,@theta|) is shown in Polar coordinates below.","(1) What is the x component of the point (r,@theta|)?","(2) What is the y component of the point (r,@theta|)?"],"ivlin":["r,,100,200,RU","@theta|,@deg|,-175,175,RU"],"avlin":["x","y"]}

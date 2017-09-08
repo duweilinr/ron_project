@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>U01_P05.html</title>
+<link href="../style_ipp_prob.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../lib_gvSetup.js"></script>
+<script>
+// Geometric variables for active display
+
+// Instance variables
+var gvNinst= 0;		// counter
+var gvIV1= {nam:"dA",val:0};
+var gvIV2= {nam:"a1",val:0};
+var gvIV=  [2,gvIV1,gvIV2];
+
+// Answers
+var gvPart1= {act:"enter",nam:"xAB",typ:"N",ansS:"",ansP:"",ntries:0};
+var gvPart2= {act:"enter",nam:"yAB",typ:"N",ansS:"",ansP:"",ntries:0};
+var gvPart3= {act:"enter",nam:"dAB",typ:"N",ansS:"",ansP:"",ntries:0};
+var gvPart=  [3,gvPart1,gvPart2,gvPart3];
+
+//alert("gv completed");
+</script>
+
+<script type="text/javascript" src="../lib_Actions.js"></script>
+<script type="text/javascript" src="../lib_cDraw1.js"></script>
+ 
+</head>
+
+
+<body id="bodywrap" onload="initialize2()">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- Wrap for header and canvas ----------------------------------------------->
+<div>
+<div id="hdrwrap"> <!-- postioned relative to parent div-->
+<h3 class="h3style">Unit_01_P05.&#160;&#160;&#160;Position vectors OA and OB lie in the x-y plane, as shown below. Vector AB is the vector from A to B. All units are in feet.</h3>
+</div>
+
+<!-- Canvases ----------------------------------------------------------------->
+<div id="cvswrap" style="width:804px; height:504px;">
+ <canvas id="layer1" width="800px" height="500px"></canvas>
+ <canvas id="layer2" width="800px" height="500px"></canvas>
+ <script>
+	gvgrid.xmax= 800;
+	gvgrid.ymax= 500;
+	gvgrid.dx=   20;
+	gvgrid.dy=   20;
+ </script>	
+</div>
+</div>
+
+<!-- New Instance section -----------------------------------------------------> 
+<div id="instwrap">
+<div id="INST"><button onclick="doINSTANCE()"><b>INSTANCE</b></button></div>
+<div id="instmsg"><p id="msgInstance">&#160;</p></div>
+<div id="REDRAW"><button onclick="drawINSTANCE('REDRAW')"><b>REDRAW</b></button></div>
+<div id="GRID"><button onclick="drawINSTANCE('GRID')"><b>GRID</b></button></div>
+</div>
+
+<hr>
+
+<!-- Part 1 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(1) What is xAB, the x component of vector AB?</b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP1" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(1)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP1"></p></div>
+ <div class="ntries"><p id="tryP1"></p></div>
+ <div class="ANS"><button onclick="doANS(1)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(1)"><b>CLR</b></button></div> 
+</div>
+
+<!-- Part 2 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(2) What is yAB, the y component of vector AB?</b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP2" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(2)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP2"></p></div>
+ <div class="ntries"><p id="tryP2"></p></div>
+ <div class="ANS"><button onclick="doANS(2)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(2)"><b>CLR</b></button></div> 
+</div>
+
+<!-- Part 3 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(3) What is dAB, the length of vector AB, in feet/</b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP3" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(3)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP3"></p></div>
+ <div class="ntries"><p id="tryP3"></p></div>
+ <div class="ANS"><button onclick="doANS(3)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(3)"><b>CLR</b></button></div> 
+</div>
+
+<hr>
+<!-- MESSAGE line instance request -------------------------------------------->
+<div id="msgwrap"> 
+ <p id="msgline"><b>&#160;&#160;&#160;Message:</b></p>
+</div>
+<br>
+<!-- General control requests -------------------------------------------------> 
+<div id="ctlwrap">
+ <div id="RETURN1"><button onclick="doRETURN()"><b>RETURN</b></button></div>
+ <div id="HELP1">  <button onclick="doHELP()"><b>HELP</b></button></div>
+ <div id="CLRMSG1"><button onclick="doCLRMSG()"><b>CLEAR MSG</b></button></div>
+</div>
+
+<hr>
+<!-- Footer ------------------------------------------------------------------->
+<div id="ftrwrap">
+ <div id="pftr1" class="h2style"><b>ip4STATICS</b></div> 
+ <div id="pftr2" class="h3style">Last update: 04/08/2016</button></div>
+</div>
+
+
+<!-- Inline scripts specific to this problem ---------------------------------->
+<script type="text/javascript">
+
+// doINSTANCE ----------------------------------------------------------------->
+function doINSTANCE()
+{
+	// generate new instance vbls
+	var d=     8 +2*Math.random();
+	var a1=    30 +30*Math.random();
+	gvIV1.val= d;
+	gvIV2.val= a1;
+
+	gvNinst=   gvNinst +1;
+	var ninst= gvNinst;
+	
+	// display instance line text	
+	var df=   d.toPrecision(3);
+	var a1f=  a1.toPrecision(3);
+	var strb= " ".concat(ninst,": d= ",df," ft,&#160; a1= ",a1f,"&deg;");
+	document.getElementById("msgInstance").innerHTML= strb.bold();
+
+	// clear all enter and message data text
+	doCLR(0);
+
+	// set scale and display instance data
+	drawINSTANCE('INSTANCE');
+
+	// get new solution and save it
+	var a1r= a1*Math.PI/180;
+	
+	var xAB= 20 +d*Math.sin(a1r);
+	var yAB= 15 -d*Math.cos(a1r);
+	var dAB= Math.sqrt(xAB*xAB +yAB*yAB);
+	
+	xAB= xAB.toPrecision(3);
+	yAB= yAB.toPrecision(3);
+	dAB= dAB.toPrecision(3);
+	gvPart[1].ansS= String(xAB);
+	gvPart[2].ansS= String(yAB);
+	gvPart[3].ansS= String(dAB);
+}	
+
+// drawINSTANCE --------------------------------------------------------------->
+function drawINSTANCE(act)
+{	
+	// see if grid toggle called for	
+	var gridon= gvgridon;
+	if (act==="GRID") {
+		gridon=   !gridon;
+		gvgridon= gridon;
+	}
+
+	// initialize layer2 canvas
+	var cid=   "layer2";
+	var c=     document.getElementById(cid);
+	var ctx=   c.getContext("2d");
+	ctx.clearRect(0,0,c.width,c.height);
+	if (gridon) {mydrawGrid(cid);}	
+
+	// recover the inst vbls
+
+	// draw the forces
+
+}
+	
+// Draw body1 only once, on load ---------------------------------------------->
+function drawBody1()
+{
+	var cid= "layer1";
+	var c1=   document.getElementById(cid);
+	var ctx = c1.getContext('2d');
+	
+	var x0=   360;
+	var y0=   360;
+	gv00.x0=  x0;
+	gv00.y0=  y0;
+	gvgridon= true;
+	
+	gvDscal= 200/20;		// pixels/ft		
+	
+	cDrawArrow(cid,x0-150,y0,x0+300,y0,"gray",2,true);	// x axis
+	cDrawArrow(cid,x0,y0+60,x0,y0-280,"gray",2,true); 	// y axis
+	ctx.font="bold 14px Arial";
+	ctx.fillStyle="gray";
+	ctx.fillText("X",x0+220,y0+15);
+	ctx.fillText("Y",x0-20,y0-260);
+
+	cDrawArrow(cid,x0,y0,x0-80,y0-120,"black",2,true);	// vector A
+	cDrawArrow(cid,x0,y0,x0+200,y0-150,"black",2,true);	// vector B
+	cDrawDot(cid,x0-80,y0-120,4,"black");
+	cDrawDot(cid,x0+200,y0-150,4,"black");
+	ctx.font="bold 16px Arial";
+	ctx.fillStyle="black";
+	ctx.fillText("O",x0-15,y0+20);
+	ctx.fillText("A",x0-90,y0-130);
+	ctx.fillText("B (20 ft,15 ft)",x0+180,y0-160);
+	ctx.fillText("a1",x0-40,y0-90);
+	ctx.fillText("d",x0-60,y0-50);
+	
+	cDrawArc3(cid,x0,y0,90,237,270,"cw","black",1,"none",true,true);		
+}
+
+// doANS -------------------------------------------------------------------->
+function doANS(partn)
+{	
+	var strb= "&#160;&#160;&#160;Answer ".concat(partn,": ");
+	gvcid=    "layer2";
+		
+	if (partn < 4) {
+		var ansS= gvPart[partn].ansS;
+		strb=     strb.concat(ansS," ft");
+		document.getElementById("msgline").innerHTML= strb;
+	} 	
+}
+
+</script>
+
+<!-- Page must load completely before this can run properly ------------------->
+<script>
+	var Ninst= gvNinst;
+	if (Ninst == 0 ) {
+		drawBody1();
+		doINSTANCE();
+	}
+</script>
+ 
+</body>
+</html>

@@ -1,0 +1,1 @@
+{"unitid":"AreaMoments","prbnum":"4","prblin":["Two channel sections are welded as shown below. Dimensions are given in inches.","(1) What is Ixx, the area moment of inertia about the x axis?","(2) What is Iyy, the area moment of inertia about the y axis?"],"ivlin":["t,in,1,2,RU","h,in,10,15,RU","b,in,6,8,RU"],"avlin":["Ixx","Iyy"]}

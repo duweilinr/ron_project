@@ -1,0 +1,1 @@
+{"unitid":"Vecs2d","prbnum":"3","prblin":["A force F has magnitude Fm and angle Fd as shown below. Force units are Newtons and degrees.","(1) What is Fx, the x-component of the force?","(2) What is Fy, the y-component of the force?"],"ivlin":["Fmag,N,150,200,RU","a,@deg|,100,160,RU"],"avlin":["Fx","Fy"]}

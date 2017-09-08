@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>U04_P02.html</title>
+<link href="../style_ipp_prob.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../lib_gvSetup.js"></script>
+
+<script>
+gvprobid= "U04_P02";
+gvgridon= false;
+
+// Geometric variables for active display
+var gvA= { x: 6,y:6 };  
+var gvB= { x:16,y:7 };
+var gvC= { x:26,y:6 };
+var gvD= { x:5, y:2 };
+var gvE= { x:24,y:2 };
+
+// Instance variables
+var gvNinst= 0;		// counter
+
+var gvIV1= {typ:"N",nam:"W1", val:0, min:0.5,max:1   };
+var gvIV2= {typ:"N",nam:"W2", val:0, min:2.5,max:3   };
+var gvIV3= {typ:"N",nam:"W3", val:0, min:2  ,max:2.5 };
+var gvIV=  [3,gvIV1,gvIV2,gvIV3];
+
+// Answers
+var gvPart1= {act:"enter",nam:"FD",typ:"F",ansS:"",ansP:"",ntries:0};
+var gvPart2= {act:"enter",nam:"FE",typ:"F",ansS:"",ansP:"",ntries:0};
+var gvPart=  [2,gvPart1,gvPart2];
+
+//alert("gv completed");
+</script>
+
+<script type="text/javascript" src="../lib_Actions.js"></script>
+<script type="text/javascript" src="../lib_cDraw1.js"></script>
+ 
+</head>
+
+<body id="bodywrap" onload="initialize2()">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- Wrap for header and canvas ----------------------------------------------->
+<div>
+<div id="hdrwrap">
+<p class="hdr2">ip4STATICS Problem U04_P02</p>
+<p class="hdr3">A truck weighing WC tons carries two loads, weighing WA and WB
+ tons, respectively.</p>
+</div>
+
+<!-- Canvases ----------------------------------------------------------------->
+<div id="cvswrap" style="width:804px; height:504px;">
+ <canvas id="layer1" width="800px" height="500px"></canvas>
+ <canvas id="layer2" width="800px" height="500px"></canvas>
+ <script>
+	gvgrid.xmax= 800;
+	gvgrid.ymax= 500;
+	gvgrid.dx=   20;
+	gvgrid.dy=   20;
+ </script>	
+</div>
+</div>
+
+<!-- New Instance section -----------------------------------------------------> 
+<div id="instwrap">
+ <div id="INST"><button onclick="doINSTANCE('new')"><b>INSTANCE</b></button></div>
+ <div id="instmsg"><p id="msgInstance">&#160;</p></div>
+</div>
+
+<!-- Set IV section -----------------------------------------------------------> 
+<div id="ivsetctrl">
+ <div id="ivSET_IV"><button onclick="setIVs('set')"><b>SET IVs</b></button></p></div> 
+ <div id="ivSUBMIT"><button onclick="setIVs('submit')"><b>SUBMIT IVs</b></button></p></div>
+ <div id="ivCLR_IV"><button onclick="setIVs('clr')"><b>CLR MSG</b></button></div>
+ <div id="ivmsgline"><p id="ivmsg"></p></div>
+</div>
+<!-- header block -->
+<div id="ivsethdr">
+ <div class="ivnam"><p id="ivnamh">Name</p></div>
+ <div class="ivmin"><p id="ivminh">Min</p></div>
+ <div class="ivmax"><p id="ivmaxh">Max</p></div>
+ <div class="ivval"><p id="ivvalh">Value</p></div> 
+</div>
+<!-- entry blocks -->
+<div id="ivsetwrap"> 
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam1"></p></div>
+  <div class="ivmin"><p id="ivmin1"></p></div>
+  <div class="ivmax"><p id="ivmax1"></p></div>
+  <div class="ivval"><input type="text" size="16" id="enteriv1" value=""></p></div>
+ </div>
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam2"></p></div>
+  <div class="ivmin"><p id="ivmin2"></p></div>
+  <div class="ivmax"><p id="ivmax2"></p></div>
+  <div class="ivval"><input type="text" size="16" id="enteriv2" value=""></p></div>
+ </div>
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam3"></p></div>
+  <div class="ivmin"><p id="ivmin3"></p></div>
+  <div class="ivmax"><p id="ivmax3"></p></div>
+  <div class="ivval"><input type="text" size="16" id="enteriv3" value=""></p></div>
+ </div> 
+</div>
+<hr>
+
+<!-- Part 1 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="hdr3">(1) What is the reaction force FD at tire D? (Enter 'tons,deg')
+ </p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP1" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(1)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP1"></p></div>
+ <div class="ntries"><p id="tryP1"></p></div>
+ <div class="ANS"><button onclick="doANS(1)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(1)"><b>CLR</b></button></div> 
+</div>
+
+<!-- Part 2 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="hdr3">(2) What is the reaction force FE at tire E? (Enter 'tons,deg')
+ </b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP2" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(2)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP2"></p></div>
+ <div class="ntries"><p id="tryP2"></p></div>
+ <div class="ANS"><button onclick="doANS(2)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(2)"><b>CLR</b></button></div> 
+</div>
+
+<hr>
+
+<!-- MESSAGE line instance request -------------------------------------------->
+<div id="msgwrap"> 
+ <p id="msgline">Message:</p>
+</div>
+<br>
+<!-- General control requests -------------------------------------------------> 
+<div id="ctlwrap">
+ <div id="FEEDBACK1"><button onclick="doFEEDBACK()"><b>FEEDBACK</b></button></div>
+ <div id="HELP1">  <button onclick="doHELP()">  <b>HELP</b></button></div>
+ <div id="CLRMSG1"><button onclick="doCLRMSG()"><b>CLEAR MSG</b></button></div>
+ <div id="WORKSH1"><button onclick="doWORKSHEET()"><b>WORKSHEET</b></button></div>
+ <div id="SOLUTION1"><button onclick="doSOLUTION()"><b>SOLUTION</b></button></div>
+</div>
+
+<hr>
+<!-- Footer ------------------------------------------------------------------->
+<div id="ftrwrap">
+<p id="ftrlin1"><b>MSU - CoE</b></p>
+</div>
+
+<!-- Inline scripts specific to this problem ---------------------------------->
+<script type="text/javascript">
+
+// doINSTANCE ----------------------------------------------------------------->
+function doINSTANCE(act)
+{
+	if (act == "new") {
+		// generate new instance vbls
+		var WA= 0.5 +0.5*Math.random();
+		var WB= 2.5 +0.5*Math.random();
+		var WC= 2   +0.25*Math.random();
+		gvIV1.val= WA;
+		gvIV2.val= WB;
+		gvIV3.val= WC;
+		gvNinst=   gvNinst +1;
+	}
+	else if ((act == "set")||(act == "grid")) {
+		WA= Number(gvIV1.val);
+		WB= Number(gvIV2.val);	
+		WC= Number(gvIV3.val);
+		if (act == "grid") {
+			gridon=   !gridon;
+			gvgridon= gridon;
+		}			
+	}
+	var ninst= gvNinst;
+	
+	// display instance line text	
+	var WAf= WA.toPrecision(3);
+	var WBf= WB.toPrecision(3);
+	var WCf= WC.toPrecision(3);
+	var strb=  " ".concat(ninst,": WA= ",WAf," tons,&#160; WB= ",WBf," tons");
+	strb=      strb.concat(",&#160; WC= ",WCf," tons");
+	document.getElementById("msgInstance").innerHTML= strb.bold();
+
+	// clear all enter and message data text
+	doCLR(0);
+
+	// display instance data
+	drawINSTANCE('INSTANCE');
+
+	// get new solution and save it
+	var Wt=  WA +WB +WC;
+	var MDt= 1*WA +11*WB +21*WC;
+	
+	var FEmag= MDt/19;
+	var FDmag= Wt -FEmag;
+	var FDdeg= 90;
+	var FEdeg= 90;
+	
+	FDmag= FDmag.toPrecision(3);
+	FDdeg= FDdeg.toPrecision(3);
+	gvPart[1].ansS= String(FDmag).concat(",",String(FDdeg));
+	
+	FEmag= FEmag.toPrecision(3);
+	FEdeg= FEdeg.toPrecision(3);	
+	gvPart[2].ansS= String(FEmag).concat(",",String(FEdeg));
+
+	gvPart[3].ansS= String(FDmag).concat(",",String(FDdeg));
+	gvPart[4].ansS= String(FEmag).concat(",",String(FEdeg));
+
+}	
+
+// Draw body1 only once, on load ---------------------------------------------->
+function drawBody1()
+{
+	var cid= "layer1";
+	var c1=   document.getElementById(cid);
+	var ctx = c1.getContext('2d');
+	
+	var x0=  100;
+	var y0=  300;
+	gv00.x0= x0;
+	gv00.y0= y0;
+	
+	gvDscal= 120/6;
+	gvFscal= 100/3;
+	
+	cDrawArrow(cid,x0-60,y0,x0+660,y0,"gray",1.5,true);		// x axis
+	cDrawArrow(cid,x0,y0+100,x0,y0-240,"gray",1.5,true);	// y axis
+	ctx.fillStyle="gray";
+	ctx.font="bold 16px Arial";
+	ctx.fillText("X",x0+630,y0+20);
+	ctx.fillText("Y",x0-20,y0-225);
+	ctx.fillText("O",x0-20,y0+20);
+
+	var Dscal= gvDscal;
+	var Axp= Dscal*gvA.x +x0;
+	var Ayp= -Dscal*gvA.y +y0;
+	var Bxp= Dscal*gvB.x +x0;
+	var Byp= -Dscal*gvB.y +y0;
+	var Cxp= Dscal*gvC.x +x0;
+	var Cyp= -Dscal*gvC.y +y0;
+	var Dxp= Dscal*gvD.x +x0;
+	var Dyp= -Dscal*gvD.y +y0;
+	var Exp= Dscal*gvE.x +x0;
+	var Eyp= -Dscal*gvE.y +y0;
+	
+	cDrawRectxy(cid,x0,y0-120,x0+400,y0-60,"black","2","lightgray");
+	cDrawRectxy(cid,x0+400,y0-200,x0+580,y0-60,"black","2","lightgray");
+	cDrawRectxy(cid,x0+60,y0-180,x0+180,y0-120,"brown","4","burlywood");
+	cDrawRectxy(cid,x0+240,y0-220,x0+380,y0-120,"brown","8","darkkhaki");
+	cDrawLine(cid,x0,y0-120,x0+396,y0-120,"gray",8,"round");
+
+	cDrawDot(cid,x0+100,y0-40,40,"black");		// rear wheel
+	cDrawDot(cid,x0+100,y0-40,20,"silver");
+	cDrawDot(cid,x0+480,y0-40,40,"black");		// front wheel
+	cDrawDot(cid,x0+480,y0-40,20,"silver");
+	
+	cDrawDot(cid,Axp,Ayp,4,"black");
+	cDrawDot(cid,Bxp,Byp,4,"black");
+	cDrawDot(cid,Cxp,Cyp,4,"black");
+	cDrawDot(cid,Dxp,Dyp,4,"black");
+	cDrawDot(cid,Exp,Eyp,4,"black");
+	
+	ctx.fillStyle="black";
+	ctx.font="bold 16px Arial";
+	ctx.fillText("A",Axp+5,Ayp-6);
+	ctx.fillText("B",Bxp+5,Byp-6);
+	ctx.fillText("C",Cxp+5,Cyp-6);
+	ctx.fillText("D",Dxp+3,Dyp-4);
+	ctx.fillText("E",Exp+3,Eyp-4);
+	
+	// dimensioning for wheels		
+	cDrawLine(cid,Dxp,y0+5,Dxp,y0+40,"gray",1,"round");
+	cDrawLine(cid,Exp,y0+5,Exp,y0+40,"gray",1,"round");
+	cDrawDoubleArrow(cid,x0, y0+25,Dxp,y0+25,"gray",1,true);
+	cDrawDoubleArrow(cid,Dxp,y0+25,Exp,y0+25,"gray",1,true);
+	cDrawTextBG(cid," 5ft ", (x0+Dxp)/2-10,y0+17);
+	cDrawTextBG(cid," 19ft ",(Dxp+Exp)/2-20,y0+17);	
+	
+	// dimensioning for weights
+	cDrawLine(cid,Axp,Ayp+8,Axp,Ayp+35,"gray",1,"round");
+	cDrawLine(cid,Bxp,Byp+8,Bxp,Ayp+35,"gray",1,"round");
+	cDrawLine(cid,Cxp,Cyp+8,Cxp,Ayp+35,"gray",1,"round");	
+	cDrawDoubleArrow(cid,x0, Ayp+20,Axp,Ayp+20,"gray",1,true);
+	cDrawDoubleArrow(cid,Axp,Ayp+20,Bxp,Ayp+20,"gray",1,true);
+	cDrawDoubleArrow(cid,Bxp,Ayp+20,Cxp,Ayp+20,"gray",1,true);	
+	cDrawTextBG(cid," 6ft ", (x0+Axp)/2-10,Ayp+11);
+	cDrawTextBG(cid," 10ft ",(Axp+Bxp)/2-10,Ayp+11);
+	cDrawTextBG(cid," 10ft ", (Bxp+Cxp)/2-10,Ayp+11);	
+	
+}
+
+// doANS -------------------------------------------------------------------->
+function doANS(partn)
+{	
+	var strb= "&#160;&#160;&#160;Answer ".concat(partn,": ");
+
+	var ansS=     gvPart[partn].ansS;
+	var ansSlist= ansS.split(",");	
+	if (partn < 3) {		
+		strb= strb.concat(ansSlist[0]," tons @ ",ansSlist[1],"&deg;");		
+	}
+	else if (partn <4) {
+		strb= strb.concat(ansSlist[0]," tons @ ",ansSlist[1],"&deg;");		
+		var Dx= gvD.x;
+		cDrawFxy(ansSlist[0],ansSlist[1],Dx,0,"h","none","green");			
+	}
+	else {
+		strb= strb.concat(ansSlist[0]," tons @ ",ansSlist[1],"&deg;");
+		var Ex= gvE.x;
+		cDrawFxy(ansSlist[0],ansSlist[1],Ex,0,"h","none","green");			
+	}
+	document.getElementById("msgline").innerHTML= strb;
+
+}
+</script>
+
+<!-- Page must load completely before this can run properly ------------------->
+<script>
+	var Ninst= gvNinst;
+	if (Ninst == 0 ) {
+		setIVs("hide");
+		drawBody1();
+		doINSTANCE("new");
+	}
+</script>
+ 
+</body>
+</html>

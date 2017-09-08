@@ -1,0 +1,1 @@
+{"unitid":"Coords","prbnum":"6","prblin":["A point (r,@theta|,z) is given in Cylindrical coordinates below. The challenge is to express the point location in Cartesian coordinates x,y and z.","(1) What is the x value?","(2) What is the y value?","(3) What is the z value?"],"ivlin":["r,,50,250,RU","@theta|,,-150,150,RU","z,,-150,150,RU"],"avlin":["x","y","z"]}

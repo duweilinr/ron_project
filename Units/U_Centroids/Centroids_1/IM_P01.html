@@ -1,0 +1,315 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>U09_P01.html</title>
+<link href="../style_ipp_prob.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../lib_gvSetup.js"></script>
+
+<script>
+gvprobid= "U09_P01";
+gvgridon= false;
+
+// Geometric variables for active display
+
+// Instance variables
+var gvNinst= 0;		// counter
+
+var gvIV1= {typ:"N",nam:"a",val:0,min:6,max:10};
+var gvIV=  [1,gvIV1];
+
+// Answers
+var gvPart1= {act:"enter",nam:"cAB",  typ:"Nc",ansS:"",ansP:"",ntries:0};
+var gvPart2= {act:"enter",nam:"cBC",  typ:"Nc",ansS:"",ansP:"",ntries:0};
+var gvPart3= {act:"enter",nam:"cCD",  typ:"Nc",ansS:"",ansP:"",ntries:0};
+var gvPart4= {act:"enter",nam:"cABCD",typ:"Nc",ansS:"",ansP:"",ntries:0};
+var gvPart=  [4,gvPart1,gvPart2,gvPart3,gvPart4];
+
+//alert("gv completed");
+</script>
+
+<script type="text/javascript" src="../lib_Actions.js"></script>
+<script type="text/javascript" src="../lib_cDraw1.js"></script>
+ 
+</head>
+
+<body id="bodywrap" onload="initialize2()">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- Wrap for header and canvas ----------------------------------------------->
+<div>
+<div id="hdrwrap"> <!-- postioned relative to parent div-->
+<p class="hdr2">ip4STATICS Problem U09_P01</p>
+<p>A steel bar is bent as shown in the figure below. Units are feet.</p>
+</div>
+
+<!-- Canvases ----------------------------------------------------------------->
+<div id="cvswrap" style="width:804px; height:464px;">
+ <canvas id="layer1" width="800px" height="460px"></canvas>
+ <canvas id="layer2" width="800px" height="460px"></canvas>
+ <script>
+	gvgrid.xmax= 800;
+	gvgrid.ymax= 460;
+	gvgrid.dx=   20;
+	gvgrid.dy=   20;
+ </script>	
+</div>
+</div>
+
+<!-- New Instance section -----------------------------------------------------> 
+<div id="instwrap">
+ <div id="INST"><button onclick="doINSTANCE('new')"><b>INSTANCE</b></button></div>
+ <div id="instmsg"><p id="msgInstance">&#160;</p></div>
+</div>
+
+<!-- Set IV section -----------------------------------------------------------> 
+<div id="ivsetctrl">
+ <div id="ivSET_IV"><button onclick="setIVs('set')"><b>SET IVs</b></button></p></div> 
+ <div id="ivSUBMIT"><button onclick="setIVs('submit')"><b>SUBMIT IVs</b></button></p></div>
+ <div id="ivCLR_IV"><button onclick="setIVs('clr')"><b>CLR MSG</b></button></div>
+ <div id="ivmsgline"><p id="ivmsg"></p></div>
+</div>
+<!-- header block -->
+<div id="ivsethdr">
+ <div class="ivnam"><p id="ivnamh">Name</p></div>
+ <div class="ivmin"><p id="ivminh">Min</p></div>
+ <div class="ivmax"><p id="ivmaxh">Max</p></div>
+ <div class="ivval"><p id="ivvalh">Value</p></div> 
+</div>
+<!-- entry blocks -->
+<div id="ivsetwrap"> 
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam1"></p></div>
+  <div class="ivmin"><p id="ivmin1"></p></div>
+  <div class="ivmax"><p id="ivmax1"></p></div>
+  <div class="ivval"><input type="text" size="16" id="enteriv1" value=""></p></div>
+ </div>
+</div>
+<hr>
+
+<!-- Part 1 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(1) Where is the centroid of segment AB? (Enter 'x,y')
+ </b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP1" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(1)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP1"></p></div>
+ <div class="ntries"><p id="tryP1"></p></div>
+ <div class="ANS"><button onclick="doANS(1)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(1)"><b>CLR</b></button></div> 
+</div>
+
+<!-- Part 2 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(2) Where is the centroid of segment BC? (Enter 'x,y')
+ </b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP2" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(2)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP2"></p></div>
+ <div class="ntries"><p id="tryP2"></p></div>
+ <div class="ANS"><button onclick="doANS(2)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(2)"><b>CLR</b></button></div> 
+</div>
+
+<!-- Part 3 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(3) Where is the centroid of segment CD? (Enter 'x,y')
+ </b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP3" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(3)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP3"></p></div>
+ <div class="ntries"><p id="tryP3"></p></div>
+ <div class="ANS"><button onclick="doANS(3)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(3)"><b>CLR</b></button></div> 
+</div>
+
+<!-- Part 4 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(4) Where is the centroid of bar ABCD? (Enter 'x,y')
+ </b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP4" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(4)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP4"></p></div>
+ <div class="ntries"><p id="tryP4"></p></div>
+ <div class="ANS"><button onclick="doANS(4)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(4)"><b>CLR</b></button></div> 
+</div>
+
+<hr>
+<!-- MESSAGE line instance request -------------------------------------------->
+<div id="msgwrap"> 
+ <p id="msgline"><b>&#160;&#160;&#160;Message:</b></p>
+</div>
+<br>
+<!-- General control requests -------------------------------------------------> 
+<div id="ctlwrap">
+ <div id="FEEDBACK1"><button onclick="doFEEDBACK()"><b>FEEDBACK</b></button></div>
+ <div id="HELP1">  <button onclick="doHELP()"><b>HELP</b></button></div>
+ <div id="CLRMSG1"><button onclick="doCLRMSG()"><b>CLEAR MSG</b></button></div>
+ <div id="WORKSH1"><button onclick="doWORKSHEET()"><b>WORKSHEET</b></button></div>
+ <div id="SOLUTION1"><button onclick="doSOLUTION()"><b>SOLUTION</b></button></div>
+</div>
+
+<hr>
+<!-- Footer ------------------------------------------------------------------->
+<div id="ftrwrap">
+<p id="ftrlin1"><b>MSU - CoE</b></p>
+</div>
+
+
+<!-- Inline scripts specific to this problem ---------------------------------->
+<script type="text/javascript">
+
+// doINSTANCE ----------------------------------------------------------------->
+function doINSTANCE(act)
+{
+	if (act == "new") {
+		// generate new instance vbls
+		var a=     6 +4*Math.random();	
+		gvIV1.val= a;	
+		gvNinst=   gvNinst +1;
+	}
+	else if ((act == "set")||(act == "grid")) {
+		a= Number(gvIV1.val);
+		if (act == "grid") {
+			gridon=   !gridon;
+			gvgridon= gridon;
+		}
+	}
+	var ninst= gvNinst;
+	
+	// display instance line text	
+	var af=     a.toPrecision(3);
+	
+	var strb=  " ".concat(ninst,": a= ",af," ft.");
+	document.getElementById("msgInstance").innerHTML= strb.bold();
+
+	// clear all enter and message data text
+	doCLR(0);
+
+	// display instance data
+	drawINSTANCE('INSTANCE');
+
+	// get new solution
+	var ABx= 2*a;
+	var ABy= 4.5*a;
+	var BCx= 3.5*a;
+	var BCy= 4.5*a;
+	var CDx= 3*a;
+	var CDy= 1*a;
+	
+	var barx= 2.911*a;		// see hw prob N P1 for details
+	var bary= 2.699*a;
+	
+	// save the solution
+	ABx= ABx.toPrecision(3);
+	ABy= ABy.toPrecision(3);		
+	gvPart[1].ansS= String(ABx).concat(",",String(ABy));
+	
+	BCx= BCx.toPrecision(3);
+	BCy= BCy.toPrecision(3);		
+	gvPart[2].ansS= String(BCx).concat(",",String(BCy));
+	
+	CDx= CDx.toPrecision(3);
+	CDy= CDy.toPrecision(3);		
+	gvPart[3].ansS= String(CDx).concat(",",String(CDy));
+
+	barx= barx.toPrecision(3);
+	bary= bary.toPrecision(3);		
+	gvPart[4].ansS= String(barx).concat(",",String(bary));	
+	
+}	
+	
+// Draw body1 only once, on load ---------------------------------------------->
+function drawBody1()
+{
+	var cid= "layer1";
+	var c1=   document.getElementById(cid);
+	var ctx = c1.getContext('2d');
+	
+	var x0=  160;
+	var y0=  400;
+	gv00.x0= x0;
+	gv00.y0= y0;
+	
+	gvDscal= 60/10;
+	gvFscal= 100/400;
+	
+	var a=  gvIV1.val;
+	var ap= 60;
+	gvDscal= ap/a;
+	
+	var Axp= x0 +1*ap;
+	var Ayp= y0 -5*ap;
+	var Bxp= x0 +3*ap;
+	var Byp= y0 -4*ap;
+	var Cxp= x0 +4*ap;
+	var Cyp= y0 -1*ap;
+	var Dxp= x0 +2*ap;
+	var Dyp= y0 -1*ap;
+
+	cDrawArrow(cid,x0,y0,x0+340,y0,"gray",1,true);	// x axis
+	cDrawArrow(cid,x0,y0,x0,y0-360,"gray",1,true);	// y axis
+	ctx.fillStyle="black";
+	ctx.font="bold 14px Arial";
+	ctx.fillText( "X",x0+320,y0+25);		// y value true pos top
+	ctx.fillText( "Y",x0-20,y0-340);
+
+	cDrawLine(cid,Axp,Ayp,Bxp,Byp,"gray",12,"round");
+	cDrawLine(cid,Bxp,Byp,Cxp,Cyp,"gray",12,"round");
+	cDrawLine(cid,Cxp,Cyp,Dxp,Dyp,"gray",12,"round");
+
+	cDrawDot(cid,Axp,Ayp,3,"black");	// A	
+	cDrawDot(cid,Bxp,Byp,3,"black");	// B
+	cDrawDot(cid,Cxp,Cyp,3,"black");	// C	
+	cDrawDot(cid,Dxp,Dyp,3,"black");	// D	
+
+	// label fixed points
+	ctx.fillStyle="black";
+	ctx.font="bold 14px Arial";		
+	ctx.fillText( "A(a,5a)",Axp-20,Ayp-20);	
+	ctx.fillText( "B(3a,4a)",Bxp+15,Byp+5);
+	ctx.fillText( "C(4a,a)",Cxp-20,Cyp+25);	
+	ctx.fillText( "D(2a,a)",Dxp-30,Dyp+25);
+	
+	gvgridon= false;
+}
+
+// doANS -------------------------------------------------------------------->
+function doANS(partn)
+{	
+	var strb= "&#160;&#160;&#160;Answer ".concat(partn,": ");
+
+	var ansS=     gvPart[partn].ansS;
+	//var ansSlist= ansS.split(",");	
+	if (partn < 5) {		
+		strb= strb.concat(ansS," ft");
+	}
+	document.getElementById("msgline").innerHTML= strb;
+
+}
+</script>
+
+<!-- Page must load completely before this can run properly ------------------->
+<script>
+	var Ninst= gvNinst;
+	if (Ninst == 0 ) {
+		setIVs("hide");
+		drawBody1();
+		doINSTANCE("new");
+	}
+</script>
+ 
+</body>
+</html>

@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>view_prob_fig</title>
+
+<link href="./style_prob.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script> 
+<script type="text/javascript" src="./lib_cDraw1.js"></script>
+<script type="text/javascript" src="./lib_cDraw2.js"></script>
+
+<script type="text/javascript" src="./Cables_2_cvs.js"></script>
+<!--
+<script type="text/javascript" src="./Units/U_Cables/Cables_1/Cables_1_cvs.js" </script> -->
+
+<script>
+var probapp = angular.module('probApp', []);
+probapp.controller('probCtrl', function($scope,$http)
+{
+// on load action ------------------------------------------------------------->
+onloadInit();
+function onloadInit()
+{
+	$scope.unitid=  "Cables";
+	$scope.prbnum=  2;
+	
+	$scope.msgline= "";
+		
+	// draw figure from existing cvs1 code
+	var xydat= drawCvs1();
+	$scope.xydata= xydat;
+		
+	drawCvs2($scope.xydata);	
+
+	$scope.ftrstr=  "app4STATICS";
+}
+ 
+// message line ---------------------------------------------------------------> 
+$scope.msglineCLR= function() {
+	$scope.msgline= "";
+}
+})    
+</script>
+
+</head>
+
+
+<body id="bodywrap" ng-app="probApp" ng-controller="probCtrl">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- Header section ----------------------------------------------------------->
+<div>
+<br>
+<h2 class="h2style" style="text-align:center">Canvas workboard for viewing figures: {{unitid}}_{{prbnum}}</h2>
+<h3 class="h3style" style="text-align: center">Use this page to view the cvs1 and cvs2 code effects for development.</h3>
+<h3 class="h3style" style="text-align: center">(May not work yet for cvs2 that is iv dependent.)</h3>
+</div>
+
+<!-- Canvas ------------------------------------------------------------------->
+<br>
+<div id="cvswrap" style="width:804px; height:504px; border:solid gray 1px;">
+ <canvas id="layer1" width="800px" height="500px"></canvas>
+ <canvas id="layer2" width="800px" height="500px"></canvas> 
+</div>
+ 
+<!-- message line ------------------------------------------------------------->
+<br>
+<div>
+ <h2 class="h2style"><b>&emsp;Message: <span style="color:red;font-weight:bold">{{msgline}}</span> 
+	&emsp;&emsp;&emsp;<button ng-click="msglineCLR()"><b>CLEAR</b></button>
+</b></button></h2>	
+</div>
+
+<!-- Footer ------------------------------------------------------------------->
+<hr>
+<div>
+ <p class="p1020" style="text-align:center"><b><span ng-bind="ftrstr"></span> :: utility page</b></p>
+</div>
+<!-- bottom of page ----------------------------------------------------------->
+
+<!-- Page must load completely before this script can run properly ------------>
+
+</body>
+</html>

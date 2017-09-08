@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>FR_main.html</title>
+
+<link href="../style_ipp_unit.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../lib_Unitmain.js"></script>
+
+</head>
+<!----------------------------------------------------------------------------->
+
+<body id="bodywrap" onload="initialize()">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div style="width:804px; border:2px solid black; background-color:ivory;">
+
+<!-- Show title --------------------------------------------------------------->
+<div>
+<h1 class="h1style" style="text-align:center"><b>FRAMES and MACHINES</b></h1>
+</div>
+
+<!-- Canvas 1 ----------------------------------------------------------------->
+<div style="height:689px; background-color:white; cursor:pointer;">
+  <canvas id="cvs1" onclick="myonClick(event)" width="800px" height="685px">
+  </canvas>
+</div>
+
+<div>
+  <p class="ptotal"><b>Problems:&#160;&#160;  
+    <a href="./FM_P01.html" target="_blank">1</a> &#160;&#160;
+    <a href="./FM_P02.html" target="_blank">2</a> &#160;&#160;
+    <a href="./FM_P03.html" target="_blank">3</a> &#160;&#160;
+    <a href="./FM_P04.html" target="_blank">4</a> &#160;&#160;
+    <a href="./FM_P05.html" target="_blank">5</a> &#160;&#160;
+    <a href="./FM_P06.html" target="_blank">6</a> &#160;&#160;
+    <a href="./FM_P07.html" target="_blank">7</a> &#160;&#160;
+    <a href="./FM_P08.html" target="_blank">8</a> &#160;&#160;
+    <a href="./FM_P09.html" target="_blank">9</a> &#160;&#160;
+    <a href="./FM_P10.html" target="_blank">10</a> &#160;&#160;	
+  </b></p> 
+</div>
+<hr>
+
+<!-- MESSAGE line instance request -------------------------------------------->
+<div> 
+ <p id="msgline"><b>&#160;&#160;&#160;Message: fig is 240x150</b></p>
+</div>
+<br>
+<!-- General control requests -------------------------------------------------> 
+<div style="height:30px;">
+ <div class="divsub" id="RETURN1"><button onclick="doRETURN()"><b>RETURN</b>
+ </button></div>
+ <div class="divsub" id="HELP1"><button onclick="doHELP()"><b>HELP</b></button>
+ </div>
+ <div class="divsub" id="CLRMSG1"><button onclick="doCLRMSG()"><b>CLEAR MSG</b>
+ </button></div>
+</div>
+
+<hr>
+<!-- Footer ------------------------------------------------------------------->
+<div id="ftrwrap">
+<p id="ftrlin1"><b>MSU - CoE</b></p>
+</div>
+
+</div>
+</div>
+
+<!-- Inline scripts ----------------------------------------------------------->
+<script type="text/javascript">
+
+// Draw 2d problem images ----------------------------------------------------->
+function drawCvs()
+{
+	var cid=  "cvs1";
+	var c=    document.getElementById(cid);
+	var ctx = c.getContext('2d');
+	var cwid= c.width;
+	var cht=  c.height;
+	ctx.clearRect(0,0,cwid,cht);
+	ctx.fillStyle="ivory";
+	ctx.fillRect(0,0,cwid,cht);
+	
+	// set up geometry scale	
+	var x0=   0;
+	var y0=   0;
+	var w=    240;
+	var h=    150;
+	var xgap= 20;
+	var ygap= 20;
+	
+	var x1= x0 +xgap;
+	var x2= x1 +w +xgap;
+	var x3= x2 +w +xgap;
+
+ 	ctx.font=         "bold 14px Arial";	
+	ctx.textBaseline= 'top';	
+	
+	// 2d row 1 ----------------------------------------------------------------	
+	var y1= y0 +ygap;
+	cDrawRectxy(cid,x1,y1,x1+w,y1+h,"black",1,"white")
+	cDrawRectxy(cid,x2,y1,x2+w,y1+h,"black",1,"white")
+	cDrawRectxy(cid,x3,y1,x3+w,y1+h,"black",1,"white")
+	
+	ctx.fillStyle= "black";	
+	var imageObj1 = new Image();
+	imageObj1.onload = function() {
+		ctx.drawImage(imageObj1, x1+2,y1+2);
+		ctx.fillText( "1",x1+5,y1+h-20);		
+		}
+		imageObj1.src = './figs/FM_P01_fig.JPG';
+	var imageObj2 = new Image();
+	imageObj2.onload = function() {
+		ctx.drawImage(imageObj2, x2+2+20,y1+2);
+		ctx.fillText( "2",x2+5,y1+h-20);			
+		}
+		imageObj2.src = './figs/FM_P02_fig.JPG';
+	var imageObj3 = new Image();	
+	imageObj3.onload = function() {
+		ctx.drawImage(imageObj3, x3+2+5,y1+2);
+		ctx.fillText( "3",x3+5,y1+h-20);			
+		}
+		imageObj3.src = './figs/FM_P03_fig.JPG';
+
+	// 2d row 2 ----------------------------------------------------------------	
+	var y2= y1 +h +ygap;
+	cDrawRectxy(cid,x1,y2,x1+w,y2+h,"black",1,"white")
+	cDrawRectxy(cid,x2,y2,x2+w,y2+h,"black",1,"white")
+	cDrawRectxy(cid,x3,y2,x3+w,y2+h,"black",1,"white")
+	
+	ctx.fillStyle= "black";	
+	var imageObj4 = new Image();
+	imageObj4.onload = function() {
+		ctx.drawImage(imageObj4, x1+2+40,y2+2);
+		ctx.fillText( "4",x1+5,y2+h-20);		
+		}
+		imageObj4.src = './figs/FM_P04_fig.JPG';
+	var imageObj5 = new Image();
+	imageObj5.onload = function() {
+		ctx.drawImage(imageObj5, x2+2+40,y2+2);
+		ctx.fillText( "5",x2+5,y2+h-20);		
+		}
+		imageObj5.src = './figs/FM_P05_fig.JPG';
+	var imageObj6 = new Image();
+	imageObj6.onload = function() {
+		ctx.drawImage(imageObj6, x3+2,y2+2);
+		ctx.fillText( "6",x3+5,y2+h-20);		
+		}
+		imageObj6.src = './figs/FM_P06_fig.JPG';
+
+	// 2d row 3 ----------------------------------------------------------------	
+	var y3= y2 +h +ygap;
+	cDrawRectxy(cid,x1,y3,x1+w,y3+h,"black",1,"white")
+	cDrawRectxy(cid,x2,y3,x2+w,y3+h,"black",1,"white")
+	cDrawRectxy(cid,x3,y3,x3+w,y3+h,"black",1,"white")
+	
+	ctx.fillStyle= "black";	
+	var imageObj7 = new Image();
+	imageObj7.onload = function() {
+		ctx.drawImage(imageObj7, x1+2,y3+2);
+		ctx.fillText( "7",x1+5,y3+h-20);		
+		}
+		imageObj7.src = './figs/FM_P07_fig.JPG';
+	var imageObj8 = new Image();
+	imageObj8.onload = function() {
+		ctx.drawImage(imageObj8, x2+2,y3+2);
+		ctx.fillText( "8",x2+5,y3+h-20);		
+		}
+		imageObj8.src = './figs/FM_P08_fig.JPG';
+	var imageObj9 = new Image();
+	imageObj9.onload = function() {
+		ctx.drawImage(imageObj9, x3+2,y3+2);
+		ctx.fillText( "9",x3+5,y3+h-20);		
+		}
+		imageObj9.src = './figs/FM_P09_fig.JPG';
+
+	// 2d row 4 ----------------------------------------------------------------	
+	var y4= y3 +h +ygap;
+	cDrawRectxy(cid,x1,y4,x1+w,y4+h,"black",1,"white")
+	//cDrawRectxy(cid,x2,y4,x2+w,y4+h,"black",1,"white")
+	//cDrawRectxy(cid,x3,y4,x3+w,y4+h,"black",1,"white")
+	
+	ctx.fillStyle= "black";	
+	var imageObj10 = new Image();
+	imageObj10.onload = function() {
+		ctx.drawImage(imageObj10, x1+2+30,y4+2);
+		ctx.fillText( "10",x1+5,y4+h-20);		
+		}
+		imageObj10.src = './figs/FM_P10_fig.JPG';		
+}
+
+// doMouseClick --------------------------------------------------------------->
+function doMouseClick(event)
+{
+	var clientX= event.clientX;		// mouse pos in canvas coords
+	var clientY= event.clientY;
+
+	var cid=  "cvs1";				// canvas window location
+	var cvs=  document.getElementById(cid);
+    var rect= cvs.getBoundingClientRect();
+	var rectleft= rect.left;
+	var recttop=  rect.top;
+
+	var posx=  clientX -rectleft;
+	var posy=  clientY -recttop;
+	//alert("posx,posy= "+posx+", "+posy);
+	
+	// find which problem pointed to (if any)
+	var x0=   0;
+	var y0=   0;
+	var w=    240;	
+	var h=    150;
+	var xgap= 20;
+	var ygap= 20;
+	
+	var x1= x0 +xgap;
+	var x2= x1 +w +xgap;
+	var x3= x2 +w +xgap;
+
+	// scan x direction first
+	if ( posx>x1 && posx<(x1+w) ) {
+		col= 1;
+	}
+	else if ( posx>x2 && posx<(x2+w) ) {
+		col= 2;
+	}
+	else if ( posx>x3 && posx<(x3+w) ) {
+		col= 3;	
+	}
+	else {
+		return ;
+	}
+	//alert("col= "+col);
+	
+	// now scan y direction (note 3d probs named as '50+' probid)
+	var y1= y0 +ygap;
+	var y2= y1 +h +ygap;
+	var y3= y2 +h +ygap;
+	var y4= y3 +h +ygap;
+		
+	// 1 to 3
+	if ( posy>y1 && posy<(y1+h) ) {
+		col= 0+col;
+	}
+	// 4 to 6
+	else if ( posy>y2 && posy<(y2+h) ) {
+		col= 3+col;
+	}
+	// 7 to 9
+	else if ( posy>y3 && posy<(y3+h) ) {
+		col= 6+col;
+	}
+	else if ( posy>y4 && posy<(y4+h) ) {
+		col= 9+col;
+	}	
+	else {
+		return ;
+	}
+	//alert("col= "+col);
+	
+	// get probnam and open
+	var	idxs= String(col);	
+	if (col<10) {idxs= "0"+idxs;}
+	var probnam= "FM_P".concat(idxs,".html");	
+	window.open(probnam,"_blank");
+}
+
+<!-- Page must load completely FMfore this can run properly ------------------->
+	drawCvs();
+	
+</script>
+
+</body>
+</html>

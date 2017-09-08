@@ -1,0 +1,142 @@
+Development log for /app4STATICS v0 06_2017
+
+This directory records development of app4STATICs, v0.
+
+Development protocol:
+1. Dropbox version is the reference. 
+	Backups kept there. Unit directories kept there.
+2. Use localhost/app4STATICS/ (office,home) to make changes.
+3. Use a [ copy_to_local/ edit_locally / return_to_dropbox ] method.
+4. Update this log to show changes.
+-------------------------------------------------------------------------------
+
+06_01
+1.	doEVAL		Enabled nbr and text type processing.
+	lib_util2	Deleted evalansP function.
+	
+06_03
+1.	doEVAL		Enabled fofx processing.
+	dbput2		Fixed counting bug for fglen.
+	db_Beams_1	Proper specification tested. Okay.
+	
+06_05
+1.	doINST2		Uses db set _defn,_fixed,_inst.
+	doANS2		  ""
+	doEVAL2		  ""
+		
+06_06
+1.	prob_run2	Assigns state of instance for doINST2.
+	doINST2		Acts wrt 'ninst' depending upon state on entry.
+	_inst.txt	Maintains 'ninst' value.
+2.	prob_run2	Revised layout; uses 'evalmsg' and 'ansrmsg' for all parts.	
+3.	Beams_n		Completed 1-8.
+
+06_07
+1.	view_prob_fig	Use to view cvs file directly.
+2.	Cables		Completed Cables_1-4.
+3.	Vecs2d		Set up main.
+4.	Vecs2d_1	Completed with iv-based drawing of vectors.
+
+06_08
+1.	Vecs2d		Completed Vecs2d_2 to 9.
+
+06_09
+1.	Vecs3d		Completed Vecs3d_1 to 7.
+
+06_10
+1.	PEq2d		Set up main.
+	PEq2d_		Completed _1 and _2.
+	
+06_12
+1.	prob_form3	Uses code_solver function.
+	dbput3		  ""
+	dbget3		Just named to match dbput3.
+2.	prob_run3	Uses code_solver function.
+	doINST3		  ""
+	doANS3		  ""
+
+06_13
+1.	version 4	Uses compact data base (<probid>_data.txt).
+2. 	version 4 	tested on PEq2d_11. ANS,EVAL okay.
+				tested on Beams_9. ANS okay.
+
+06_14
+1.	doEVAL4		Tested for Beam_9. Okay.
+2.	prob_run4	Added check for missing user data entry for EVAL.
+3.	solntext	Removed from system (prob_form4,dbput4,etc.).				
+
+06_15
+1.	PEq2d		Completed problems 1-10 in v4.
+2.	Vecs2d		Completed prob 1 in v4.
+3.	Vecs3d		  ""
+4.	FandM2d		Set up main page.
+	FandM2d		Completed prob 1 in v4.
+	
+06_16
+1.	FandM3d		Set up main page and prob 1.
+2.	Rigid2d		  ""
+3.	Rigid3d		  ""
+4.	Frames		  ""
+
+06_17
+1.	style_prob_4	Updated for prob_run4 and prob_form4.
+2.	Trusses		Set up main page and prob 1.
+3.	Beams		  ""
+4.	Cables		  ""	
+	
+06_18
+1.	U_zzTest	Set up test directory.
+	zzTest_1	Copied from PEq2d_1.
+	zzTest_2	Copied from Cables_1.	
+2.	U_Friction	Set up main page.
+	Friction_1	Set up problem 1.
+
+06_19
+1.	doEVAL		When evaluating 'text': respond RIGHT/WRONG.
+2.	Centroids	Set up main page and problem 1.
+3.	AreaMoments	  "
+
+06_21
+1.	v5			prob_run5, doINST5, doANS5, doEVAL5	set up.
+2.	testing v5	Used zzTest_1, zzTest_2, Beams_1.
+3.	dbput5		Dropped write of _data file. Not needed.
+4.	dbget5		Compatible with v5.
+5.	style_prob_5.css	""
+
+06_22
+1.	lib_utils_js	Built new lib with init_sys_data and doHELP, etc.
+2.	app4STATICS		Use lib_utils_js.	
+	prob_form		  ""
+	prob_run		  ""
+3.	unit_mains		  ""
+
+06_25
+1.	Basics_1	Built as standalone version. Uses local tools.
+
+06_26
+1.	Basics_1	Created formatted text in canvas.
+
+06_27
+1.	Basics_1	Completed layout and iv,av generation.
+				Completed doANS and doEVAL.
+				
+06_28
+1.	prob_run-dev	Improved PROGRESS METER display (drawCvs3).
+	zzTest_3		Shows PROGRESS METER.
+2.	prob_form		Process prblin input for special characters.
+	zzTest4			Prob stmt contains attempts at spec char coding. See _defn.
+
+NEXT:
+
+TO DO:	
+	
+				
+ITEM:	Are there Beams_9 and _10 problems?
+	
+-------------------------------------------------------------------------------
+NOTE. Errors in solntext that cause EVAL problems can lead to difficulty
+	  in debugging. *** esp see if 'ivstr' not defined. ***
+	  *** ALWAYS check solntext code carefully for syntax and vbl labeling
+			errors. ***
+
+EOF ---------------------------------------------------------------------------]

@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>U05_P06.html</title>
+<link href="../style_ipp_prob.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../lib_gvSetup.js"></script>
+
+<script>
+gvprobid= "U05_P06";
+gvgridon= false;
+
+// Geometric variables for active display
+
+// Instance variables
+var gvNinst= 0;		// counter
+
+var gvIV1= {typ:"N",nam:"F", val:0, min:200,max:400 };
+var gvIV2= {typ:"N",nam:"L", val:0, min:5,  max:10  };
+var gvIV=  [2,gvIV1,gvIV2];
+
+// Answers
+var gvPart1= {act:"enter",nam:"FA",   typ:"F",ansS:"",ansP:"",ntries:0};
+var gvPart2= {act:"enter",nam:"FB",   typ:"F",ansS:"",ansP:"",ntries:0};
+var gvPart3= {act:"enter",nam:"nzero",typ:"N",ansS:"",ansP:"",ntries:0};
+var gvPart4= {act:"enter",nam:"TAC",  typ:"N",ansS:"",ansP:"",ntries:0};
+var gvPart5= {act:"enter",nam:"TAD",  typ:"N",ansS:"",ansP:"",ntries:0};
+var gvPart6= {act:"enter",nam:"TCD",  typ:"N",ansS:"",ansP:"",ntries:0};
+var gvPart=  [6,gvPart1,gvPart2,gvPart3,gvPart4,gvPart5,gvPart6];
+
+//alert("gv completed");
+</script>
+
+<script type="text/javascript" src="../lib_Actions.js"></script>
+<script type="text/javascript" src="../lib_cDraw1.js"></script>
+ 
+</head>
+
+<body id="bodywrap" onload="initialize2()">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- Wrap for header and canvas ----------------------------------------------->
+<div>
+<div id="hdrwrap"> <!-- postioned relative to parent div-->
+<p class="hdr2">ip4STATICS Problem U05_P06</p>
+<p>A truss carries a set of loads, as shown below. Units are lb and ft.</p>
+</div>
+
+<!-- Canvases ----------------------------------------------------------------->
+<div id="cvswrap" style="width:804px; height:304px;">
+ <canvas id="layer1" width="800px" height="300px"></canvas>
+ <canvas id="layer2" width="800px" height="300px"></canvas>
+ <script>
+	gvgrid.xmax= 800;
+	gvgrid.ymax= 300;
+	gvgrid.dx=   20;
+	gvgrid.dy=   20;
+ </script>	
+</div>
+</div>
+
+
+<!-- New Instance section -----------------------------------------------------> 
+<div id="instwrap">
+ <div id="INST"><button onclick="doINSTANCE('new')"><b>INSTANCE</b></button></div>
+ <div id="instmsg"><p id="msgInstance">&#160;</p></div>
+</div>
+
+<!-- Set IV section -----------------------------------------------------------> 
+<div id="ivsetctrl">
+ <div id="ivSET_IV"><button onclick="setIVs('set')"><b>SET IVs</b></button></p></div> 
+ <div id="ivSUBMIT"><button onclick="setIVs('submit')"><b>SUBMIT IVs</b></button></p></div>
+ <div id="ivCLR_IV"><button onclick="setIVs('clr')"><b>CLR MSG</b></button></div>
+ <div id="ivmsgline"><p id="ivmsg"></p></div>
+</div>
+<!-- header block -->
+<div id="ivsethdr">
+ <div class="ivnam"><p id="ivnamh">Name</p></div>
+ <div class="ivmin"><p id="ivminh">Min</p></div>
+ <div class="ivmax"><p id="ivmaxh">Max</p></div>
+ <div class="ivval"><p id="ivvalh">Value</p></div> 
+</div>
+<!-- entry blocks -->
+<div id="ivsetwrap"> 
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam1"></p></div>
+  <div class="ivmin"><p id="ivmin1"></p></div>
+  <div class="ivmax"><p id="ivmax1"></p></div>
+  <div class="ivval"><input type="text" size="16" id="enteriv1" value=""></p></div>
+ </div>
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam2"></p></div>
+  <div class="ivmin"><p id="ivmin2"></p></div>
+  <div class="ivmax"><p id="ivmax2"></p></div>
+  <div class="ivval"><input type="text" size="16" id="enteriv2" value=""></p></div>
+ </div>
+</div>
+<hr>
+
+<!-- Part 1 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(1) What is reaction force FA at A, in lb,deg?</b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP1" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(1)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP1"></p></div>
+ <div class="ntries"><p id="tryP1"></p></div>
+ <div class="ANS"><button onclick="doANS(1)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(1)"><b>CLR</b></button></div> 
+</div>
+
+<!-- Part 2 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(2) What is reaction force FB at B, in lb,deg?</b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP2" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(2)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP2"></p></div>
+ <div class="ntries"><p id="tryP2"></p></div>
+ <div class="ANS"><button onclick="doANS(2)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(2)"><b>CLR</b></button></div> 
+</div>
+
+<!-- Part 3 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(3) How many links have zero force?</b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP3" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(3)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP3"></p></div>
+ <div class="ntries"><p id="tryP3"></p></div>
+ <div class="ANS"><button onclick="doANS(3)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(3)"><b>CLR</b></button></div> 
+</div>
+
+
+
+<!-- Part 4 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(4) What is link force TAC at equilibrium?&#160; Use + for tension, - for compression.</b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP4" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(4)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP4"></p></div>
+ <div class="ntries"><p id="tryP4"></p></div>
+ <div class="ANS"><button onclick="doANS(4)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(4)"><b>CLR</b></button></div> 
+</div>
+
+<!-- Part 5 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(5) What is link force TAD at equilibrium?</b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP5" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(5)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP5"></p></div>
+ <div class="ntries"><p id="tryP5"></p></div>
+ <div class="ANS"><button onclick="doANS(5)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(5)"><b>CLR</b></button></div> 
+</div>
+
+<!-- Part 6 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(6) What is link force TCD at equilibrium?</b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP6" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(6)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP6"></p></div>
+ <div class="ntries"><p id="tryP6"></p></div>
+ <div class="ANS"><button onclick="doANS(6)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(6)"><b>CLR</b></button></div> 
+</div>
+
+<hr>
+<!-- MESSAGE line instance request -------------------------------------------->
+<div id="msgwrap"> 
+ <p id="msgline"><b>&#160;&#160;&#160;Message:</b></p>
+</div>
+<br>
+<!-- General control requests -------------------------------------------------> 
+<div id="ctlwrap">
+ <div id="FEEDBACK1"><button onclick="doFEEDBACK()"><b>FEEDBACK</b></button></div>
+ <div id="HELP1">  <button onclick="doHELP()"><b>HELP</b></button></div>
+ <div id="CLRMSG1"><button onclick="doCLRMSG()"><b>CLEAR MSG</b></button></div>
+ <div id="WORKSH1"><button onclick="doWORKSHEET()"><b>WORKSHEET</b></button></div>
+ <div id="SOLUTION1"><button onclick="doSOLUTION()"><b>SOLUTION</b></button></div>
+</div>
+
+<hr>
+<!-- Footer ------------------------------------------------------------------->
+<div id="ftrwrap">
+<p id="ftrlin1"><b>MSU - CoE</b></p>
+</div>
+
+
+<!-- Inline scripts specific to this problem ---------------------------------->
+<script type="text/javascript">
+
+// doINSTANCE ----------------------------------------------------------------->
+function doINSTANCE(act)
+{
+	if (act == "new") {
+		// generate new instance vbls
+		var F= 200 +200*Math.random();
+		var L= 5 +5*Math.random();	
+		gvIV1.val= F;
+		gvIV2.val= L;
+		gvNinst=   gvNinst +1;
+	}
+	else if ((act == "set")||(act == "grid")) {
+		F= Number(gvIV1.val);
+		L= Number(gvIV2.val);
+		if (act == "grid") {
+			gridon=   !gridon;
+			gvgridon= gridon;
+		}			
+	}
+	var ninst= gvNinst;
+	
+	// display instance line text	
+	var Ff= F.toPrecision(3);
+	var Lf= L.toPrecision(3);	
+	var strb=  " ".concat(ninst,": F= ",Ff," lb,&#160; L= ",Lf," ft.");
+	document.getElementById("msgInstance").innerHTML= strb.bold();
+
+	// clear all enter and message data text
+	doCLR(0);
+
+	// display instance data
+	drawINSTANCE('INSTANCE');
+
+	// get new solution
+	var FAx= F;
+	var FAy= 2*F;
+	var FBx= -2*F;
+	var FBy= 2*F;
+	
+	var FAmag= Math.sqrt(FAx*FAx +FAy*FAy);
+	var FAdeg= Math.atan2(FAy,FAx)*180/Math.PI;
+	
+	var FBmag= Math.sqrt(FBx*FBx +FBy*FBy);
+	var FBdeg= Math.atan2(FBy,FBx)*180/Math.PI;
+
+	var nzero= 2;
+
+	var TADy= FAy;
+	var TADx= TADy;
+	var TAD=  Math.sqrt(TADx*TADx +TADy*TADy);
+	var TAC=  FAx -TADx;
+	var TCD=  -1*F;
+	
+	// save the solution
+	FAmag= FAmag.toPrecision(3);
+	FAdeg= FAdeg.toPrecision(3);
+	gvPart[1].ansS= String(FAmag).concat(",",String(FAdeg));
+	
+	FBmag= FBmag.toPrecision(3);
+	FBdeg= FBdeg.toPrecision(3);
+	gvPart[2].ansS= String(FBmag).concat(",",String(FBdeg));	
+		
+	nzero= nzero.toPrecision(1);
+	gvPart[3].ansS= String(nzero);
+	
+	TAC= TAC.toPrecision(3);
+	gvPart[4].ansS= String(TAC);	
+	
+	TAD= TAD.toPrecision(3);
+	gvPart[5].ansS= String(TAD);	
+	
+	TCD= TCD.toPrecision(3);
+	gvPart[6].ansS= String(TCD);	
+}	
+	
+// Draw body1 only once, on load ---------------------------------------------->
+function drawBody1()
+{
+	var cid= "layer1";
+	var c1=   document.getElementById(cid);
+	var ctx = c1.getContext('2d');
+	
+	var x0=  200;
+	var y0=  380;
+	gv00.x0= x0;
+	gv00.y0= y0;
+	
+	gvDscal= 100/1;
+	gvFscal= 100/100;
+
+	var xi0= 100;
+	var yi0= 10;
+	var imageObj = new Image();
+	imageObj.onload = function() {
+		ctx.drawImage(imageObj, xi0,yi0);
+		}
+	imageObj.src = './TR_P06_img.JPG';	// keep caps for jpg tag	
+	
+	gvgridon= false;
+}
+
+// doANS -------------------------------------------------------------------->
+function doANS(partn)
+{	
+	var strb= "&#160;&#160;&#160;Answer ".concat(partn,": ");
+
+	var ansS=     gvPart[partn].ansS;
+	var ansSlist= ansS.split(",");	
+	if (partn < 3) {
+		strb= strb.concat(ansSlist[0]," lb @ ",ansSlist[1],"&deg;");	
+	}
+	else if (partn <4) {
+		strb= strb.concat(ansS," links");	
+	}
+	else if (partn <7) {
+		strb= strb.concat(ansS," lb");	
+	}
+	document.getElementById("msgline").innerHTML= strb;
+
+}
+</script>
+
+<!-- Page must load completely before this can run properly ------------------->
+<script>
+	var Ninst= gvNinst;
+	if (Ninst == 0 ) {
+		setIVs("hide");
+		drawBody1();
+		doINSTANCE("new");
+	}
+</script>
+ 
+</body>
+</html>

@@ -1,0 +1,1 @@
+{"unitid":"Beams","unitnp":8,"prbnum":"8","showPROGRESS":"ON","showANSWER":"ON","ninst":1,"ivcode":"$F1=298;$a=13.4;$d=2.01;","avvalarr":["0.00,-59.9","0.00,59.9","0.00","V1x:fofx: $F1*$d\/10:0:$a","M1x:fofx: -$x*$F1*$d\/10:0:$a","V2x:fofx: $F1*$d\/10:$a:20","M2x:fofx: $F1*$d*(2-$x\/10):$a:20"],"ptryarr":[0,0,0,0,0,0,0],"ansYES":["","","","","","",""]}

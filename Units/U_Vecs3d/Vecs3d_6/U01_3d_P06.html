@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>U01_3d_P06.html</title>
+<link href="../style_ipp_prob.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../lib_gvSetup.js"></script>
+<script>
+// Geometric variables for active display
+
+// Instance variables
+var gvNinst= 0;		// counter
+
+var gvIV1= { typ:"N",nam:"F1", val:0 };
+var gvIV2= { typ:"N",nam:"F2", val:0 };
+var gvIV3= { typ:"N",nam:"a21",val:0 };
+var gvIV4= { typ:"N",nam:"a22",val:0 };
+var gvIV=  [ 4, gvIV1,gvIV2,gvIV3,gvIV4 ];
+
+// Answers
+var gvPart1= {act:"enter",nam:"theta",typ:"N",ansS:"",ansP:"",ntries:0};
+var gvPart=  [1,gvPart1];
+
+//alert("gv completed");
+</script>
+
+<script type="text/javascript" src="../lib_Actions.js"></script>
+<script type="text/javascript" src="../lib_cDraw1.js"></script>
+ 
+</head>
+
+
+<body id="bodywrap" onload="initialize2()">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- Wrap for header and canvas ----------------------------------------------->
+<div>
+<div id="hdrwrap"> <!-- postioned relative to parent div-->
+<h3 class="h3style">Unit_01_3d_P06.&#160;&#160;&#160;Forces F1 and F2 act at the origin in a 3d space, as shown below.</h3>
+</div>
+
+<!-- Canvases ----------------------------------------------------------------->
+<div id="cvswrap" style="width:804px; height:504px;">
+ <canvas id="layer1" width="800px" height="500px"></canvas>
+ <canvas id="layer2" width="800px" height="500px"></canvas>
+ <script>
+	gvgrid.xmax= 800;
+	gvgrid.ymax= 500;
+	gvgrid.dx=   20;
+	gvgrid.dy=   20;
+ </script>	
+</div>
+</div>
+
+<!-- New Instance section -----------------------------------------------------> 
+<div id="instwrap">
+<div id="INST"><button onclick="doINSTANCE()"><b>INSTANCE</b></button></div>
+<div id="instmsg"><p id="msgInstance">&#160;</p></div>
+<div id="REDRAW"><button onclick="drawINSTANCE('REDRAW')"><b>REDRAW</b></button></div>
+<div id="GRID"><button onclick="drawINSTANCE('GRID')"><b>GRID</b></button></div>
+</div>
+
+<hr>
+
+<!-- Part 1 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(1) What is angle &theta; between the two forces, in degrees?</b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP1" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(1)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP1"></p></div>
+ <div class="ntries"><p id="tryP1"></p></div>
+ <div class="ANS"><button onclick="doANS(1)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(1)"><b>CLR</b></button></div> 
+</div>
+
+<hr>
+<!-- MESSAGE line instance request -------------------------------------------->
+<div id="msgwrap"> 
+ <p id="msgline"><b>&#160;&#160;&#160;Message:</b></p>
+</div>
+<br>
+<!-- General control requests -------------------------------------------------> 
+<div id="ctlwrap">
+ <div id="RETURN1"><button onclick="doRETURN()"><b>RETURN</b></button></div>
+ <div id="HELP1">  <button onclick="doHELP()"><b>HELP</b></button></div>
+ <div id="CLRMSG1"><button onclick="doCLRMSG()"><b>CLEAR MSG</b></button></div>
+</div>
+
+<hr>
+<!-- Footer ------------------------------------------------------------------->
+<div id="ftrwrap">
+ <div id="pftr1" class="h2style"><b>ip4STATICS</b></div> 
+ <div id="pftr2" class="h3style">Last update: 05/10/2016</button></div>
+</div>
+
+
+<!-- Inline scripts specific to this problem ---------------------------------->
+<script type="text/javascript">
+
+// doINSTANCE ----------------------------------------------------------------->
+function doINSTANCE()
+{
+	// generate new instance vbls
+
+	var F1m= 200 +200*Math.random();
+	var a11= 30;
+	var a12= 30;
+		
+	var F2m= 200 +200*Math.random();
+	var a21= 20 +40*Math.random();
+	var a22= 20 +40*Math.random();
+
+	gvIV1.val= F1m;
+	gvIV2.val= F2m;		
+	gvIV3.val= a21;
+	gvIV4.val= a22;	
+
+	gvNinst=   gvNinst +1;
+	var ninst= gvNinst;
+	
+	// display instance line text	
+	var F1mf=  F1m.toPrecision(3);
+	var F2mf=  F2m.toPrecision(3);
+	var a21f=  a21.toPrecision(3);
+	var a22f=  a22.toPrecision(3);	
+	var strb=  " ".concat(ninst,": F1= ",F1mf," lb,&#160; F2= ",F2mf," lb");
+	strb=      strb.concat(",&#160; a21= ",a21f,"&deg;,&#160; a22=",a22f,"&deg;");
+	document.getElementById("msgInstance").innerHTML= strb.bold();
+
+	// clear all enter and message data text
+	doCLR(0);
+
+	// set scale and display instance data
+	gvFscal= 100/200;
+	drawINSTANCE('INSTANCE');
+
+	// get new solution and save it
+
+	var a11=  30;
+	var a12=  30;
+	var a11r= a11*Math.PI/180;
+	var a12r= a12*Math.PI/180;
+	var a21r= a21*Math.PI/180;
+	var a22r= a22*Math.PI/180;
+		
+	var thetar= Math.acos(-1*Math.cos(a12r)*Math.sin(a11r)*Math.cos(a22r)*Math.sin(a21r)) +(Math.cos(a12r)*Math.cos(a11r)*Math.cos(a22r)*Math.cos(a21r)) -(Math.sin(a12r)*Math.sin(a22r));
+
+	var theta=      thetar*180/Math.PI;
+	theta=          theta.toPrecision(3);
+	gvPart[1].ansS= String(theta);
+}	
+
+// drawINSTANCE --------------------------------------------------------------->
+function drawINSTANCE(act)
+{	
+	// see if grid toggle called for	
+	var gridon= gvgridon;
+	if (act==="GRID") {
+		gridon=   !gridon;
+		gvgridon= gridon;
+	}
+
+	// initialize layer2 canvas
+	var cid=   "layer2";
+	var c=     document.getElementById(cid);
+	var ctx=   c.getContext("2d");
+	ctx.clearRect(0,0,c.width,c.height);
+	//gridon= gvgridon;
+	if (gridon) {mydrawGrid(cid);}	
+
+	// recover the inst vbls
+
+	// draw the forces
+}
+	
+// Draw body1 only once, on load ---------------------------------------------->
+function drawBody1()
+{
+	var cid= "layer1";
+	var c1=   document.getElementById(cid);
+	var ctx = c1.getContext('2d');
+	
+	var x0=  360;
+	var y0=  240;
+	gv00.x0= x0;
+	gv00.y0= y0;
+	gvgridon= false;
+
+	cDrawArrow(cid,x0,y0+180,x0,y0-180,"grey",1.5,true); //z-axis
+	cDrawArrow(cid,x0-240,y0,x0+240,y0,"grey",1.5,true); //y-axis
+	cDrawArrow(cid,x0+140,y0-140,x0-140,y0+140,"grey",1.5,true); //x-axis
+	ctx.font="normal 14px Arial";
+	ctx.fillStyle="grey";
+	ctx.fillText("Z", x0-20,y0-150);
+	ctx.fillText("Y", x0+210,y0+20);
+	ctx.fillText("X", x0-150,y0+130);
+
+	// F1 -------------------------------------
+	var x1= x0+160;
+	var y1= y0-50;	
+	cDrawArrow(cid,x1,y0-115,x1,y1,"grey",1,false);			// proj z
+	cDrawArrow(cid,x0,y0,x1,y1,"grey",1,false);				// proj xy
+	cDrawArrow(cid,x1,y1,x1-50,y0,"grey",1,false);			// proj x
+	cDrawForce2(cid,x0,y0,x1,y0-120,3,"red","round",12);	// force
+	cDrawArc3(cid,x0-100,y0-200,270,38,47,"cw","black",1,"none",true,true); 	//a11
+	cDrawArc3(cid,x0,y0-50,114,-14,6,"cw","black",1,"none",true,true); //a12	
+
+
+	ctx.fillStyle= "black";
+	ctx.font= "bold 14px Arial";
+	ctx.fillText("F1",x1+10,y0-125);
+	var xdeg= "02DA";		// hexadecimal for degree symbol
+	var hex=  cDrawHexText(xdeg);
+	var lbl=  "30".concat(hex);
+	ctx.fillText(lbl,x0+88,y0-45);		// a11	
+	ctx.fillText(lbl,x0+60,y0-5);		// a12		
+	
+	// F2 -------------------------------------
+	var x2= x0+130;
+	var y2= y0+40;
+	cDrawArrow(cid,x2,y0+95,x2,y2,"grey",1,false);			// proj z	
+	cDrawArrow(cid,x2,y2,x2+40,y0,"grey",1,false);			// proj x
+	cDrawArrow(cid,x0,y0,x2,y2,"grey",1,false);				// proj xy
+	cDrawForce2(cid,x0,y0,x2,y0+100,3,"red","round",12);	// force	
+
+	cDrawArc3(cid,x0-100,y0-200,310,41,48, "cw","black",1,"none",true,true);	//a21
+	cDrawArc3(cid,x0,y0,112,17,37,"cw","black",1,"none",true,true);	//a22
+
+	ctx.fillStyle= "black";
+	ctx.font= "bold 14px Arial";
+	ctx.fillText("F2",x0+120,y0+120);		
+	ctx.fillText("a21",x0+90,y0+20);
+	ctx.fillText("a22",x0+73,y0+50);
+
+}
+
+// doANS -------------------------------------------------------------------->
+function doANS(partn)
+{	
+	var strb= "&#160;&#160;&#160;Answer ".concat(partn,": ");
+	gvcid=    "layer2";
+		
+	var ansS= gvPart[partn].ansS;
+	if (partn < 2) {
+		strb=    strb.concat(ansS," &deg;");
+		document.getElementById("msgline").innerHTML= strb;
+	}
+
+}
+
+</script>
+
+<!-- Page must load completely before this can run properly ------------------->
+<script>
+	var Ninst= gvNinst;
+	if (Ninst == 0 ) {
+		drawBody1();
+		doINSTANCE();
+	}
+</script>
+ 
+</body>
+</html>

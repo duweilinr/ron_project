@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>about.html</title>
+<meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+
+<link href="./style_unit.css" rel="stylesheet" type="text/css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="./lib_Actions.js"></script>
+<script src="./lib_cDraw1.js"></script>
+
+<script>
+var probapp = angular.module('probApp', []);
+probapp.controller('probCtrl', function($scope,$http)
+{
+// on load action ------------------------------------------------------------->
+onloadInit();
+function onloadInit()
+{
+	$scope.caller= "app4_main";
+	$scope.ftrstr= "app4STATICS";	
+
+}
+
+})
+</script>
+
+<script type="text/javascript" src="../lib_gvSetup.js"></script>
+<script>
+gvgridon= false;
+</script>
+
+<script type="text/javascript" src="../lib_Actions.js"></script>
+<script type="text/javascript" src="../lib_cDraw1.js"></script>
+
+<!-- Inline scripts ----------------------------------------------------------->
+<script type="text/javascript">
+
+// Draw body ------------------------------------------------------------------>
+function drawBody1()
+{
+	var cid=  "layer1";
+	var c=    document.getElementById(cid);
+	var ctx = c.getContext('2d');
+	var cwid= c.width;
+	var cht=  c.height;
+	ctx.clearRect(0,0,cwid,cht);
+	ctx.fillStyle="white";
+	ctx.fillRect(0,0,cwid,cht);
+
+	var gridon= gvgridon;
+	if ( gridon ) { mydrawGrid(cid); }		
+	
+	// set up geometry scale	
+	var x0=  300;
+	var y0=  120;
+	gv00.x0= x0;
+	gv00.y0= y0;
+
+	// draw x and y axes
+	cDrawArrow(cid,x0-260,y0+80,x0-220,y0+80,"gray",1,true);	// x axis
+	cDrawArrow(cid,x0-260,y0+80,x0-260,y0+40,"gray",1,true);	// y axis
+	ctx.fillStyle="black";
+	ctx.font="bold 16px Arial";
+	ctx.fillText( "X",x0-230,y0+100);		// y value true pos top
+	ctx.fillText( "Y",x0-280,y0+52);
+	//cDrawDot(cid,x0-260,y0+80,2,'gray');
+		
+	cDrawRectxy(cid,x0-160,y0-15,x0+160,y0+15,"black",2,"silver")
+
+	cDrawArrow(cid,x0,y0-77,x0,y0-17,"red",3,true);	// load force
+	cDrawMoment(cid,x0+160,y0+30,x0+160,y0-30,"red",3,"ccw")
+	cDrawArrow(cid,x0-150,y0+77,x0-150,y0+17,"blue",3,true);
+	cDrawArrow(cid,x0+130,y0+57,x0+130,y0+17,"blue",3,true);
+	
+	// label fixed points
+	ctx.fillStyle="black";
+	ctx.font="bold 16px Arial";				
+	var txt=          "About ip4STATICS";
+    ctx.fillStyle=    'white';		// background color
+    var width=        ctx.measureText(txt).width +20;
+    ctx.fillRect(x0-280,y0-100,width,16);	
+    ctx.fillStyle=    'black';		// text color
+    ctx.fillText(txt,x0-280,y0-87);
+}
+
+// Toggle grid - local version only  ------------------------------------------>
+function toggleGrid2() {	
+	var gridon= gvgridon;
+	if (gridon) {
+		gvgridon= false;
+	}
+	else {
+		gvgridon= true
+	}
+	drawBody1();
+}
+</script>	
+
+</head>
+<!----------------------------------------------------------------------------->
+
+
+<body id="bodywrap">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div style="width:604px; border:2px solid black; background-color:ivory;">
+
+<!-- Header section ----------------------------------------------------------->
+<div>
+<h1 class="h1style" style="text-align:center">&#160;&#160 ip4STATICS:
+ interactive problems for STATICS</h1>
+</div>
+
+<div>
+<h3 class="h3style" style="text-align:center"><b><i>Use ip4STATICS to build
+ skill and confidence in your STATICS know-how.</i></b></h3>
+</div>
+
+<!-- Canvas 1 ----------------------------------------------------------------->
+<div style="height:244px; border:solid black 0px;">
+ <canvas id="layer1" width="560px" height="240px"></canvas>
+ <canvas id="layer2" width="560px" height="240px"></canvas>
+ <script>
+	gvgrid.xmax= 600;
+	gvgrid.ymax= 240;
+	gvgrid.dx=   20;
+	gvgrid.dy=   20;
+	drawBody1();
+ </script>	
+</div>
+
+<br>
+<!-- Questions and answers ----------------------------------------------------> 
+<div class="aboutwrap">
+  <div class="about1"><b>What is 'ip4STATICS'?</b></div>
+  <div class="about2"><b>ip4STATICS is a rich collection of interactive
+  problems for building and verifying your STATICS skills. Both 2d and 3d
+  problems are included.</b></div>
+</div>
+
+<div class="aboutwrap">
+  <div class="about1"><b>What do I need to know to use 'ip4STATICS' 
+  effectively?</b></div>
+  <div class="about2"><b>Use ip4STATICS while you are learning the principles
+  and methods of Statics to earn how to apply them. And use ip4STATICS at any
+  time to review and refresh your skills. Use ip4STATICS to assess for yourself
+  how competent you are in Statics problem-solving.</b></div>
+</div>
+
+<div class="aboutwrap">
+  <div class="about1"><b>How are the problems organized?</b></div>
+  <div class="about2"><b>The problems are organized by units which match the
+  most commonly used topics or chapters in popular texts and videos.</b></div>
+</div>
+
+<div class="aboutwrap">
+  <div class="about1"><b>Who controls the use of ip4STATICS?</b></div>
+  <div class="about2"><b>YOU ARE IN COMPLETE CONTROL OF HOW YOU USE ip4STATICS.</b></div>
+  <div class="about2"><b>(1) You get immediate feedback when you enter an
+  answer. Usually this is a % accuracy measure.</b></div>
+  <div class="about2"><b>(2) You can ask for an answer at any time.</b></div>
+  <div class="about2"><b>(3) You can ask for a worked solution at any time.</b></div>  
+  <div class="about2"><b>(4) You can ask for a new set of <i>instance
+  variables</i>, such as loads, lengths, masses, etc. By running multiple
+  instances of a problem you can understand the structure of the problem
+  type, not just how to solve for a particular set of numbers.</b></div> 
+</div>
+<br>
+
+<!-- Footer ------------------------------------------------------------------->
+<div class="hline"></div>
+<div style="height:30px;">
+ <div id="pftrm"><b>Michigan State University - College of Engineering</b></div> 
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>U01_P07.html</title>
+<link href="../style_ipp_prob.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../lib_gvSetup.js"></script>
+<script>
+gvprobid= "U01_P07";
+gvgridon= false;
+
+// Geometric variables for active display
+
+// Instance variables
+var gvNinst= 0;		// counter
+var gvIV1= {nam:"F1m",val:0,min:100,max:150 };
+var gvIV2= {nam:"F1d",val:0,min:25, max:205 };
+var gvIV3= {nam:"F2m",val:0,min:150,max:230 };
+var gvIV=  [3,gvIV1,gvIV2,gvIV3];
+
+// Answers
+var gvPart1= {act:"enter",nam:"FRmag",typ:"N",ansS:"",ansP:"",ntries:0};
+var gvPart2= {act:"enter",nam:"FRdeg",typ:"N",ansS:"",ansP:"",ntries:0};
+var gvPart=  [2,gvPart1,gvPart2];
+
+//alert("gv completed");
+</script>
+
+<script type="text/javascript" src="../lib_Actions.js"></script>
+<script type="text/javascript" src="../lib_cDraw1.js"></script>
+ 
+</head>
+
+<body id="bodywrap" onload="initialize2()">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- Wrap for header and canvas ----------------------------------------------->
+<div>
+<div id="hdrwrap"> <!-- postioned relative to parent div-->
+<p class="hdr2">ip4STATICS Problem U01_P07</p>
+<p>A barrel 1 meter in diameter is acted on by two forces, as shown below.</p>
+</div>
+
+<!-- Canvases ----------------------------------------------------------------->
+<div id="cvswrap" style="width:804px; height:504px;">
+ <canvas id="layer1" width="800px" height="500px"></canvas>
+ <canvas id="layer2" width="800px" height="500px"></canvas>
+ <script>
+	gvgrid.xmax= 800;
+	gvgrid.ymax= 500;
+	gvgrid.dx=   20;
+	gvgrid.dy=   20;
+ </script>	
+</div>
+</div>
+
+<!-- New Instance section -----------------------------------------------------> 
+<div id="instwrap">
+ <div id="INST"><button onclick="doINSTANCE('new')"><b>INSTANCE</b></button></div>
+ <div id="instmsg"><p id="msgInstance">&#160;</p></div>
+</div>
+
+<!-- Set IV section -----------------------------------------------------------> 
+<div id="ivsetctrl">
+ <div id="ivSET_IV"><button onclick="setIVs('set')"><b>SET IVs</b></button></p></div> 
+ <div id="ivSUBMIT"><button onclick="setIVs('submit')"><b>SUBMIT IVs</b></button></p></div>
+ <div id="ivCLR_IV"><button onclick="setIVs('clr')"><b>CLR MSG</b></button></div>
+ <div id="ivmsgline"><p id="ivmsg"></p></div>
+</div>
+<!-- header block -->
+<div id="ivsethdr">
+ <div class="ivnam"><p id="ivnamh">Name</p></div>
+ <div class="ivmin"><p id="ivminh">Min</p></div>
+ <div class="ivmax"><p id="ivmaxh">Max</p></div>
+ <div class="ivval"><p id="ivvalh">Value</p></div> 
+</div>
+<!-- entry blocks -->
+<div id="ivsetwrap"> 
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam1"></p></div>
+  <div class="ivmin"><p id="ivmin1"></p></div>
+  <div class="ivmax"><p id="ivmax1"></p></div>
+  <div class="ivval"><input type="text" size="16" id="enteriv1" value=""></p></div>
+ </div>
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam2"></p></div>
+  <div class="ivmin"><p id="ivmin2"></p></div>
+  <div class="ivmax"><p id="ivmax2"></p></div>
+  <div class="ivval"><input type="text" size="16" id="enteriv2" value=""></p></div>
+ </div> 
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam3"></p></div>
+  <div class="ivmin"><p id="ivmin3"></p></div>
+  <div class="ivmax"><p id="ivmax3"></p></div>
+  <div class="ivval"><input type="text" size="16" id="enteriv3" value=""></p></div>
+ </div>
+</div>
+<hr>
+
+<!-- Part 1 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p>(1) What is FRmag, the magnitude of the resultant force FR, in N?</p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP1" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(1)"><b>ENTER</b></button></div>  
+ <div class="ansres"><p id="resP1"></p></div>
+ <div class="ntries"><p id="tryP1"></p></div>
+ <div class="ANS"><button onclick="doANS(1)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(1)"><b>CLR</b></button></div> 
+</div>
+
+<!-- Part 2 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p>(2) What is FRdeg, the angle of resultant force FR, in deg?</p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP2" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(2)"><b>ENTER</b></button></div>  
+ <div class="ansres"><p id="resP2"></p></div>
+ <div class="ntries"><p id="tryP2"></p></div>
+ <div class="ANS"><button onclick="doANS(2)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(2)"><b>CLR</b></button></div> 
+</div>
+
+<hr>
+<!-- MESSAGE line instance request -------------------------------------------->
+<div id="msgwrap"> 
+ <p id="msgline"><b>&#160;&#160;&#160;Message:</b></p>
+</div>
+<br>
+<!-- General control requests -------------------------------------------------> 
+<div id="ctlwrap">
+ <div id="FEEDBACK1"><button onclick="doFEEDBACK()"><b>FEEDBACK</b></button></div>
+ <div id="HELP1">  <button onclick="doHELP()"><b>HELP</b></button></div>
+ <div id="CLRMSG1"><button onclick="doCLRMSG()"><b>CLEAR MSG</b></button></div>
+ <div id="WORKSH1"><button onclick="doWORKSHEET()"><b>WORKSHEET</b></button></div>
+ <div id="SOLUTION1"><button onclick="doSOLUTION()"><b>SOLUTION</b></button></div>
+</div>
+
+<hr>
+<!-- Footer ------------------------------------------------------------------->
+<div id="ftrwrap">
+<p id="ftrlin1"><b>MSU - CoE</b></p>
+</div>
+ 
+
+<!-- Inline scripts specific to this problem ---------------------------------->
+<script type="text/javascript">
+
+// doINSTANCE ----------------------------------------------------------------->
+function doINSTANCE(act)
+{
+	if (act == "new") {
+		// generate new instance vbls
+		var F1m=   100 +50*Math.random();
+		var F1d=   25 +180*Math.random();	
+		var F2m=   150 +80*Math.random();
+		gvIV1.val= F1m;
+		gvIV2.val= F1d;
+		gvIV3.val= F2m;		
+		gvNinst=   gvNinst +1;
+	}
+	else if ((act == "set")||(act == "grid")) {
+		F1m= Number(gvIV1.val);
+		F1d= Number(gvIV2.val);
+		F2m= Number(gvIV3.val);
+		if (act == "grid") {
+			gridon=   !gridon;
+			gvgridon= gridon;
+		}		
+	}	
+	var ninst= gvNinst;
+	
+	// generate F2d opposite to F1d
+	var F2d=   F1d -180;
+	if (F1d>99.9) { 
+		F1df= F1d.toPrecision(3);
+		F2df= F2d.toPrecision(2);
+	}
+	else {
+		F1df= F1d.toPrecision(2);
+		F2df= F2d.toPrecision(3);
+	}	
+	
+	// display instance line text	
+	var F1mf=  F1m.toPrecision(3);
+	var F2mf=  F2m.toPrecision(3);
+	var strb=  " ".concat(ninst,": F1= ",F1mf," N @ ",F1df,"&deg;");
+	strb=      strb.concat(", F2= ",F2mf," N @ ",F2df,"&deg;");
+	document.getElementById("msgInstance").innerHTML= strb.bold();
+
+	// clear all enter and message data text
+	doCLR(0);
+
+	// display instance data
+	gvFscal= 100/100;
+	drawINSTANCE('INSTANCE');
+	
+	// draw the forces
+	cDrawFxy(F1m,F1d,0,0,"t","F1","red");
+	cDrawFxy(F2m,F2d,0,0,"t","F2","red");
+	
+	// get new solution and save it -------------------------------------
+	var Fmag= F1m -F2m;
+	if ( Fmag > 0) {
+		Fdeg= F1d;
+	}
+	else {
+		Fmag= -Fmag;
+		Fdeg= F2d;
+	}
+	
+	Fmf= Fmag.toPrecision(3);
+	Fdf= Fdeg.toPrecision(3);
+	gvPart[1].ansS= String(Fmf);
+	gvPart[2].ansS= String(Fdf);
+}	
+	
+// Draw body1 only once, on load ---------------------------------------------->
+function drawBody1()
+{
+	var cid= "layer1";
+	var c1=   document.getElementById(cid);
+	var ctx = c1.getContext('2d');
+	
+	var x0=  400;
+	var y0=  240;
+	gv00.x0= x0;
+	gv00.y0= y0;
+	
+	cDrawArrow(cid,x0-280,y0,x0+280,y0,"gray",1,true);		// x axis
+	cDrawArrow(cid,x0,y0+220,x0,y0-220,"gray",1,true);		// y axis
+	ctx.fillStyle="black";
+	ctx.font="bold 16px Arial";
+	ctx.fillText( "X",x0+245,y0+20);		// y value true pos top
+	ctx.fillText( "Y",x0-20,y0-185);
+	
+	// draw fixed body
+	cDrawDot(cid,x0,y0,30,"brown");
+	cDrawDot(cid,x0,y0,27,"burlywood");	
+					
+	// draw and label fixed points
+	cDrawDot(cid,x0,y0,3,"black")	
+	ctx.fillStyle="black";
+	ctx.font="bold 16px Arial";
+	ctx.fillText( "A",x0-10,y0-10);		// y true pos top
+}
+
+// doANS -------------------------------------------------------------------->
+function doANS(partn)
+{	
+	var strb= "&#160;&#160;&#160;Answer ".concat(partn,": ");
+	var ansS=     gvPart[partn].ansS;
+		
+	if (partn < 2) {
+		var FRmag= ansS;
+		strb= strb+FRmag+" N";
+	}
+	else if (partn < 3) {
+		var FRdeg= ansS;
+		strb= strb+FRdeg+"&deg;";	
+	}	
+	document.getElementById("msgline").innerHTML= strb;	
+}
+
+</script>
+
+<!-- Page must load completely before this can run properly ------------------->
+<script>
+	var Ninst= gvNinst;
+	if (Ninst == 0 ) {
+	setIVs("hide");
+		drawBody1();
+		doINSTANCE("new");
+	}
+</script>
+ 
+</body>
+</html>

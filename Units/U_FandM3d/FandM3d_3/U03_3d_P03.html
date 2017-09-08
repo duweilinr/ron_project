@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>U03_3d_P03.html</title>
+<link href="../style_ipp_prob.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../lib_gvSetup.js"></script>
+
+<script>
+gvgridon= false;
+
+// Geometric variables for active display
+
+// Instance variables
+var gvNinst= 0;		// counter
+
+var gvIV1= {typ:"N",nam:"F1",val:0};
+var gvIV2= {typ:"N",nam:"F2",val:0};
+var gvIV3= {typ:"N",nam:"F3",val:0};
+var gvIV4= {typ:"N",nam:"H", val:0};
+var gvIV=  [4,gvIV1,gvIV2,gvIV3,gvIV4];
+
+// Answers
+var gvPart1= {act:"enter",nam:"FAijk",typ:"ijk",ansS:"",ansP:"",ntries:0};
+var gvPart2= {act:"enter",nam:"MAijk",typ:"ijk",ansS:"",ansP:"",ntries:0};
+var gvPart=  [2,gvPart1,gvPart2];
+
+//alert("gv completed");
+</script>
+
+<script type="text/javascript" src="../lib_Actions.js"></script>
+<script type="text/javascript" src="../lib_cDraw1.js"></script>
+ 
+</head>
+
+<body id="bodywrap" onload="initialize2()">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- Wrap for header and canvas ----------------------------------------------->
+<div>
+<div id="hdrwrap"> <!-- postioned relative to parent div-->
+<h3 class="h3style">Unit_03_3d_P03.&#160;&#160;&#160;An electric utility pole supports
+ three wires, with forces F1, F2 and F3, as shown below. The pole is supported
+ at its base, point A. Units are pounds for force and feet for length. <br> Wire force
+ directions are: F1= |F1|*{0.612i+0.612j+0.5k}; F2= |F2|*{2j-1k};
+ F3= |F3|*{-1i+1j-2k}.</h3>
+</div>
+
+<!-- Canvases ----------------------------------------------------------------->
+<div id="cvswrap" style="width:804px; height:504px;">
+ <canvas id="layer1" width="800px" height="500px"></canvas>
+ <canvas id="layer2" width="800px" height="500px"></canvas>
+ <script>
+	gvgrid.xmax= 800;
+	gvgrid.ymax= 500;
+	gvgrid.dx=   20;
+	gvgrid.dy=   20;
+ </script>	
+</div>
+</div>
+
+<!-- New Instance section -----------------------------------------------------> 
+<div id="instwrap">
+<div id="INST"><button onclick="doINSTANCE()"><b>INSTANCE</b></button></div>
+<div id="instmsg"><p id="msgInstance">&#160;</p></div>
+<div id="REDRAW"><button onclick="drawINSTANCE('REDRAW')"><b>REDRAW</b></button></div>
+<div id="GRID"><button onclick="drawINSTANCE('GRID')"><b>GRID</b></button></div>
+</div>
+
+<hr>
+
+<!-- Part 1 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(1) What is the resultant force FA(i,j,k) at A, in lbs?
+ </b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP1" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(1)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP1"></p></div>
+ <div class="ntries"><p id="tryP1"></p></div>
+ <div class="ANS"><button onclick="doANS(1)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(1)"><b>CLR</b></button></div> 
+</div>
+
+<!-- Part 2 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(2) What is the resultant moment MA(i,j,k) at A,
+ in ft-lbs? </b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP2" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(2)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP2"></p></div>
+ <div class="ntries"><p id="tryP2"></p></div>
+ <div class="ANS"><button onclick="doANS(2)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(2)"><b>CLR</b></button></div> 
+</div>
+
+<hr>
+<!-- MESSAGE line instance request -------------------------------------------->
+<div id="msgwrap"> 
+ <p id="msgline"><b>&#160;&#160;&#160;Message:</b></p>
+</div>
+<br>
+<!-- General control requests -------------------------------------------------> 
+<div id="ctlwrap">
+ <div id="RETURN1"><button onclick="doRETURN()"><b>RETURN</b></button></div>
+ <div id="HELP1">  <button onclick="doHELP()"><b>HELP</b></button></div>
+ <div id="CLRMSG1"><button onclick="doCLRMSG()"><b>CLEAR MSG</b></button></div>
+</div>
+
+<hr>
+<!-- Footer ------------------------------------------------------------------->
+<div id="ftrwrap">
+ <div id="pftr1" class="h2style"><b>ip4STATICS</b></div> 
+ <div id="pftr2" class="h3style">Last update: 05/10/2016</button></div>
+</div>
+
+
+<!-- Inline scripts specific to this problem ---------------------------------->
+<script type="text/javascript">
+
+// doINSTANCE ----------------------------------------------------------------->
+function doINSTANCE()
+{
+	// generate new instance vbls
+	var F1= 100 +100*Math.random();
+	var F2= 100 +100*Math.random();
+	var F3= 50 +50*Math.random();
+	var H=  10 +4*Math.random();
+		
+	gvIV1.val= F1;
+	gvIV2.val= F2;
+	gvIV3.val= F3;
+	gvIV4.val= H;
+
+	gvNinst=   gvNinst +1;
+	var ninst= gvNinst;
+	
+	// display instance line text	
+	var F1f= F1.toPrecision(3);
+	var F2f= F2.toPrecision(3);
+	var F3f= F3.toPrecision(3);
+	var Hf=  H.toPrecision(3);	
+	var strb=  " ".concat(ninst,": F1= ",F1f," lb,&#160; F2= ",F2f," lb");
+	strb=      strb.concat(",&#160; F3= ",F3f," lb,&#160; H= ",Hf," ft.");
+	document.getElementById("msgInstance").innerHTML= strb.bold();
+
+	// clear all enter and message data text
+	doCLR(0);
+
+	// set scale and display instance data
+	gvFscal= 100/100;	// pixels/force
+	gvDscal= 100/4;		// pixels/length
+	drawINSTANCE('INSTANCE');
+
+	// get new solution and save it
+	var V1= { i:0.612,j:0.612,k:0.5 };
+	var V2= { i:0,    j:2,    k:-1 };
+	var V3= { i:-1,   j:1,    k:-2 };
+	var len1=  Math.sqrt(V1.i*V1.i +V1.j*V1.j +V1.k*V1.k);
+	var len2=  Math.sqrt(V2.i*V2.i +V2.j*V2.j +V2.k*V2.k);
+	var len3=  Math.sqrt(V3.i*V3.i +V3.j*V3.j +V3.k*V3.k);
+	
+	var F1i= F1*V1.i/len1;
+	var F1j= F1*V1.j/len1;
+	var F1k= F1*V1.k/len1;
+	var F2i= F2*V2.i/len2;
+	var F2j= F2*V2.j/len2;
+	var F2k= F2*V2.k/len2;
+	var F3i= F3*V3.i/len3;
+	var F3j= F3*V3.j/len3;
+	var F3k= F3*V3.k/len3;
+	
+	var FAi= -1*(F1i +F2i +F3i);
+	var FAj= -1*(F1j +F2j +F3j);
+	var FAk= -1*(F1k +F2k +F3k);
+	
+	var MAi= -1*FAj*H;
+	var MAj= FAi*H;
+	var MAk= 0;
+
+	FAi= FAi.toPrecision(3);
+	FAj= FAj.toPrecision(3);	
+	FAk= FAk.toPrecision(3);		
+	gvPart[1].ansS= String(FAi).concat(",",String(FAj),",",String(FAk));
+
+	MAi= MAi.toPrecision(3);
+	MAj= MAj.toPrecision(3);
+	MAk= MAk.toPrecision(3);
+	gvPart[2].ansS= String(MAi).concat(",",String(MAj),",",String(MAk));
+}	
+
+// drawINSTANCE --------------------------------------------------------------->
+function drawINSTANCE(act)
+{	
+	// see if grid toggle called for	
+	var gridon= gvgridon;
+	if (act==="GRID") {
+		gridon=   !gridon;
+		gvgridon= gridon;
+	}
+
+	// initialize layer2 canvas
+	var cid=   "layer2";
+	var c=     document.getElementById(cid);
+	var ctx=   c.getContext("2d");
+	ctx.clearRect(0,0,c.width,c.height);
+	gridon= gvgridon;
+	if (gridon) {mydrawGrid(cid);}	
+
+	// draw the force
+}
+	
+// Draw body1 only once, on load ---------------------------------------------->
+function drawBody1()
+{
+	var cid= "layer1";
+	var c1=   document.getElementById(cid);
+	var ctx = c1.getContext('2d');
+	
+	var x0=  320;
+	var y0=  300;
+	gv00.x0= x0;
+	gv00.y0= y0;
+
+	var xi0= 180;
+	var yi0= 60;
+	var imageObj = new Image();
+	imageObj.onload = function() {
+		ctx.drawImage(imageObj, xi0,yi0);
+		}
+	imageObj.src = './U03_3d_P03_img.JPG';	// keep caps for jpg tag	
+
+	gvgridon= false;
+}
+
+// doANS -------------------------------------------------------------------->
+function doANS(partn)
+{	
+	var strb= "&#160;&#160;&#160;Answer ".concat(partn,": ");
+
+	var ansS=     gvPart[partn].ansS;
+
+	if (partn < 2) {		
+		strb= strb.concat(ansS," i,j,k in lb");
+	}
+	else {
+		strb= strb.concat(ansS," i,j,k in ft-lb");	
+	}
+	document.getElementById("msgline").innerHTML= strb;
+
+}
+</script>
+
+<!-- Page must load completely before this can run properly ------------------->
+<script>
+	var Ninst= gvNinst;
+	if (Ninst == 0 ) {
+		drawBody1();
+		doINSTANCE();
+	}
+</script>
+ 
+</body>
+</html>

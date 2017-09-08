@@ -1,0 +1,1 @@
+{"unitid":"Centroids","prbnum":"4","prblin":["The cross-section of a concrete dam is shown below. Dimensions are in meters.","(1) Where is Cxy, the centroid?"],"ivlin":["d,m,0.5,1,RU","h,m,4,10,RU"],"avlin":["Cx,Cy"]}

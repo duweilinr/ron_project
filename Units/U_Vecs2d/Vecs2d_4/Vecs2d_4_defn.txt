@@ -1,0 +1,1 @@
+{"unitid":"Vecs2d","prbnum":"4","prblin":["A force F has y-component Fy as shown below. Its line of action is the line marked with angle @alpha|.","(1) What is Fmag, the magnitude of the force?","(2) What is Fx, the x-component of the force?"],"ivlin":["Fy,N,140,180,RU","@alpha|,@deg|,20,60,RU"],"avlin":["Fmag","Fx"]}

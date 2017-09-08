@@ -1,0 +1,1 @@
+{"unitid":"Coords","prbnum":"8","prblin":["Point P is shown in Polar coordinates (r,@theta|) below.","(1) Express the location of P in i,j terms, as P= Pi*i+Pj*j."],"ivlin":["r,,100,200,RU","@theta|,@deg|,-175,175,RU"],"avlin":["Pi,Pj"]}

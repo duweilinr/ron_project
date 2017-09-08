@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<!-- zzTest.html	v.07/05/2017	adds PROGRESS METER toggle ---------------->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>zzTest</title>
+
+<link href="../../style_unit.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<script src="../../lib_utils_js.js"></script>
+<script src="../../lib_cDraw1.js"></script>
+
+<script>
+var probapp = angular.module('probApp', []);
+probapp.controller('probCtrl', function($scope,$http)
+{
+// on load action ------------------------------------------------------------->
+onloadInit();
+function onloadInit()
+{
+	var sysdat=    init_sys_data();
+	$scope.hdrstr= sysdat.hdrstr;
+	$scope.ftrstr= sysdat.ftrstr;
+
+	$scope.unitid= "zzTest";
+	$scope.prbnum= "";
+	$scope.nprobs= 5;
+	
+	$scope.noteline=     "none";
+	$scope.showPROGRESS= "OFF";
+}
+
+$scope.doPROGRESS= function() {
+	var state= $scope.showPROGRESS;
+	if ( state == "OFF") {
+		state= "ON";
+	}
+	else {
+		state= "OFF";
+	}
+	$scope.showPROGRESS= state;
+}
+
+$scope.myMouseClick= function(arg)
+{
+	if (arg === "1to3") {
+		alert("click: "+arg);
+	}
+
+	if (arg <= $scope.nprobs) {
+		$scope.prbnum= arg;
+		$http({
+			method: 'POST',
+			data:	{ unitid:       $scope.unitid,
+					  prbnum:       $scope.prbnum,
+					  showPROGRESS: $scope.showPROGRESS	},
+			url:    '../../cpSetup.php'
+		}).then(function successCallback(response) {
+			var result=   response.data; 	// returned object is 'result'
+			//var probfile= "../../prob_run.php";
+			var probfile= "../../prob_run_dev.php";			
+			window.open(probfile);
+		}, function errorCallback(response) {
+			var status=     response.status;
+			var statusText= response.statusText;			
+			var errout=     "error= ".concat(status,", ",statusText);
+			console.log(errout);	
+		})						
+	}	
+}
+})
+</script>
+
+</head>
+
+
+<body id="bodywrap" ng-app="probApp" ng-controller="probCtrl">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- Show title --------------------------------------------------------------->
+<div>
+<h1 class="h1style" style="text-align:center"><b>{{hdrstr}}: Testing</b></h1>
+</div>
+
+<hr class="std1" />
+<br>
+<div>
+<p class="p30"><b>Click on the figure to select a problem.</b></p>
+</div>
+
+<br>
+<!-- FIGURES ------------------------------------------------------------------>
+<div id="figureswrap" style="text-align:center; border:dashed blue 0px;">
+
+<div>
+  <p class="p30" style="text-align:left"><b>1 to 3</b></p>
+</div>
+<div class="imagrow">
+<img class="imgcol1" ng-click="myMouseClick('1')" src="./zzTest_1/zzTest_1_thumb.JPG" alt="figure 1">
+<img class="imgcol2" ng-click="myMouseClick('2')" src="./zzTest_2/zzTest_2_thumb.JPG" alt="figure 2">
+<img class="imgcol3" ng-click="myMouseClick('3')" src="./zzTest_3/zzTest_3_thumb.JPG" alt="figure 3">
+</div>
+<div>
+  <p class="p30" style="text-align:left"><b>4 to 5</b></p>
+</div>
+<div class="imagrow">
+<img class="imgcol1" ng-click="myMouseClick('4')" src="./zzTest_4/zzTest_4_thumb.JPG" alt="figure 4">
+<img class="imgcol2" ng-click="myMouseClick('5')" src="./zzTest_5/zzTest_5_thumb.JPG" alt="figure 5">
+</div>
+
+<div>
+  <p class="p30" style="text-align:left" ng-click="myMouseClick('1to3')"><b>1 to 3</b></p>
+</div>
+<div class="imagrow">
+<img class="imgcol1" ng-click="myMouseClick('1')" src="./zzTest_1/zzTest_1_thumb.JPG" alt="figure 1">
+<img class="imgcol2" ng-click="myMouseClick('2')" src="./zzTest_2/zzTest_2_thumb.JPG" alt="figure 2">
+<img class="imgcol3" ng-click="myMouseClick('3')" src="./zzTest_3/zzTest_3_thumb.JPG" alt="figure 3">
+</div>
+
+</div>
+
+<br>
+<hr>
+<!-- MESSAGE line instance request -------------------------------------------->
+<div> 
+ <p class="p30"><b>NOTES: </b>{{noteline}}</p>
+ <p class="p30">INTERNAL NOTES: <i>(img is 240x150)</i></p> 
+</div>
+
+<br>
+<!-- Dashboard requests -------------------------------------------------------> 
+<div style="height:30px;">
+ <p class="p30"><button ng-click="doPROGRESS()"><b>PROGRESS &#160;METER</b></button><b> &#160;&#160;{{showPROGRESS}}</b></p>
+</div>
+
+<br>
+<!-- General control requests -------------------------------------------------> 
+<div style="height:30px;">
+ <div class="divsub" id="RETURN1"><button onclick="doRETURN()"><b>RETURN</b>
+ </button></div>
+ <div class="divsub" id="HELP1"><button onclick="doHELP()"><b>HELP</b></button>
+ </div>
+ <div class="divsub" id="CLRMSG1"><button onclick="doCLRMSG()"><b>CLEAR MSG</b>
+ </button></div>
+</div>
+
+<hr class="std1" />
+<!-- Footer ------------------------------------------------------------------->
+<div>
+ <p id="pftr"><b>{{ftrstr}}</b></p>
+</div>
+
+</div>
+
+<!-- Page must load completely before this can run properly ------------------->
+
+</body>
+</html>

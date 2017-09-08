@@ -1,0 +1,39 @@
+/* File:  style_prob_5.css    06_21_2017 rcr
+(1)	Supports all HTML prob pages.
+(2)	'#' (id=) used for unique items; '.' (class=) used for multiple items.
+(3)	border-style: top right bottom left  {solid/double/dotted/dashed}
+*/
+
+div		  { position:relative;
+			font-family:"Arial"; color:black; font-size:14px; }
+
+#bodywrap { background-color:silver; margin:2px; }
+#pagewrap { width:810px; border:3px solid green; background-color:ivory; }
+#cvswrap  { cursor:pointer; }
+#layer1   { position:absolute; left:4px; top:0px; z-index:1;
+			 border:0px solid gray;	background-color:white  }
+#layer2   { position:absolute; left:4px; top:0px; z-index:2;
+			 border:0px solid gray; }
+#layer3   { position:absolute; left:4px; top:0px; z-index:3;
+			 border:0px solid gray; }			 
+
+/* std answer part (ap) format for 1 input */
+.aphdr    { height:30px; text-align:left; padding:2px 15px 2px 10px; }
+.apindex  { position:absolute; top:5px; height:23px; left:3%;  width:3%; }
+.aptxtinp { position:absolute; top:5px; height:23px; left:6%;  width:70%; }
+.apEVAL   { position:absolute; top:5px; height:23px; left:77%; width:7%;  }
+.apCLR    { position:absolute; top:5px; height:23px; left:85%; width:6%;  }
+.apANS    { position:absolute; top:5px; height:23px; left:92%; width:6%;  }
+
+.msglbl   { position:absolute; top:5px; height:23px; left:3%;  width:10%; }
+.msgline  { position:absolute; top:5px; height:23px; left:14%; width:75%; }
+.msgCLR   { position:absolute; top:5px; height:23px; left:90%; width:8%;  }
+
+hr      { width:98%; text-align:center; height:2px; background-color:green;
+ 		  color:green; border:0 none; }
+
+p       { font-family:"Arial"; color:black; font-size:14px;
+			margin:0px 0px 0px 0px; }
+.p1020	{ padding:0px 10px 10px 20px; }
+
+/* end of file -------------------------------------------------------------- */

@@ -1,0 +1,1 @@
+{"unitid":"Centroids","prbnum":"3","prblin":["The plan view of a sheet of steel is shown below. Dimensions are given in feet.","(1) Where is Cxy, the centroid?"],"ivlin":["w,ft,4,8,RU","h,ft,4,8,RU","d,ft,1,2,RU","t,ft,1,2,RU"],"avlin":["Cx,Cy"]}

@@ -1,0 +1,1 @@
+{"unitid":"Rigid2d","prbnum":"10","prblin":["A beam carries a complex distributed load, as shown below.","(1) What is the reaction force FA at A?","(2) What is the reaction force FD at D?"],"ivlin":["w1,N\/m,100,150,RU","w2,N\/m,150,200,RU","LB,m,3,5,RU","LC,m,9,12,RU","L,m,15,16,RU"],"avlin":["FAmag,FAdeg","FDmag,FDdeg"]}

@@ -1,0 +1,1 @@
+{"unitid":"zzTest","prbnum":"4","prblin":["1. alpha \"\\u03B1\" \"\\u00B0\" (deg)","2. beta  \\u03B2 \\u00B0 (deg)","That is all."],"ivlin":["F1mag,lb,200,400,RU","F1deg,deg,10,350,RU","F2mag,lb,200,400,RU","F2deg,deg,20,340,RU"],"avlin":["FRmag","FRdeg"]}

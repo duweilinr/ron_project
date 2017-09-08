@@ -1,0 +1,1 @@
+{"unitid":"Coords","prbnum":"9","prblin":["Point P is shown in Cartesian coordinates (x,y,z) below.","(1) Express the location of P in i,j,k terms, as P= Pi*i+Pj*j+Pk*k."],"ivlin":["x,,-250,250,RU","y,,-150,150,RU","z,,-150,150,RU"],"avlin":["Pi,Pj,Pk"]}

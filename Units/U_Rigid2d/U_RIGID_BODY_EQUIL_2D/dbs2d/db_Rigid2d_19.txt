@@ -1,0 +1,1 @@
+{"caller":"form1","unitid":"Rigid2d","prbnum":"19","prblin":["Problem 19 used to test image and thumb handling.","(1) Find ans1."],"cvsfig":"image","ivlin":["iv1,ft,1,2,RU"],"avlin":["ans1"],"nparts":"1","solntext":"$ans1= 2*$iv1;"}

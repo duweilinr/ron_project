@@ -1,0 +1,106 @@
+Development log for /app4STATICS v0 07_2017
+
+This directory records development of app4STATICs, v0.
+
+Development protocol:
+1. Dropbox version is the reference. 
+	Backups kept there. Unit directories kept there.
+2. Use localhost/app4STATICS/ (office,home) to make changes.
+3. Use a [ copy_to_local/ edit_locally / return_to_dropbox ] method.
+4. Update this log to show changes.
+-------------------------------------------------------------------------------
+
+07_01
+1.	prob_run_dev	Allows for prblin defn using function doPrblin in _cvs file.
+					This allows imbedding of unicode symbols in prblin text.
+	doPrblin		Added this function to zzTest_5_cvs.txt. Uses degree symbol.
+	zzTest_5		Runs okay.
+
+07_02
+1.	zztest_5		Specified "function" for prblin input in prob_form.
+	prob-run_dev	If 'prblin' in _defn file says "function", uses doPrblin
+					fcn in _cvs to set prblin. Else uses _defn for 'prblin'.
+	zzTest_5		Tested okay.
+	
+07_03
+1.	prob_run_dev	Initializes ninst. Updates when NEW INST called for.
+	doINST			Saves ninst in _inst file.
+
+2.	style_prob.css	Added div for ptries.
+	prob_run_dev	Displays ptry data.
+	doINST			Initializes ptry data, saves in _inst file.
+	
+07_05
+1.	prob_run_dev	Implements PROGRESS METER based on ptryarr data.
+	doINST			Clears layer3 on new instance. Sets ptryarr data to zero.
+	
+07_06
+1.	app4STATICS_6.php	Converted to ng usage. Maintains master unit index.
+2.	cpSetup_6			Supports revised main/unit_main approach.
+
+07_07
+1.	zzTest.php		Converted unit_main to template format.
+2.	U_Vecs2d		Converted all 9 problems to current format. Tested okay.
+
+07_08
+1.	U_Vecs3d		Converted all probs to current format and tested.
+2.	prob_run_dev	Added '(<pnbr>)' to evalstr display.
+3.	U_FandM2d		Converted probs 1 to 4.
+
+07_09
+1.	app4STATICS_6	Added showANSWER toggle control.
+	cpSetup_6		Handles 'showANSWER' vbl.
+	unit_main		  ""
+	prob_run_dev	  ""
+2.	U_FansM2d		Converted probs 5 and 6.
+
+07_10
+1.	U_FansM2d		Converted probs 7 to 12.
+2.	U_FandM3d		Converted probs 1 to 3.
+
+07_11
+1.	New std version		app4STATICS, cpSetup, unit_main, prob_run, prob_form.
+2.	U_PEq3d			Added prob 2 (new).
+3.	U_Rigid2d		Converted probs 1 to 8.
+
+07_12
+1.	U_Rigid2d		Converted probs 9 to 17. Complete.
+2.	U_Rigid3d		Converted probs 1 to 7. Complete.
+
+07_13
+1.	U_Cables		Converted probs 1 to 4. Complete.
+
+07_27
+1.	doINST			Saves results in curr_inst.txt file (common for all probs).
+	doANS			Uses curr_inst.txt.
+	doEVAL			  ""
+
+07_29
+1.	app4STATICS		Uses cpWrite to set up curr_prob.txt file.
+	cpWrite			Called by "main","unit_main", and "doINST".
+	unit_main		Uses cpWrite.
+	doINST			  ""
+	doANS			  ""
+	doEVAL			  ""
+2.	prob_run		Only displays ninst; does not set it.
+	doINST			Sets ninst value.
+	
+07_31
+1.	prob_run		Debugged EVAL reporting.
+	doINST			Revised initialization of ansYES.
+	
+	
+NEXT:	Apply unit_main template to all units.	
+
+TO DO:	
+	
+				
+ITEM:	Are there Beams_9 and _10 problems?
+	
+-------------------------------------------------------------------------------
+NOTE. Errors in solntext that cause EVAL problems can lead to difficulty
+	  in debugging. *** esp see if 'ivstr' not defined. ***
+	  *** ALWAYS check solntext code carefully for syntax and vbl labeling
+			errors. ***
+
+EOF ---------------------------------------------------------------------------]

@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>U01_P07.html</title>
+<link href="../style_ipp_prob.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../lib_gvSetup.js"></script>
+<script>
+// Geometric variables for active display
+
+// Instance variables
+var gvNinst= 0;		// counter
+var gvIV1= {nam:"F1",mag:0,deg:0};
+var gvIV2= {nam:"F2",mag:0,deg:0};
+var gvIV=  [2,gvIV1,gvIV2];
+
+// Answers
+var gvPart1= {act:"enter",nam:"FR",typ:"F",ansS:"",ansP:"",ntries:0};
+var gvPart2= {act:"draw", nam:"FR",typ:"F",ansS:"",ansP:"",ntries:0};
+var gvPart=  [2,gvPart1,gvPart2];
+
+//alert("gv completed");
+</script>
+
+<script type="text/javascript" src="../lib_Actions.js"></script>
+<script type="text/javascript" src="../lib_cDraw1.js"></script>
+ 
+</head>
+
+<body id="bodywrap" onload="initialize2()">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- Wrap for header and canvas ----------------------------------------------->
+<div>
+<div id="hdrwrap"> <!-- postioned relative to parent div-->
+<h3 class="h3style">Unit_01_P07.&#160;&#160;&#160;A barrel 1 meter in diameter is acted on by two forces, as shown below.</h3>
+</div>
+
+<!-- Canvases ----------------------------------------------------------------->
+<div id="cvswrap" style="width:804px; height:504px;">
+ <canvas id="layer1" width="800px" height="500px"></canvas>
+ <canvas id="layer2" width="800px" height="500px"></canvas>
+ <script>
+	gvgrid.xmax= 800;
+	gvgrid.ymax= 500;
+	gvgrid.dx=   20;
+	gvgrid.dy=   20;
+ </script>	
+</div>
+</div>
+
+<!-- New Instance section -----------------------------------------------------> 
+<div id="instwrap">
+<div id="INST"><button onclick="doINSTANCE()"><b>INSTANCE</b></button></div>
+<div id="instmsg"><p id="msgInstance">&#160;</p></div>
+<div id="REDRAW"><button onclick="drawINSTANCE('REDRAW')"><b>REDRAW</b></button></div>
+<div id="GRID"><button onclick="drawINSTANCE('GRID')"><b>GRID</b></button></div>
+</div>
+
+<hr>
+
+<!-- Part 1 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(1) What is the resultant force FR in N,deg?</b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP1" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(1)"><b>ENTER</b></button></div>  
+ <div class="ansres"><p id="resP1"></p></div>
+ <div class="ntries"><p id="tryP1"></p></div>
+ <div class="ANS"><button onclick="doANS(1)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(1)"><b>CLR</b></button></div> 
+</div>
+
+<!-- Part 2 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(2) Draw the resultant force FR.</b></p>
+</div>
+<div class="partans">
+ <div class="DRAW"><button onclick="doDRAW(2)"><b>DRAW</b></button></div>
+ <div class="msgDRAW"> <p id="msgDRAW2"></p></div>
+ <div class="ansres"><p id="resP2"></p></div>
+ <div class="ntries"><p id="tryP2"></p></div>
+ <div class="ANS"><button onclick="doANS(2)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(2)"><b>CLR</b></button></div> 
+</div>
+
+<hr>
+<!-- MESSAGE line instance request -------------------------------------------->
+<div id="msgwrap"> 
+ <p id="msgline"><b>&#160;&#160;&#160;Message:</b></p>
+</div>
+<br>
+<!-- General control requests -------------------------------------------------> 
+<div id="ctlwrap">
+ <div id="RETURN1"><button onclick="doRETURN()"><b>RETURN</b></button></div>
+ <div id="HELP1">  <button onclick="doHELP()"><b>HELP</b></button></div>
+ <div id="CLRMSG1"><button onclick="doCLRMSG()"><b>CLEAR MSG</b></button></div>
+</div>
+
+<hr>
+<!-- Footer ------------------------------------------------------------------->
+<div id="ftrwrap">
+ <div id="pftr1" class="h2style"><b>ip4STATICS</b></div> 
+ <div id="pftr2" class="h3style">Last update: 05/10/2016</button></div>
+</div>
+
+</div>
+
+<!-- Inline scripts specific to this problem ---------------------------------->
+<script type="text/javascript">
+
+// doINSTANCE ----------------------------------------------------------------->
+function doINSTANCE()
+{
+	// generate new instance vbls
+	var F1m=   100 +50*Math.random();
+	var F1d=   25 +180*Math.random();
+	var F2m=   150 +80*Math.random();
+	var F2d=   F1d -180;
+	
+	gvIV1.mag= F1m;
+	gvIV1.deg= F1d;
+	gvIV2.mag= F2m;
+	gvIV2.deg= F2d;			
+
+	gvNinst=   gvNinst +1;
+	var ninst= gvNinst;
+	
+	// display instance line text	
+	var F1mf=  F1m.toPrecision(3);
+	var F1df=  F1d.toPrecision(3);
+	var F2mf=  F2m.toPrecision(3);
+	var F2df=  F2d.toPrecision(3);	
+	var strb=  " ".concat(ninst,": F1= ",F1mf," N @ ",F1df,"&deg;");
+	strb=      strb.concat(", F2= ",F2mf," N @ ",F2df,"&deg;");
+	document.getElementById("msgInstance").innerHTML= strb.bold();
+
+	// clear all enter and message data text
+	doCLR(0);
+
+	// display instance data
+	gvFscal= 100/100;
+	drawINSTANCE('INSTANCE');
+
+	// get new solution and save it
+	var Fmag= F1m -F2m;
+	if ( Fmag > 0) {
+		Fdeg= F1d;
+	}
+	else {
+		Fmag= -Fmag;
+		Fdeg= F2d;
+	}
+	
+	Fmf= Fmag.toPrecision(3);	// magnitude
+	Fdf= Fdeg.toPrecision(3);	// angle in degrees
+	gvPart[1].ansS= String(Fmf).concat(",",String(Fdf));
+	gvPart[2].ansS= String(Fmf).concat(",",String(Fdf));	
+
+}	
+
+// drawINSTANCE --------------------------------------------------------------->
+function drawINSTANCE(act)
+{	
+	// see if grid toggle called for	
+	var gridon= gvgridon;
+	if (act==="GRID") {
+		gridon=   !gridon;
+		gvgridon= gridon;
+	}
+
+	// initialize layer2 canvas
+	var cid=   "layer2";
+	var c=     document.getElementById(cid);
+	var ctx=   c.getContext("2d");
+	ctx.clearRect(0,0,c.width,c.height);
+	gridon= gvgridon;
+	if (gridon) {mydrawGrid(cid);}	
+
+	// recover the inst vbls
+	var F1m= gvIV1.mag;
+	var F1d= gvIV1.deg;
+	var F2m= gvIV2.mag;
+	var F2d= gvIV2.deg;
+
+	// draw the forces
+	cDrawFxy(F1m,F1d,0,0,"t","F1","red");
+	cDrawFxy(F2m,F2d,0,0,"t","F2","red");				
+}
+	
+// Draw body1 only once, on load ---------------------------------------------->
+function drawBody1()
+{
+	var cid= "layer1";
+	var c1=   document.getElementById(cid);
+	var ctx = c1.getContext('2d');
+	
+	var x0=  400;
+	var y0=  240;
+	gv00.x0= x0;
+	gv00.y0= y0;
+	
+	cDrawArrow(cid,x0-280,y0,x0+280,y0,"gray",1,true);		// x axis
+	cDrawArrow(cid,x0,y0+220,x0,y0-220,"gray",1,true);		// y axis
+	ctx.fillStyle="black";
+	ctx.font="bold 16px Arial";
+	ctx.fillText( "X",x0+245,y0+20);		// y value true pos top
+	ctx.fillText( "Y",x0-20,y0-185);
+	
+	// draw fixed body
+	cDrawDot(cid,x0,y0,30,"brown");
+	cDrawDot(cid,x0,y0,27,"burlywood");	
+					
+	// draw and label fixed points
+	cDrawDot(cid,x0,y0,3,"black")	
+	ctx.fillStyle="black";
+	ctx.font="bold 16px Arial";
+	ctx.fillText( "A",x0-10,y0-10);		// y true pos top
+}
+
+// doANS -------------------------------------------------------------------->
+function doANS(partn)
+{	
+	var strb= "&#160;&#160;&#160;Answer ".concat(partn,": ");
+	gvcid=    "layer2";
+		
+	if (partn < 3) {
+		var ansS=     gvPart[partn].ansS;
+		var ansSlist= ansS.split(","); 
+		
+		var mag= ansSlist[0];
+		var deg= ansSlist[1];
+		strb=    strb.concat(mag," N @ ",deg,"&deg;");
+		document.getElementById("msgline").innerHTML= strb;
+
+		// option to draw answer
+		cDrawFxy(mag,deg,0,0,"t","none","green");
+	} 	
+}
+
+</script>
+
+<!-- Page must load completely before this can run properly ------------------->
+<script>
+	var Ninst= gvNinst;
+	if (Ninst == 0 ) {
+		drawBody1();
+		doINSTANCE();
+	}
+</script>
+ 
+</body>
+</html>

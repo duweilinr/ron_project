@@ -1,0 +1,1 @@
+{"unitid":"Rigid2d","prbnum":"2","prblin":["A truck weighing WC tons carries two loads, weighing WA and WB tons, respectively.","(1) What is the reaction force FD at tire D?","(2) What is the reaction force FE at tire E?"],"ivlin":["WA,tons,0.5,1,RU","WB,tons,2.5,3,RU","WC,tons,2,2.25,RU"],"avlin":["FDmag,FDdeg","FEmag,FEdeg"]}

@@ -1,0 +1,1 @@
+{"unitid":"Vecs3d","prbnum":"6","prblin":["Forces F1 and F2 act at the origin in a 3d space, as shown below.","(1) What is angle @theta| between the two forces, in degrees?"],"ivlin":["F1m,lb,200,400,RU","a11,@deg|,30,30,RU","a12,@deg|,30,30,RU","F2m,lb,200,400,RU","a21,@deg|,20,60,RU","a22,@deg|,20,60,RU"],"avlin":["@theta|"]}

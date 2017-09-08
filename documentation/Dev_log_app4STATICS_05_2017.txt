@@ -1,0 +1,111 @@
+Development log for /app4STATICS v0 05_2017
+
+This directory records development of app4STATICs, v0.
+
+Development protocol:
+1. Dropbox version is the reference. 
+	Backups kept there. Unit directories kept there.
+2. Use localhost/app4STATICS/ (office,home) to make changes.
+3. Use a [ copy_to_local/ edit_locally / return_to_dropbox ] method.
+4. Update this log to show changes.
+-------------------------------------------------------------------------------
+
+05_03
+1.	prob_run1.php	Removed tryn feature.
+	doINST			  ""
+	doANS			  ""
+	doEVAL			  ""
+2.	cidoSETUP		Removed tryn feature.
+	doINSTsetup		Deleted.
+3.	run_Basics_1	Specific to this problem. No canvas. 
+					Builds specific data base internally. Layout follows.
+	U_Basics/dbs		No db_Basics_1.txt file used.
+	doINST_Basics_1		Called by run_Basics_1.	
+	style_prob_1.css	Used by run_Basics_1.
+
+05_05
+1.	prob_run1		Remove svstr,svarr as scope vbls. Remove cidoSETUP.
+	doINST			Handles all instances starting with 1.
+	doANS			More efficient file referencing.
+	
+05_06
+1.	prob_run1			Formatting of answer lines.
+	style_prob_2.css	Modified layout for answer lines.
+2.	doEVAL.php			Moved comp2Nbrs to lib_util.php
+	lib_util.php		Revised comp2Nbrs to return "HOT",etc. evaluations.
+	
+05_12
+1.	ciSetup.php		Sets up curr_inst.txt file initially.
+	Beams.html		Unit main calls ciSetup.
+	prob_run1.php	Uses curr_inst.txt file for setup.
+	doINST.php		  ""
+	
+05_14
+1.	lib_util		Added evalansP; edited cmp2nbrs.
+	prob_form1		Requires spec of ans type.
+	dbput1			Saves anslbl and anstyp data.
+	doINST			Uses anstyp data.
+	doEVAL			  ""
+		
+05_15
+1.	dbput1		Adds escape characters as need when encoded for data file.	
+	dbget1		Unencode from data file and then recode for POSTing.
+
+05_16
+1.	prob_form2	Uses dbput2 and dbget2.
+	dbput2		Creates and saves 'anslst', list of each ans vbl as object.
+	dbget2		Uses 'anslst'. 
+	
+	TASK	doINST2 solver to use new db for anslbl, anslst, and solntext.
+	
+05_17
+1.	prob_form2	Uses solntext1 and solntext2. Drops nparts.
+	dbput2		  ""
+	dbget2		  ""
+	
+2.	doINST2		Started on new db design and usage
+
+05_20
+1.	doINST2		Working on solver handling of fofx type. NOTE. solntext2 should
+				not be needed in prob_form1 intake. Put all code into solntext1.
+				
+05_23
+1.	prob_form2	Fixed bug in editing avlin input.
+	doINST2		Solver works for answers that are all 'nbr' type.
+				Results into svarr in curr_inst file. doANS,doEVAL not tested.
+				
+05_25
+1.	dbput2		Creates and saves all fixed data for doINST2, EVAL and ANS.
+	dbget2		Retrieves fixed data.
+	doINST2		Loads fixed data and uses ivs to solve.
+	
+05_26
+1.	dbput2		Revised data structure to identify answer types.
+	doINST2		  ""
+	
+05_28
+1.	prob_form2	Requires separation of solution into 3 groups: code (default), text, and fofx.
+2.	dbput2		Revised data structure to handle 3 groups.
+	doINST2		Finds solution for each group. Saves in db.
+	
+05_29
+1.	doANS2		Works with 'code','text' and 'fofx' vbls.
+	doINST2		Cleaned up.
+	prob_run2	Cleaned up.
+	
+	NEXT: 	Complete doANS2 handling of text and fofx.
+			Then revise doEVAL.
+			
+05_31
+1.	doANS2		Completed.
+	lib_util:evalansP	Completed for 'nbr' and 'text' types.
+	
+	NEXT: enable EVAL of 'fofx'
+	
+-------------------------------------------------------------------------------
+NOTE. Errors in solntext that cause EVAL problems can lead to difficulty
+	  in debugging. *** esp see if 'ivstr' not defined. ***
+	  *** ALWAYS check solntext code carefully for syntax and vbl labeling
+			errors. ***
+
+EOF ---------------------------------------------------------------------------]

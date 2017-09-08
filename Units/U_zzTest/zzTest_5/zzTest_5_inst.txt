@@ -1,0 +1,1 @@
+{"ninst":1,"ivcode":"$F1mag=354;$F1deg=111;$F2mag=333;$F2deg=38.2;","avvalarr":["553","75.9"],"ptryarr":[0,0],"ansYES":[0]}

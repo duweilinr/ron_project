@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+<!-- File: prob_form.html     08/22/2017 rcr
+	 Collects prob definition data and saves in db. 
+	 Loads existing prb definition for editing.
+	 Handles extended answer types, like 'fofx'.
+	 prblin text must have each part start on a new line with "(" as first char.
+-->
+<head>
+<meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>prob_form</title>
+<!--<link href="./style_prob.css" rel="stylesheet" type="text/css">-->
+<link href="./style_prob.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="./lib_utils_js.js"></script>
+
+<script>
+// doPrblin ------------------------------------------------------------------->
+function doPrblin(textraw)
+{	
+	var text= [];
+	text= textraw.split('\n');
+	var len=  text.length;
+	for (var i=0; i<len; i++) {
+		text[i]= "(".concat(i,")",text[i]);
+	}
+	var textdone= text;
+	return textdone;
+}	
+</script>
+
+<script>
+var probapp = angular.module('probApp', []);
+
+probapp.controller('probCtrl', function($scope,$http)
+{
+// on load action ------------------------------------------------------------->
+onloadInit();
+function onloadInit()
+{
+	var sysdat= init_sys_data();
+	$scope.hdrstr= sysdat.hdrstr;
+	$scope.ftrstr= sysdat.ftrstr;
+
+	$scope.caller= "form1";
+	$scope.topics= [
+		"Coordinate Systems",
+		"Vectors in 2d",
+		"Vectors in 3d",
+		"Particle Equilibrium in 2d",
+		"Particle Equilibrium in 3d",
+		"Systems of Forces and Moments in 2d",
+		"Systems of Forces and Moments in 3d",
+		"Rigid Body Equilibrium in 2d",
+		"Rigid Body Equilibrium in 3d",
+		"Frames and Machines",
+		"Trusses",
+		"Beams",
+		"Cables",
+		"Friction",
+		"Centroids and Centers of Mass",
+		"Area Moments of Inertia",
+		"Testing"
+		];
+	$scope.selectedTopic= "";
+	$scope.code=   [
+		"Coords",
+		"Vecs2d",
+		"Vecs3d",
+		"PEq2d",
+		"PEq3d",
+		"FandM2d",
+		"FandM3d",
+		"Rigid2d",
+		"Rigid3d",
+		"Frames",
+		"Trusses",
+		"Beams",
+		"Cables",
+		"Friction",
+		"Centroids",
+		"AreaMoments",
+		"zzTest"
+		] 
+	$scope.unitid= "";
+	$scope.prbnum= "";
+
+	$scope.prstmt= "";
+	$scope.prblin= [];
+
+	$scope.imgthumb= "";
+	//$scope.debugtext= "debugtext";	// not used currently
+
+	$scope.ivstmt= "";
+	$scope.ivlin=  [];
+	$scope.ivmsg=  "";
+
+	$scope.avstmt= "";
+	$scope.avlin=  [];
+	$scope.avmsg=  "";
+
+	$scope.checkmsg=  "";
+	$scope.submitmsg= "";
+}
+ 
+// get the unitid and prbnum -------------------------------------------------->
+$scope.doENTER= function()
+{		
+	var select= $scope.selectedTopic;	
+	var tlist=  $scope.topics;
+	var len=    tlist.length;
+	var clist=  $scope.code;
+	for (var i=0; i<len; i++) {
+		if (select == tlist[i]) {
+			$scope.unitid= clist[i];
+		}
+	}		
+	
+	// get the thumb for display
+	var probid=       $scope.unitid.concat("_",$scope.prbnum);
+	var filstr1=      "./Units/U_".concat($scope.unitid,"/",probid,"/",probid);
+	$scope.imgthumb=  filstr1.concat("_thumb.JPG");
+} 
+
+// load existing problem data ------------------------------------------------->
+$scope.doLOAD= function()
+{		
+	$http({
+		method: 'POST',
+		data:   { unitid: $scope.unitid,
+				  prbnum: $scope.prbnum },
+		url:    './dbget.php'
+	}).then(function successCallback(response) {
+		var result=       response.data; 	// returned object
+		$scope.prblin=    result.prblin;
+		$scope.ivlin=     result.ivlin;
+		$scope.avlin=     result.avlin;
+			
+		var list= $scope.prblin;
+		var len=  list.length;
+		var stmt= list[0];
+		for (var i=1; i<len; i++) {
+			stmt= stmt.concat("\n",list[i]);
+		}
+		$scope.prstmt= stmt;
+		
+		list= $scope.ivlin;
+		len=  list.length;
+		stmt= list[0];
+		for (var i=1; i<len; i++) {
+			stmt= stmt.concat("\n",list[i]);
+		}
+		$scope.ivstmt= stmt;
+		
+		list= $scope.avlin;
+		len=  list.length;
+		stmt= list[0];
+		for (var i=1; i<len; i++) {
+			stmt= stmt.concat("\n",list[i]);
+		}
+		$scope.avstmt= stmt;
+		
+	}, function errorCallback(response) {
+		var status=     response.status;
+		var statusText= response.statusText;			
+		var errout= "error= ".concat(status,", ",statusText);
+		console.log(errout);	
+	})
+}
+
+// check all statements ------------------------------------------------------->
+$scope.doCHECK= function()
+{		
+	var error= false;
+	
+	// check the problem statement
+	var stmt= $scope.prstmt;
+	if (stmt == "") {
+		$scope.prblin= [];
+		$scope.prmsg=  "Please enter a problem statement.";
+		error= true;
+		return ;
+	}
+	else {
+		$scope.prblin= stmt.split('\n');		
+		//$scope.debugtext= $scope.prblin[0];
+		$scope.prmsg=   "Problem statement entered.";
+	}
+
+	// check the instance variables statement
+	var ivserr= false;
+	stmt=      $scope.ivstmt;	//alert("stmt: "+stmt);
+	if (stmt == "") {
+		$scope.ivlin= [];
+		$scope.ivmsg=  "Please enter instance variables.";
+		ivserr= true;
+	}
+	else {	
+		var ivlist= stmt.split('\n');
+		var len= 	ivlist.length;	//alert("len: "+len);
+		for (var i=0;i<len;i++)  {
+			var ivi= ivlist[i].split(",");
+			var ilen= ivi.length;
+			if (ilen!=5) {
+				$scope.ivmsg= "Error for iv number ".concat(i+1);
+				ivserr= true;
+			}
+		}
+		if (!ivserr) {
+			$scope.ivlin= ivlist;
+			$scope.ivmsg= "Instance variables entered.";
+			//alert("ivlist: "+ivlist[0]+", "+ivlist[1]);
+		}
+		else {
+			error= true;
+		}
+	}
+
+	// check the answer variable statement
+	stmt=   $scope.avstmt;
+	if (stmt == "") {
+		$scope.avlin= [];
+		$scope.avmsg= "Please enter answer variables.";
+		error= true;
+	}
+	else {
+		var avlist=   stmt.split('\n');		
+		$scope.avlin= avlist;
+		$scope.avmsg= "Answer variables entered.";
+		//alert("avlist: "+avlist[0]+", "+avlist[1]);
+	}
+
+	// make final report
+	if (error) {
+		$scope.checkmsg= "Fix reported errors, then CHECK again.";	
+	}
+	else {
+		$scope.checkmsg= "SUBMIT to save problem data.";
+	}
+}
+
+// submit prob data ----------------------------------------------------------->
+$scope.doSUBMIT= function()
+{	
+	//var ivlist= $scope.ivlin; alert("(2)ivlist: "+ivlist[0]+", "+ivlist[1]);
+
+	$http({
+		method: 'POST',
+		data:   { caller:   "prob_form5",
+				  unitid:   $scope.unitid,
+				  prbnum:   $scope.prbnum,
+				  prblin:   $scope.prblin,
+				  ivlin:    $scope.ivlin,
+				  avlin:    $scope.avlin  },
+		url:    './dbput.php'
+	}).then(function successCallback(response) {
+		var result=       response.data; 	// returned object
+		var output=       result.output;
+		$scope.submitmsg= output;
+			
+	}, function errorCallback(response) {
+		var status=     response.status;
+		var statusText= response.statusText;			
+		var errout= "error= ".concat(status,", ",statusText);
+		console.log(errout);	
+	})
+}
+
+})
+</script>
+
+</head>
+
+
+<body id="bodywrap" ng-app="probApp" ng-controller="probCtrl">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- header ------------------------------------------------------------------->
+<br>
+<div> 
+ <h1 style="text-align:center">{{hdrstr}}: Problem entry form</h1>
+</div>
+
+<!-- Get topic and problem number --------------------------------------------->
+<div> 
+ <h3 style="color:red">&emsp;Step 1. Enter the topic and problem number.</h3>
+ <p class="p1020"><b>TOPICS: 
+ <select ng-init="selectedTopic='Testing'" ng-model="selectedTopic" ng-options="x for x in topics"></select></b></p>
+ <p class="p1020"><b>PROBLEM NUMBER:</b>&emsp;&emsp;<input ng-model="prbnum"  size="8"></b></p>
+</div>
+<div style="height:128px; border:solid red 0px;">
+ <div style="position:absolute; left:5px; top:5px;">
+  <br>
+  <p class="p1020"><button ng-click="doENTER()">ENTER problem selection</b>
+  </button>&emsp;{{unitid}}_{{prbnum}}</p><br>
+  <p class="p1020"><button ng-click="doLOAD()">LOAD existing problem</b></button></p>
+  <!--<br><p class="p1020">debug: {{debugtext}}</p>-->
+ </div>
+ <div style="position:absolute; left:500px; top:5px; width:204px; height:124px;">
+  <img ng-src="{{imgthumb}}" width="200px" height="120px" style="border:solid gray 1px;"/>
+ </div>
+</div>
+
+<!-- problem statement -------------------------------------------------------->
+<br>
+<div>
+ <h3 style="color:red">&emsp;Step 2. Enter the problem statement.&emsp;{{prmsg}}</h3>
+ <p class="p1020"><textarea rows="8" cols="80" ng-model="prstmt">
+ </textarea></p>
+</div>
+
+<!-- instance variables ------------------------------------------------------->
+<div>
+ <h3 style="color:red">&emsp;Step 3. Enter the instance variables.&emsp;{{ivmsg}}</h3>
+ <p class="p1020"><textarea rows="6" cols="80" ng-model="ivstmt">
+ </textarea></p>
+</div>
+
+<!-- answer variables --------------------------------------------------------->
+<div>
+ <h3 style="color:red">&emsp;Step 4. Enter the answer variables.&emsp; {{avmsg}}</h3>
+ <p class="p1020" style="color:black">NOTE. For answer type 'fofx', enter  'avlbl:fofx:f(x):xs:xe', one vbl per line.</p>
+ <p class="p1020"><textarea rows="6" cols="80" ng-model="avstmt">
+ </textarea></p>
+</div>
+ 
+<!-- CONTROL AREA ------------------------------------------------------------->
+<!-- check the form data -->
+<div>
+ <h3 style="color:red">&emsp;Step 5. Check the problem form data.
+ &emsp;<button ng-click="doCHECK()"><b>CHECK</b></button>
+ &emsp;{{checkmsg}}</h3>
+</div>
+
+<!-- submit the form -->
+<div>
+ <h3 style="color:red">&emsp;Step 6. Submit the problem form.
+ &emsp;<button ng-click="doSUBMIT()"><b>SUBMIT</b></button>
+ &emsp;{{submitmsg}}</h3>
+</div>
+
+<!-- Footer ------------------------------------------------------------------->
+<hr>
+<div>
+ <p class="p1020" style="text-align:center"><b><span ng-bind="ftrstr"></span> </b></p>
+</div>
+<!-- bottom of page ----------------------------------------------------------->
+
+<!-- Page must load completely before this can run properly ------------------->
+
+</body>
+</html>

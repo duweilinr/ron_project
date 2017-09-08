@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>U03_P09.html</title>
+<link href="../style_ipp_prob.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../lib_gvSetup.js"></script>
+<script>
+// Geometric variables for active display
+
+// Instance variables
+var gvNinst= 0;		// counter
+var gvIV1= {nam:"h", val:0};
+var gvIV=  [1,gvIV1];
+
+// Answers
+var gvPart1= {act:"enter",nam:"W", typ:"F",ansS:"",ansP:"",ntries:0};
+var gvPart2= {act:"enter",nam:"xW",typ:"N",ansS:"",ansP:"",ntries:0};
+var gvPart=  [2,gvPart1,gvPart2];
+
+//alert("gv completed");
+</script>
+
+<script type="text/javascript" src="../lib_Actions.js"></script>
+<script type="text/javascript" src="../lib_cDraw1.js"></script>
+ 
+</head>
+
+<body id="bodywrap" onload="initialize2()">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- Wrap for header and canvas ----------------------------------------------->
+<div>
+<div id="hdrwrap"> <!-- postioned relative to parent div-->
+<h3 class="h3style">Unit_03_P09.&#160;&#160;&#160;A swimming pool is filled to a
+height of h meters, as shown below. Consider a vertical segment of the side wall
+ 1 meter wide (i.e.,1m in the z direction). Assume that &rho;, the density of
+ water, is 1000 kg/m<sup>3</sup>. Assume g= 9.81 m/s<sup>2</sup>.</h3>
+</div>
+
+<!-- Canvases ----------------------------------------------------------------->
+<div id="cvswrap" style="width:804px; height:504px;">
+ <canvas id="layer1" width="800px" height="500px"></canvas>
+ <canvas id="layer2" width="800px" height="500px"></canvas>
+ <script>
+	gvgrid.xmax= 800;
+	gvgrid.ymax= 500;
+	gvgrid.dx=   20;
+	gvgrid.dy=   20;
+ </script>	
+</div>
+</div>
+
+<!-- New Instance section -----------------------------------------------------> 
+<div id="instwrap">
+<div id="INST"><button onclick="doINSTANCE()"><b>INSTANCE</b></button></div>
+<div id="instmsg"><p id="msgInstance">&#160;</p></div>
+<div id="REDRAW"><button onclick="drawINSTANCE('REDRAW')"><b>REDRAW</b></button></div>
+<div id="GRID"><button onclick="drawINSTANCE('GRID')"><b>GRID</b></button></div>
+</div>
+
+<hr>
+
+<!-- Part 1 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(1) What is FP, the equivalent concentrated load force
+ on the wall segment, in kN,deg?</b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP1" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(1)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP1"></p></div>
+ <div class="ntries"><p id="tryP1"></p></div>
+ <div class="ANS"><button onclick="doANS(1)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(1)"><b>CLR</b></button></div> 
+</div>
+
+<!-- Part 2 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(2) What is yP, the y location of FP, in m?</b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP2" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(2)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP2"></p></div>
+ <div class="ntries"><p id="tryP2"></p></div>
+ <div class="ANS"><button onclick="doANS(2)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(2)"><b>CLR</b></button></div> 
+</div>
+
+<hr>
+<!-- MESSAGE line instance request -------------------------------------------->
+<div id="msgwrap"> 
+ <p id="msgline"><b>&#160;&#160;&#160;Message:</b></p>
+</div>
+<br>
+<!-- General control requests -------------------------------------------------> 
+<div id="ctlwrap">
+ <div id="RETURN1"><button onclick="doRETURN()"><b>RETURN</b></button></div>
+ <div id="HELP1">  <button onclick="doHELP()"><b>HELP</b></button></div>
+ <div id="CLRMSG1"><button onclick="doCLRMSG()"><b>CLEAR MSG</b></button></div>
+</div>
+
+<hr>
+<!-- Footer ------------------------------------------------------------------->
+<div id="ftrwrap">
+ <div id="pftr1" class="h2style"><b>ip4STATICS</b></div> 
+ <div id="pftr2" class="h3style">Last update: 05/10/2016</button></div>
+</div>
+
+
+<!-- Inline scripts specific to this problem ---------------------------------->
+<script type="text/javascript">
+
+// doINSTANCE ----------------------------------------------------------------->
+function doINSTANCE()
+{
+	// generate new instance vbls
+	var h=  4 +2*Math.random();
+	
+	gvIV1.val= h;
+
+	gvNinst=   gvNinst +1;
+	var ninst= gvNinst;
+
+	// display instance line text	
+	var hf= h.toPrecision(3);
+	var strb=  " ".concat(ninst,": h= ",hf," m.");
+	document.getElementById("msgInstance").innerHTML= strb.bold();
+
+	// clear all enter and message data text
+	doCLR(0);
+
+	// set scale and display instance data
+	drawINSTANCE('INSTANCE');
+
+	// get new solution and save it
+	var rho= 1000;			// kg/m^3
+	var g=   9.81;			// m/s^2
+
+	// find solution and save it
+	var FPmag= 0.001*rho*g*h*h/2;	// kN
+	var FPdeg= 0;
+	var yP=    h/3;	
+	
+	FPmag= FPmag.toPrecision(3);
+	FPdeg= FPdeg.toPrecision(3);
+	yP=    yP.toPrecision(3);
+
+	gvPart[1].ansS= String(FPmag).concat(",",String(FPdeg));
+	gvPart[2].ansS= String(yP);
+}	
+
+// drawINSTANCE --------------------------------------------------------------->
+function drawINSTANCE(act)
+{	
+	// see if grid toggle called for	
+	var gridon= gvgridon;
+	if (act==="GRID") {
+		gridon=   !gridon;
+		gvgridon= gridon;
+	}
+
+	// initialize layer2 canvas
+	var cid=   "layer2";
+	var c=     document.getElementById(cid);
+	var ctx=   c.getContext("2d");
+	ctx.clearRect(0,0,c.width,c.height);
+	gridon= gvgridon;
+	if (gridon) {mydrawGrid(cid);}	
+
+	// recover the inst vbls
+
+	// draw the forces
+	
+}
+	
+// Draw body1 only once, on load ---------------------------------------------->
+function drawBody1()
+{
+	var cid= "layer1";
+	var c1=   document.getElementById(cid);
+	var ctx = c1.getContext('2d');
+	
+	var x0=  460;
+	var y0=  360;
+	gv00.x0= x0;
+	gv00.y0= y0;
+		
+	// draw x and y axes
+	cDrawArrow(cid,x0-360,y0,x0+200,y0,"gray",1,true);	// x axis
+	cDrawArrow(cid,x0,y0,x0,y0-280,"gray",1,true);		// y axis
+	ctx.fillStyle="black";
+	ctx.font="bold 14px Arial";
+	ctx.fillText( "X",x0+180,y0+20);
+	ctx.fillText( "Y",x0-20,y0-260);
+	
+	// draw fixed body
+	cDrawRectxy(cid,x0-300,y0,x0+100,y0+30,"gray",1,"gray")
+	cDrawRectxy(cid,x0-300,y0,x0,y0-160,"lightblue",1,"lightblue")	
+	cDrawRectxy(cid,x0,y0-200,x0+40,y0,"black",1,"lightgray")
+
+	cDrawDot(cid,x0,y0,3,"black");		// A
+	
+	cDrawDoubleArrow(cid,x0-340,y0,x0-340,y0-160,"gray",1,true);
+	cDrawTextBG(cid,"h",x0-344,y0-80);
+	cDrawLine(cid,x0-302,y0-160,x0-360,y0-160,"gray",1,"round");
+		
+	// label fixed points
+	ctx.fillStyle="black";
+	ctx.font="bold 14px Arial";
+	ctx.fillText( "A",x0+5,y0-5);
+
+	// draw distributed load - triangular
+	var hp= 160;		// h in pixels
+	var wp= 100;		// w in pixels (base)	
+	cDrawLine(cid,x0-wp,y0,x0,y0-hp,"red",1,"round");
+	var y2= y0;
+	var dy= 20;
+	var dx= dy*wp/hp;
+	var yd= y0-hp+20;
+	var x1= x0-dx;
+	while ( yd < y0+5 ) {
+		cDrawForce2(cid,x1,yd,x0,yd,2,"red","round",8);
+		yd= yd+dy;
+		x1= x1-dx;
+	}	
+			
+	gvgridon= false;
+}
+
+// doANS -------------------------------------------------------------------->
+function doANS(partn)
+{	
+	var strb= "&#160;&#160;&#160;Answer ".concat(partn,": ");
+	gvcid=    "layer2";
+		
+	var ansS=     gvPart[partn].ansS;
+	var ansSlist= ansS.split(","); 	
+	
+	if (partn < 2) {
+		strb=    strb.concat(ansSlist[0]," kN @ ",ansSlist[1],"&deg;");
+		document.getElementById("msgline").innerHTML= strb;
+	}
+	else {
+		strb=    strb.concat(ansS," m");
+	}
+	document.getElementById("msgline").innerHTML= strb;
+
+	// option to draw answer
+}
+</script>
+
+<!-- Page must load completely before this can run properly ------------------->
+<script>
+	var Ninst= gvNinst;
+	if (Ninst == 0 ) {
+		drawBody1();
+		doINSTANCE();
+	}
+</script>
+ 
+</body>
+</html>

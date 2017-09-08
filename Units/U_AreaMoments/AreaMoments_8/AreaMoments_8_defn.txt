@@ -1,0 +1,1 @@
+{"unitid":"AreaMoments","prbnum":"8","prblin":["For the cross-section shown in the figure below, find the properties of the moment of inertia. Dimensions are given in inches.","(1) What is Ixx, the area moment of inertia about the x axis?","(2) What is Iyy, the area moment of inertia about the y axis?"],"ivlin":["w,in,1,15,RU","h,in,1,15,RU"],"avlin":["Ixx","Iyy"]}

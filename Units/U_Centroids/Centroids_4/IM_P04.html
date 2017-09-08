@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>U09_P04.html</title>
+<link href="../style_ipp_prob.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../lib_gvSetup.js"></script>
+
+<script>
+gvprobid= "U09_P04";
+gvgridon= false;
+
+// Geometric variables for active display
+
+// Instance variables
+var gvNinst= 0;		// counter
+
+var gvIV1= {typ:"N",nam:"d",val:0,min:0.5,max:1};
+var gvIV2= {typ:"N",nam:"h",val:0,min:4,max:10};
+var gvIV=  [2,gvIV1,gvIV2];
+
+// Answers
+var gvPart1= {act:"enter",nam:"Cxy",typ:"Nc",ansS:"",ansP:"",ntries:0};
+var gvPart=  [1,gvPart1];
+
+//alert("gv completed");
+</script>
+
+<script type="text/javascript" src="../lib_Actions.js"></script>
+<script type="text/javascript" src="../lib_cDraw1.js"></script>
+ 
+</head>
+
+<body id="bodywrap" onload="initialize2()">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- Wrap for header and canvas ----------------------------------------------->
+<div>
+<div id="hdrwrap"> <!-- postioned relative to parent div-->
+<p class="hdr2">ip4STATICS Problem U09_P04</p>
+<p>The cross-section of a concrete dam is shown below. Dimensions are
+ in meters.</p>
+</div>
+
+<!-- Canvases ----------------------------------------------------------------->
+<div id="cvswrap" style="width:804px; height:504px;">
+ <canvas id="layer1" width="800px" height="500px"></canvas>
+ <canvas id="layer2" width="800px" height="500px"></canvas>
+ <script>
+	gvgrid.xmax= 800;
+	gvgrid.ymax= 500;
+	gvgrid.dx=   20;
+	gvgrid.dy=   20;
+ </script>	
+</div>
+</div>
+
+<!-- New Instance section -----------------------------------------------------> 
+<div id="instwrap">
+ <div id="INST"><button onclick="doINSTANCE('new')"><b>INSTANCE</b></button></div>
+ <div id="instmsg"><p id="msgInstance">&#160;</p></div>
+</div>
+
+<!-- Set IV section -----------------------------------------------------------> 
+<div id="ivsetctrl">
+ <div id="ivSET_IV"><button onclick="setIVs('set')"><b>SET IVs</b></button></p></div> 
+ <div id="ivSUBMIT"><button onclick="setIVs('submit')"><b>SUBMIT IVs</b></button></p></div>
+ <div id="ivCLR_IV"><button onclick="setIVs('clr')"><b>CLR MSG</b></button></div>
+ <div id="ivmsgline"><p id="ivmsg"></p></div>
+</div>
+<!-- header block -->
+<div id="ivsethdr">
+ <div class="ivnam"><p id="ivnamh">Name</p></div>
+ <div class="ivmin"><p id="ivminh">Min</p></div>
+ <div class="ivmax"><p id="ivmaxh">Max</p></div>
+ <div class="ivval"><p id="ivvalh">Value</p></div> 
+</div>
+<!-- entry blocks -->
+<div id="ivsetwrap"> 
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam1"></p></div>
+  <div class="ivmin"><p id="ivmin1"></p></div>
+  <div class="ivmax"><p id="ivmax1"></p></div>
+  <div class="ivval"><input type="text" size="16" id="enteriv1" value=""></p></div>
+ </div>
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam2"></p></div>
+  <div class="ivmin"><p id="ivmin2"></p></div>
+  <div class="ivmax"><p id="ivmax2"></p></div>
+  <div class="ivval"><input type="text" size="16" id="enteriv2" value=""></p></div>
+ </div>
+</div>
+<hr>
+
+<!-- Part 1 -------------------------------------------------------------------> 
+<div class="parthdr">
+ <p class="p10"><b>&#160;(1) Where is Cxy, the centroid? (Enter 'Cx,Cy')</b></p>
+</div>
+<div class="partans">
+ <div class="ansENTER"><input type="text" size="42" id="enterP1" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(1)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP1"></p></div>
+ <div class="ntries"><p id="tryP1"></p></div>
+ <div class="ANS"><button onclick="doANS(1)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(1)"><b>CLR</b></button></div> 
+</div>
+
+<hr>
+<!-- MESSAGE line instance request -------------------------------------------->
+<div id="msgwrap"> 
+ <p id="msgline"><b>&#160;&#160;&#160;Message:</b></p>
+</div>
+<br>
+<!-- General control requests -------------------------------------------------> 
+<div id="ctlwrap">
+ <div id="FEEDBACK1"><button onclick="doFEEDBACK()"><b>FEEDBACK</b></button></div>
+ <div id="HELP1">  <button onclick="doHELP()"><b>HELP</b></button></div>
+ <div id="CLRMSG1"><button onclick="doCLRMSG()"><b>CLEAR MSG</b></button></div>
+ <div id="WORKSH1"><button onclick="doWORKSHEET()"><b>WORKSHEET</b></button></div>
+ <div id="SOLUTION1"><button onclick="doSOLUTION()"><b>SOLUTION</b></button></div>
+</div>
+
+<hr>
+<!-- Footer ------------------------------------------------------------------->
+<div id="ftrwrap">
+<p id="ftrlin1"><b>MSU - CoE</b></p>
+</div>
+
+
+<!-- Inline scripts specific to this problem ---------------------------------->
+<script type="text/javascript">
+
+// doINSTANCE ----------------------------------------------------------------->
+function doINSTANCE(act)
+{
+	if (act == "new") {
+		// generate new instance vbls
+		var d= 0.5 +0.5*Math.random();	
+		var h= 4 +6*Math.random();
+		gvIV1.val= d;
+		gvIV2.val= h;	
+		gvNinst=   gvNinst +1;
+	}
+	else if ((act == "set")||(act == "grid")) {
+		d= Number(gvIV1.val);
+		h= Number(gvIV2.val);
+		if (act == "grid") {
+			gridon=   !gridon;
+			gvgridon= gridon;
+		}		
+	}
+	var ninst= gvNinst;
+	
+	// display instance line text	
+	var df= d.toPrecision(3);
+	var hf= h.toPrecision(3);
+	
+	var strb=  " ".concat(ninst,": d= ",df," m, h= ",hf," m.");
+	document.getElementById("msgInstance").innerHTML= strb.bold();
+
+	// clear all enter and message data text
+	doCLR(0);
+
+	// display instance data
+	drawINSTANCE('INSTANCE');
+
+	// get new solution
+	var fac1= 3*d/2 +h;
+	var den=  fac1 +h*h/4 +(d+h/2)*d/2;
+	var xnum= fac1*d*d/2 +h*h*(h/6 +d)/4 +d*(d+h/2)*(3*d/2+h/4)/2;
+	var ynum= fac1*fac1*d/2 +h*h*(d/2+h/3)/4 +d*d*(d+h/2)/8;
+	
+	var Cx= xnum/den;
+	var Cy= ynum/den;
+	
+	// save the solution
+	Cx= Cx.toPrecision(3);
+	Cy= Cy.toPrecision(3);		
+	gvPart[1].ansS= String(Cx).concat(",",String(Cy));
+}	
+	
+// Draw body1 only once, on load ---------------------------------------------->
+function drawBody1()
+{
+	var cid= "layer1";
+	var c1=   document.getElementById(cid);
+	var ctx = c1.getContext('2d');
+	
+	var x0=  200;
+	var y0=  440;
+	gv00.x0= x0;
+	gv00.y0= y0;
+	
+	gvDscal= 100/100;
+	gvFscal= 100/100;
+	
+	// working dimensions
+	var dp= 80;
+	var hp= 200;
+	var bp= 2*dp +hp/2;
+	// key locations
+	var x1= x0+dp;
+	var x2= x1+hp/2;
+	var x3= x2+dp;
+	var y1= y0-dp/2;
+	var y2= y1-hp;
+	var y3= y2-dp;
+
+	// draw x and y axes
+	cDrawArrow(cid,x0,y0,x3+100,y0,"black",1,true);	// x axis
+	cDrawArrow(cid,x0,y0,x0,y3-80,"black",1,true);	// y axis
+	ctx.fillStyle="black";
+	ctx.font="bold 16px Arial";
+	ctx.fillText( "X",x3+80,y0+25);		// y value true pos top
+	ctx.fillText( "Y",x0-20,y3-60);
+		
+	cDrawRectxy(cid,x0,y0-dp/2,x0+bp,y0,"none",0,"silver");	
+	cDrawRectxy(cid,x0,y0-3*dp/2-hp,x0+dp,y0-dp/2,"none",0,"silver");
+	cDrawTriangle(cid,x1,y1,x2,y1,x1,y2,"none",0,"silver");
+		
+	cDrawDot(cid,x0,y0,3,"black");		// origin
+	cDrawLine(cid,x0-4,y0,x0-40,y0,"gray",1,"round");
+	cDrawLine(cid,x0-4,y1,x0-40,y1,"gray",1,"round");
+	cDrawLine(cid,x0-4,y2,x0-40,y2,"gray",1,"round");
+	cDrawLine(cid,x0-4,y3,x0-40,y3,"gray",1,"round");
+	
+	cDrawDoubleArrow(cid,x0-20,y0,x0-20,y1,"gray",1,true);
+	cDrawDoubleArrow(cid,x0-20,y1,x0-20,y2,"gray",1,true);
+	cDrawDoubleArrow(cid,x0-20,y2,x0-20,y3,"gray",1,true);
+	cDrawTextBG(cid,"d/2",x0-30,(y0+y1-16)/2);
+	cDrawTextBG(cid,"h",x0-25,(y1+y2-16)/2);
+	cDrawTextBG(cid,"d",x0-25,(y2+y3-16)/2);
+	
+	cDrawLine(cid,x1,y3-4,x1,y3-30,"gray",1,"round");	
+	cDrawDoubleArrow(cid,x0,y3-20,x1,y3-20,"gray",1,true);	
+	cDrawTextBG(cid," d ",(x0+x1-12)/2,y3-30);
+	
+	cDrawLine(cid,x2,y1-4,x2,y1-30,"gray",1,"round");
+	cDrawLine(cid,x3,y1-4,x3,y1-30,"gray",1,"round");	
+	cDrawDoubleArrow(cid,x2,y1-20,x3,y1-20,"gray",1,true);	
+	cDrawTextBG(cid," d ",(x2+x3-12)/2,y1-30);
+
+	var x11= x1+0.6*(x2-x1);
+	var y11= y1-0.4*(y1-y2);
+	cDrawTriangle(cid,x11,y11,x11,y11-60,x11-30,y11-60,"black",1,"none");
+	ctx.fillStyle="black";	
+	ctx.font="bold 14px Arial";	
+	ctx.fillText( "0.5",x11-25,y11-70);	
+	ctx.fillText( "1",x11+5,y11-25);	
+
+	ctx.font="bold 14px Arial";		
+	ctx.fillText( "O",x0-15,y0+20);	
+
+	gvgridon= false;
+}
+
+// doANS -------------------------------------------------------------------->
+function doANS(partn)
+{	
+	var strb= "&#160;&#160;&#160;Answer ".concat(partn,": ");
+
+	var ansS=     gvPart[partn].ansS;
+	var ansSlist= ansS.split(",");	
+	if (partn < 2) {		
+		strb= strb.concat(ansSlist[0],",",ansSlist[1]," m");
+	}
+	document.getElementById("msgline").innerHTML= strb;
+
+}
+</script>
+
+<!-- Page must load completely before this can run properly ------------------->
+<script>
+	var Ninst= gvNinst;
+	if (Ninst == 0 ) {
+		setIVs("hide");
+		drawBody1();
+		doINSTANCE("new");
+	}
+</script>
+ 
+</body>
+</html>

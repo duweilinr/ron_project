@@ -1,0 +1,1 @@
+{"unitid":"FandM2d","prbnum":"6","prblin":["A beam carries two uniformly-distributed load segments, as shown below. Units are lb and ft.","(1) What is FR, the equivalent concentrated load force, in lb,@deg|?","(2) What is xR, the x location of FR in ft?"],"ivlin":["w,lb\/ft,15,25,RU","h,ft,2,4,RU"],"avlin":["FRmag,FRdeg","xR"]}

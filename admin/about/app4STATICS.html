@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>app4STATICS.html</title>
+<meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+
+<link href="./style_unit.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="./lib_Actions.js"></script>
+<script src="./lib_cDraw1.js"></script>
+
+<script>
+var probapp = angular.module('probApp', []);
+probapp.controller('probCtrl', function($scope,$http)
+{
+// on load action ------------------------------------------------------------->
+onloadInit();
+function onloadInit()
+{
+	$scope.caller= "app4_main";
+	$scope.ftrstr= "app4STATICS";	
+
+}
+
+})
+</script>
+
+<script>
+function myMouseClick(arg) {
+	var msg= arg;
+	alert("mouseClick= "+msg);
+}
+</script>
+
+</head>
+<!----------------------------------------------------------------------------->
+
+
+<body id="bodywrap" ng-app="probApp" ng-controller="probCtrl">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div style="width:804px; border:2px solid gray; background-color:ivory;">
+
+<!-- Header section ----------------------------------------------------------->
+<div>
+<br>
+<h1 class="h1style" style="text-align:center">app4STATICS</h1>
+<h2 class="h2style" style="text-align: center"><i>Use this active problem pool for STATICS to build your skills and test yourself!</i></h2>
+</div>
+
+<div id="topimage" style="text-align:center; border:solid red 0px; 
+      cursor:pointer" onclick="myMouseClick('img_main_1');">
+  <img src="img_main_1.JPG" alt="img_main_1" style="width:790px;height:150px;">
+</div>
+ 
+<!-- Wrap for contents -------------------------------------------------------->
+<div style="width:800px; border:solid red 0px;">
+
+ <!-- About ip4STATICS --------------------------------------------------------> 
+<br>
+<div style="width:800px; border:solid red 0px;">
+  <p class="p30">
+  <a href="./admin/about/about.html" target="_blank"><b>About ip4STATICS</b></a>
+  &emsp; <a href="./admin/about/help_main.html" target="_blank"><b>How to run a problem</b></a> 
+  </p>
+  <br>  
+  <p class="p30">
+  <a href="./admin/login.html" target="_blank"><b>LOG IN</b></a>
+  &emsp; <a href="./admin/register.html" target="_blank"><b>REGISTER</b></a>	
+  &emsp; <a href="./admin/run_demo.html" target="_blank"><b>RUN DEMO</b></a>
+  </p>  
+</div>
+
+<!-- TOPICS -------------------------------------------------------------------> 
+<br>
+<div style="width:800px; border:solid red 0px;">
+  <h2 class="h2style">&emsp;&emsp;<b>TOPICS</b></a></p>
+</div>
+ 
+<div>  
+  <p class="p45"><a href="./Units/U_Vectors2d/Vectors2d.html" target="_blank">
+  <b>Force and Position Vectors in 2d</b></a></p>   
+  <p class="p45"><a href="./Units/U_Vectors3d/Vectors3d.html" target="_blank"> 
+  <b>Force and Position Vectors in 3d</b></a></p>      
+  <br>
+  <p class="p45"><a href="./Units/U_PartEq2d/PartEq2d.html" target="_blank"> 
+  <b>Particle Equilibrium in 2d<b></a></p>
+  <p class="p45"><a href="./Units/U_PartEq3d/PartEq3d.html" target="_blank"> 
+  <b>Particle Equilibrium in 3d<b></a></p> 
+  <br>
+  <p class="p45"><a href="./Units/U_FandM2d/FandM2d.html" target="_blank">
+  <b>Systems of Forces and Moments in 2d<b></a></p>
+  <p class="p45"><a href="./Units/U_FandM3d/FandM3d.html" target="_blank">
+  <b>Systems of Forces and Moments in 3d<b></a></p>
+  
+  <br>
+  <p class="p45"><a href="./Units/U_Rigid2d/Rigid2d.html" target="_blank">
+  <b>Rigid Body Equilibrium in 2d<b></a></p>
+  <p class="p45"><a href="./Units/U_Rigid3d/Rigid3d.html" target="_blank">
+  <b>Rigid Body Equilibrium in 3d<b></a></p>
+</div>
+
+<div>
+  <br>
+  <p class="p45"><a href="./Units/U_Frames/Frames.html" target="_blank">
+  <b>Frames and Machines<b></a></p>  
+  <p class="p4515"><a href="./Units/U_Trusses/Trusses.html" target="_blank">
+  <b>Trusses</b></a></p> 
+  <p class="p4515"><a href="./Units/U_Beams/Beams.html" target="_blank">
+  <b>Beams</b></a></p>
+  <p class="p4515"><a href="./Units/U_Cables/Cables.html" target="_blank">
+  <b>Cables</b></a></p>   
+  <p class="p4515"><a href="./Units/U_Friction/Friction.html" target="_blank">
+  <b>Friction</b></a></p>
+  <p class="p4515"><a href="./Units/U_Centroids/Centroids.html" target="_blank">
+  <b>Centroids and Mass Moments of Inertia</b></a></p>
+  <p class="p4515"><a href="./Units/U_AreaMoments/AreaMoments.html" target="_blank">
+  <b>Area Moments of Inertia</b></a></p>  
+</div>  
+
+</div>
+
+<br>
+<hr>
+<!-- Footer ------------------------------------------------------------------->
+<div id="ftrwrap">
+<p id="ftrlin1"><b>{{ftrstr}}</b></p>
+</div>
+
+</div>
+
+<!-- Inline scripts -----------------------------------------------------------
+<script type="text/javascript">
+</script> -->	
+
+</body>
+</html>

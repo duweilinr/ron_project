@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>PartEq2d_5</title>
+<link href="../../style_prob.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script> 
+<script type="text/javascript" src="../../lib_cDraw1.js"></script>
+<script type="text/javascript" src="../../lib_cDraw2.js"></script>
+
+<script>
+var probapp = angular.module('probApp', []);
+probapp.controller('probCtrl', function($scope,$http)
+{
+// on load action ------------------------------------------------------------->
+onloadInit();
+function onloadInit()
+{
+	$scope.unitid=  "PartEq2d";
+	$scope.prbnum=  "5";
+	$scope.prblin=  [];
+	$scope.ivstr=   "";
+	$scope.ivval=   [];
+	$scope.ninst=   0;	
+	$scope.avlin=   [];
+	$scope.nparts=  "";
+	$scope.ansarr=  [];		// ans structure in object form for display	
+	$scope.msgline= "";
+	$scope.ftrstr=  "app4STATICS";
+
+	// get the problem data for display
+	$http({
+		method: 'POST',
+		data:	{ caller: "run1",
+				  unitid: $scope.unitid,
+				  prbnum: $scope.prbnum },
+		url:    '../../dbget1.php'
+	}).then(function successCallback(response) {
+		var result=    response.data; 	// returned object is 'result'
+		$scope.prblin= result.prblin;
+		$scope.avlin=  result.avlin;
+		$scope.nparts= result.nparts;
+		
+		var unit=   $scope.unitid;
+		var probid= unit.concat("_",$scope.prbnum);
+
+		// display cvs1 figure as image or draw it
+		drawBody1();
+		
+		// display answer vbl structure
+		var avlinx=   $scope.avlin;
+		var np=  $scope.nparts;
+		for ( var i=0; i<np; i++) {
+			var avline= avlinx[i];
+			var avlist= avline.split(",");
+			var nsub=   avlist.length;
+			var subarr= [];		// single line subarray of av objects
+			for (var n=0; n<nsub; n++) {
+				var avobj1= {lbl:avlist[n],val:""};
+				subarr[n]= avobj1;
+			}	
+			$scope.ansarr[i]= {subp:subarr,tryn:"0",eval:"",svstr:""};
+		}	
+		
+		// set up current data file
+		$http({
+			method: 'POST',
+			data:	{ caller: "run1",
+					  unitid: $scope.unitid,
+					  prbnum: $scope.prbnum,
+					  nparts: $scope.nparts },
+			url:    '../../cdsetup.php'
+		}).then(function successCallback(response) {
+			var result=   response.data;
+			$scope.ninst= result.ninst;
+			$scope.ivstr= result.ivstr;
+		}, function errorCallback(response) {
+			var status=     response.status;
+			var statusText= response.statusText;			
+			var errout=     "error= ".concat(status,", ",statusText);
+			console.log(errout);	
+		})
+
+		// set up first instance on load
+		$http({
+			method: 'GET',
+			url:    '../../doINST.php'
+		}).then(function successCallback(response) {
+			var result=   response.data;
+			$scope.ninst= result.ninst;
+			$scope.ivstr= result.ivstr;
+			$scope.ivval= result.ivval;
+			var ivvald=   $scope.ivval;
+			drawInstance(ivvald);				
+		}, function errorCallback(response) {
+			var status=     response.status;
+			var statusText= response.statusText;			
+			var errout=     "error= ".concat(status,", ",statusText);
+			console.log(errout);	
+		})
+			
+	}, function errorCallback(response) {
+		var status=     response.status;
+		var statusText= response.statusText;			
+		var errout= "error= ".concat(status,", ",statusText);
+		console.log(errout);	
+	})
+}
+
+// user call for new instance ------------------------------------------------>
+$scope.INST= function()
+{		
+		// display answer vbl structure in cleared form		
+		var avlinx=   $scope.avlin;
+		var np= $scope.nparts;
+		for ( var i=0; i<np; i++) {
+			var avline= avlinx[i];
+			var avlist= avline.split(",");
+			var nsub=   avlist.length;
+			var subarr= [];		// single line subarray of av objects
+			for (var n=0; n<nsub; n++) {
+				var avobj1= {lbl:avlist[n],val:""};
+				subarr[n]= avobj1;
+			}	
+			$scope.ansarr[i]= {subp:subarr,tryn:"0",eval:"",svstr:""};
+		}	
+
+	$http({
+		method: 'GET',
+		url:    '../../doINST.php'
+	}).then(function successCallback(response) {
+		var result=   response.data; 
+		$scope.ninst= result.ninst;
+		$scope.ivstr= result.ivstr;
+		$scope.ivval= result.ivval;
+		var ivvald=   $scope.ivval;
+		drawInstance(ivvald);	
+	}, function errorCallback(response) {
+		var status=     response.status;
+		var statusText= response.statusText;			
+		var errout=     "error= ".concat(status,", ",statusText);
+		console.log(errout);	
+	})
+}
+
+// user call for evaluation -------------------------------------------------->
+$scope.EVAL= function(pnxin)
+{	
+	var pnx=   pnxin;		// make vbl local
+	var anspn= $scope.ansarr[pnx];
+	var subs=  anspn.subp;
+	var nsubs= subs.length;	
+	// creat the ans string for this part
+	var avstr= subs[0].val;		// first answer of part pnx
+	for (var i=1; i<nsubs; i++) {
+		inp= subs[i].val;
+		avstr= avstr.concat(",",inp);
+	}
+	// POST data to doEVAL for evaluation
+	$http({
+	  method: 'POST',
+	  data:   {	pnx:pnx, avstr:avstr },
+	  url:    '../../doEVAL.php'
+	}).then(function successCallback(response) {
+		var result=  response.data; 	// returned object
+		var tryn=    result.tryn;
+		var evalstr= result.evalstr;
+		anspn.tryn=  tryn;
+		anspn.eval=  evalstr;
+	}, function errorCallback(response) {
+		var status=     response.status;
+		var statusText= response.statusText;			
+		var errout= "error= ".concat(status,", ",statusText);
+		console.log(errout);	
+	})
+}
+ 
+// user wants to clear answer line -------------------------------------------->
+$scope.CLR= function(pnx)
+{
+	var anspn= $scope.ansarr[pnx];
+	var subs=  anspn.subp;
+	var nsubs= subs.length;	
+
+	for (var i=0; i<nsubs; i++) {
+		subs[i].val= "";
+	}
+	anspn.eval= "";
+	return ;
+}
+
+// user wants to see answer --------------------------------------------------->
+$scope.ANS= function(pnx)
+{
+	$http({
+		  method: 'POST',
+		  data:   { pnx:pnx },
+		  url:    '../../doANS.php'
+	}).then(function successCallback(response) {
+		var result=  response.data; 	// returned object
+		var svstr=   result.svstr;
+
+		var anspn=   $scope.ansarr[pnx];
+		anspn.svstr= result.svstr;
+		anspn.tryn=  -1;	// do not allow ENTER again for this part			
+		anspn.eval=  "";				
+		// clear rest of line		
+		var subs=  anspn.subp;
+		var nsubs= subs.length;	
+		anspn.svstr= result.svstr;
+		for (var i=0; i<nsubs; i++) {
+			subs[i].val= "";
+		}
+	}, function errorCallback(response) {
+			var status=     response.status;
+			var statusText= response.statusText;			
+			var errout= "error= ".concat(status,", ",statusText);
+			console.log(errout);	
+	})	
+}
+     
+// message line ---------------------------------------------------------------> 
+$scope.msglineCLR= function() {
+	$scope.msgline= "";
+}
+   
+}); 
+</script>
+
+<script>
+function drawBody1()
+{
+	var cid=  "layer1";
+	var c=   document.getElementById(cid);
+	var ctx = c.getContext('2d');
+	
+	var x0=   400;
+	var xmin= x0-300;
+	var xmax= x0+300;
+	var y0=   250;	
+	var ybot= y0+200;
+	var ytop= y0-200;
+	cDrawAxes1(cid,x0,xmin,xmax,y0,ybot,ytop);
+
+	// draw fixed body
+	cDrawRectxy(cid,x0-50,y0-50,x0+50,y0+50,"brown",6,"burlywood");
+					
+	// draw and label fixed points
+	cDrawDot(cid,x0,y0,3,"black")	
+	ctx.fillStyle="black";
+	ctx.font="bold 16px Arial";
+	ctx.fillText( "C",x0-10,y0-10);
+}
+
+function drawInstance(ivvald)
+{
+	var cid=   "layer2";
+	var c=   document.getElementById(cid);
+	var ctx = c.getContext('2d');
+
+	var x0=   400;
+	var xmin= x0-300;
+	var xmax= x0+300;
+	var y0=   250;	
+	var ybot= y0+200;
+	var ytop= y0-200;
+	cDrawGrid1(cid,x0,xmin,xmax,y0,ybot,ytop);
+
+	// recover the inst vbls
+	var F1mag= ivvald[0];
+	var F1deg= ivvald[1];
+	var F1rad= F1deg*Math.PI/180;	
+	var Wt= ivvald[2];
+	
+	// draw the forces
+	var Fscal= 50/1000;
+	var F1x= F1mag*Math.cos(F1rad)*Fscal;
+	var F1y= F1mag*Math.sin(F1rad)*Fscal;
+	var Wts= Wt*Fscal;
+	cDrawArrow(cid,x0,y0,x0+F1x,y0-F1y,"red",3,true);
+	cDrawArrow(cid,x0,y0,x0,y0+Wts,"red",3,true);		
+	ctx.font=      "bold 16px Arial";
+	ctx.fillStyle= "red";
+	ctx.fillText("F1",x0+F1x-25,y0-F1y);	
+	ctx.fillText("Wt",x0-30,y0+Wts);
+}
+
+</script>
+
+</head>
+
+<body id="bodywrap" ng-app="probApp" ng-controller="probCtrl">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- problem id --------------------------------------------------------------->
+<br>
+<div>
+ <h2>&emsp;{{unitid}}&#160;{{prbnum}}</h2>
+</div>
+
+<!-- problem statement -------------------------------------------------------->
+<div style="padding:0px 10px 0px 0px;">
+ <p class="p1020" ng-repeat="x in prblin">{{x}}</p>
+</div>
+
+<!-- Image or canvas ---------------------------------------------------------->
+<br>
+<div id="cvswrap" style="width:804px; height:504px; border:solid gray 1px;">
+ <canvas id="layer1" width="800px" height="500px"></canvas>
+ <canvas id="layer2" width="800px" height="500px"></canvas> 
+</div>
+
+<!-- instance variables ------------------------------------------------------->
+<br>
+<div>
+ <p class="p1020">
+	<button ng-click="INST()"><b>GET INST</b></button>
+	&emsp;{{ninst}}: {{ivstr}}</p>
+</div>
+		
+<!-- answer parts and message line --------------------------------------------> 
+<hr>
+<div style="padding:0px 10px 0px 0px;">
+ <p class="p1020" ng-repeat="x in avarr">{{x}}</p>
+</div>
+
+<div ng-app="probApp">
+	<p class="p1020" ng-repeat="x in ansarr">
+	({{$index+1}})
+	<span ng-repeat="y in x.subp">{{y.lbl}}
+	&#160;<input type="text" size="2" ng-model="y.val">
+	</span>
+	&#160;<button type="button" ng-click="EVAL($index)"><b>EVALUATE</b></button>
+	&emsp;&emsp;&emsp;&emsp;Try {{x.tryn}}	
+	&nbsp;{{x.eval}}
+	&emsp;<button ng-click="CLR($index)"><b>CLR</b></button>
+	&emsp;<button ng-click="ANS($index)"><b>ANS</b></button>	
+	&#160;{{x.svstr}}	
+	</p>
+</div>
+
+<hr>
+<div>
+ <p class="p1020"><b>Message: </b>{{msgline}} 
+	&emsp;<button ng-click="msglineCLR()"><b>CLEAR</b></button>
+</b></button></p>	
+</div>
+
+<!-- Footer ------------------------------------------------------------------->
+<hr>
+<div>
+ <p class="p1020" style="text-align:center"><b><span ng-bind="ftrstr"></span></b></p>
+</div>
+<!-- bottom of page ----------------------------------------------------------->
+
+<!-- Page must load completely before this script can run properly ------------>
+
+</body>
+</html>

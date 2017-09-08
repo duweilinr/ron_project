@@ -1,0 +1,397 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>FM_P07.html</title>
+<link href="../style_ipp_prob.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../lib_gvSetup.js"></script>
+
+<script>
+gvprobid= "U06_P08";
+gvgridon= false;
+
+// Geometric variables for active display
+
+// Instance variables
+var gvNinst= 0;		// counter
+
+var gvIV1= {typ:"N",nam:"FL",val:0, min:30,max:40 };
+var gvIV2= {typ:"N",nam:"L", val:0, min:1,max:1.2 };
+var gvIV3= {typ:"N",nam:"df",val:0, min:0.5,max:0.6 };
+var gvIV=  [3,gvIV1,gvIV2,gvIV3];
+
+// Answers
+var gvPart1= {act:"enter",nam:"k1",typ:"N",ansS:"",ansP:"",ntries:0};
+var gvPart2= {act:"enter",nam:"k2",typ:"N",ansS:"",ansP:"",ntries:0};
+var gvPart3= {act:"enter",nam:"FL",typ:"N",ansS:"",ansP:"",ntries:0};
+var gvPart=  [3,gvPart1,gvPart2,gvPart3];
+//alert("gv completed");
+</script>
+
+<script type="text/javascript" src="../lib_Actions.js"></script>
+<script type="text/javascript" src="../lib_cDraw1.js"></script>
+ 
+</head>
+
+<body id="bodywrap" onload="initialize2()">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- Wrap for header and canvas ----------------------------------------------->
+<div>
+<div id="hdrwrap"> <!-- postioned relative to parent div-->
+<p class="hdr2">FM_P07</p>
+<p style="padding:5px;"> &#160;A structure is tensioned by a stiff cable BD, as shown below. Each arm weighs W= 10N. Part (a) shows the bar assembled without arm weight or load effects. The cable free length is df m (i.e., it has no tension). 
+Part (b) shows the bar as it deflect due to the weight of arms AB and CD and
+ loads FL.</p>
+<p style="padding:5px;"> &#160;(1) If the bar sag is not to exceed 0.1 m, what cable stiffness k1 is required?</p>
+<p style="padding:5px;"> &#160;(2) If the bar sag is not to exceed 0.2 m, what cable stiffness k2 is required?</p>
+<p style="padding:5px;"> &#160;(3) For a cable with stiffness k1 from part (1), what is the maximum value of FL that keeps the sag at 0.2 m or less?</p>
+</div>
+
+<!-- Canvases ----------------------------------------------------------------->
+<div id="cvswrap" style="width:804px; height:284px;">
+ <canvas id="layer1" width="800px" height="280px"></canvas>
+ <canvas id="layer2" width="800px" height="280px"></canvas>
+ <script>
+	gvgrid.xmax= 800;
+	gvgrid.ymax= 280;
+	gvgrid.dx=   20;
+	gvgrid.dy=   20;
+ </script>	
+</div>
+</div>
+
+<!-- New Instance section -----------------------------------------------------> 
+<div id="instwrap">
+ <div id="INST"><button onclick="doINSTANCE('new')"><b>INSTANCE</b></button></div>
+ <div id="instmsg"><p id="msgInstance">&#160;</p></div>
+</div>
+
+<!-- Set IV section -----------------------------------------------------------> 
+<div id="ivsetctrl">
+ <div id="ivSET_IV"><button onclick="setIVs('set')"><b>SET IVs</b></button></p></div> 
+ <div id="ivSUBMIT"><button onclick="setIVs('submit')"><b>SUBMIT IVs</b></button></p></div>
+ <div id="ivCLR_IV"><button onclick="setIVs('clr')"><b>CLR MSG</b></button></div>
+ <div id="ivmsgline"><p id="ivmsg"></p></div>
+</div>
+<!-- header block -->
+<div id="ivsethdr">
+ <div class="ivnam"><p id="ivnamh">Name</p></div>
+ <div class="ivmin"><p id="ivminh">Min</p></div>
+ <div class="ivmax"><p id="ivmaxh">Max</p></div>
+ <div class="ivval"><p id="ivvalh">Value</p></div> 
+</div>
+<!-- entry blocks -->
+<div id="ivsetwrap"> 
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam1"></p></div>
+  <div class="ivmin"><p id="ivmin1"></p></div>
+  <div class="ivmax"><p id="ivmax1"></p></div>
+  <div class="ivval"><input type="text" size="10" id="enteriv1" value=""></p></div>
+ </div>
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam2"></p></div>
+  <div class="ivmin"><p id="ivmin2"></p></div>
+  <div class="ivmax"><p id="ivmax2"></p></div>
+  <div class="ivval"><input type="text" size="10" id="enteriv2" value=""></p></div>
+ </div>
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam3"></p></div>
+  <div class="ivmin"><p id="ivmin3"></p></div>
+  <div class="ivmax"><p id="ivmax3"></p></div>
+  <div class="ivval"><input type="text" size="10" id="enteriv3" value=""></p></div>
+ </div>
+</div>
+<hr>
+
+<!-- Part 1 -------------------------------------------------------------------> 
+<div class="partans">
+ <div class="partseg" style="left:3%; width:8%;"><p id="data1">(1) &#160;k1=</p></div>
+ <div class="partseg" style="left:12%;width:10%;"><input type="text" size="8"
+ id="enterP1" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(1)"><b>ENTER</b></button></div>
+ <div class="ansres"><p id="resP1"></p></div>
+ <div class="ntries"><p id="tryP1"></p></div>
+ <div class="ANS"><button onclick="doANS(1)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(1)"><b>CLR</b></button></div> 
+</div>
+<!-- Part 2 -------------------------------------------------------------------> 
+<div class="partans">
+ <div class="partseg" style="left:3%; width:8%;"><p id="data2">(2) &#160;k2=</p></div>
+ <div class="partseg" style="left:12%;width:10%;"><input type="text" size="8"
+ id="enterP2" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(2)"><b>ENTER</b></button></div>
+ <div class="ansres"><p id="resP2"></p></div>
+ <div class="ntries"><p id="tryP2"></p></div>
+ <div class="ANS"><button onclick="doANS(2)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(2)"><b>CLR</b></button></div> 
+</div>
+<!-- Part 3 -------------------------------------------------------------------> 
+<div class="partans">
+ <div class="partseg" style="left:3%; width:8%;"><p id="data3">(3) &#160;FL=</p></div>
+  <div class="partseg" style="left:12%;width:10%;"><input type="text" size="8"
+ id="enterP3" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(3)"><b>ENTER</b></button></div>
+ <div class="ansres"><p id="resP3"></p></div>
+ <div class="ntries"><p id="tryP3"></p></div>
+ <div class="ANS"><button onclick="doANS(3)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(3)"><b>CLR</b></button></div> 
+</div>
+
+<hr>
+<!-- MESSAGE line instance request -------------------------------------------->
+<div id="msgwrap"> 
+ <p id="msgline"><b>&#160;&#160;&#160;Message:</b></p>
+</div>
+<br>
+<!-- General control requests -------------------------------------------------> 
+<div id="ctlwrap">
+ <div id="FEEDBACK1"><button onclick="doFEEDBACK()"><b>FEEDBACK</b></button></div>
+ <div id="HELP1">  <button onclick="doHELP()"><b>HELP</b></button></div>
+ <div id="CLRMSG1"><button onclick="doCLRMSG()"><b>CLEAR MSG</b></button></div>
+ <div id="WORKSH1"><button onclick="doWORKSHEET()"><b>WORKSHEET</b></button></div>
+ <div id="SOLUTION1"><button onclick="doSOLUTION()"><b>SOLUTION</b></button></div>
+</div>
+
+<hr>
+<!-- Footer ------------------------------------------------------------------->
+<div id="ftrwrap">
+<p id="ftrlin1"><b>MSU - CoE</b></p>
+</div>
+
+
+<!-- Inline scripts specific to this problem ---------------------------------->
+<script type="text/javascript">
+
+// doINSTANCE ----------------------------------------------------------------->
+function doINSTANCE(act)
+{
+	// initialize
+	var strb= "";
+	var part= "";
+	var nbr=  0;
+	var ans=  "";
+
+	if ( act == "new" ) {
+		// generate new instance vbls
+		var FL= 30 +10*Math.random();
+		var L=  1 +0.2*Math.random();
+		var df= 0.5 +0.1*Math.random();
+		gvIV1.val= FL;
+		gvIV2.val= L;
+		gvIV3.val= df;
+		gvNinst=   gvNinst +1;
+	}
+	else if ( act == "set" ){
+		FL= Number(gvIV1.val);
+		L=  Number(gvIV2.val);
+		df= Number(gvIV3.val);
+	}
+	var ninst= gvNinst;
+	
+	// display instance line text	
+	var FLf= FL.toPrecision(3);
+	var Lf=  L.toPrecision(3);
+	var dff= df.toPrecision(3);
+	var strb=  " ".concat(ninst,": FL= ",FLf," N,&#160; L= ",Lf," m");
+	strb= strb.concat(",&#160; df= ",dff," m.");
+	document.getElementById("msgInstance").innerHTML= strb.bold();
+
+	// clear all enter and message data text
+	doCLR(0);
+
+	// display instance data
+	//drawINSTANCE('INSTANCE');
+
+	// get new solution
+	var Ltot= 2*L +df;
+	var W=    10;
+	
+	// answer 1
+	var s1= 0.1;
+	var a1= Math.sqrt(L*L -s1*s1);
+	var d1= Ltot -2*a1;
+	var T1= (1/s1)*(W*a1/2 +FL*a1);
+	var k1= T1/(d1-df);
+	k1= k1.toPrecision(3);
+	gvPart[1].ansS= String(k1);
+	
+	// answer 2
+	var s2= 0.2;
+	var a2= Math.sqrt(L*L -s2*s2);
+	var d2= Ltot -2*a2;
+	var T2= (1/s2)*(W*a2/2 +FL*a2);
+	var k2= T2/(d2-df);
+	k2= k2.toPrecision(3);
+	gvPart[2].ansS= String(k2);
+
+	// answer 3 (uses s2 and k1)
+	var T3= k1*(d2-df);
+	FL= (1/a2)*(T3*s2 -W*a2/2);
+	FL= FL.toPrecision(3);
+	gvPart[3].ansS= String(FL);
+}	
+	
+// Draw body1 only once, on load ---------------------------------------------->
+function drawBody1()
+{
+	var cid= "layer1";
+	var c1=   document.getElementById(cid);
+	var ctx = c1.getContext('2d');
+	
+	var x0=  160;
+	var y0=  60;
+	gv00.x0= x0;
+	gv00.y0= y0;
+	
+	gvDscal= 100/1;
+	gvFscal= 100/100;
+
+	var Lp=  200;
+	var dfp= 100;
+	
+	// axes
+	//cDrawArrow(cid,x0-100,y0,x0+wp,y0,"gray",1,true);		// x axis
+	//cDrawArrow(cid,x0,y0,x0,y0-hp,"gray",1,true);		// y axis
+
+	// part (a) ----------------------------------------------------------------
+	var xAp= x0; 
+	var yAp= y0;
+	var xBp= xAp+Lp;
+	var yBp= yAp;
+	var xCp= xBp+dfp;
+	var yCp= yBp;
+	var xDp= xCp+Lp;
+	var yDp= yCp;
+
+	// label
+	ctx.fillStyle="black";
+	ctx.font="bold 16px Arial";
+	ctx.fillText("(a)",xAp-120,yAp+5);
+
+	// frame
+	cDrawLine(cid,xAp,yAp,xBp,yBp,"gray",18,"round");
+	cDrawLine(cid,xAp,yAp,xBp,yBp,"lightgray",14,"round");
+	cDrawLine(cid,xCp,yCp,xDp,yDp,"gray",18,"round");		
+	cDrawLine(cid,xCp,yCp,xDp,yDp,"lightgray",14,"round");	
+	cDrawLine(cid,xBp,yBp,xCp,yCp,"gray",8,"round");	
+	
+	// supports
+	cDrawDot(cid,xAp,yAp,12,"white");	
+	cDrawDot(cid,xAp,yAp,10,"gray");
+	cDrawLine(cid,xAp,yAp,xAp-20,yAp,"gray",20,"butt");		
+	cDrawLine(cid,xAp-23,yAp-20,xAp-23,yAp+20,"gray",6,"butt");			
+	cDrawLine(cid,xAp-30,yAp-30,xAp-30,yAp+30,"black",8,"butt");
+
+	cDrawDot(cid,xDp,yDp,12,"white");	
+	cDrawDot(cid,xDp,yDp,10,"gray");
+	cDrawLine(cid,xDp,yDp,xDp+20,yDp,"gray",20,"butt");		
+	cDrawLine(cid,xDp+23,yDp-20,xDp+23,yDp+20,"gray",6,"butt");			
+	cDrawLine(cid,xDp+30,yDp-30,xDp+30,yDp+30,"black",8,"butt");
+		
+	// joints
+	cDrawDot(cid,xAp,yAp,5,"white");		
+	cDrawDot(cid,xAp,yAp,3,"black");			
+	cDrawDot(cid,xBp,yBp,3,"black");	
+	cDrawDot(cid,xCp,yCp,3,"black");
+	cDrawDot(cid,xDp,yDp,5,"white");
+	cDrawDot(cid,xDp,yDp,3,"black");
+		
+	ctx.fillStyle="black";
+	ctx.font="bold 14px Arial";
+	ctx.fillText("A",xAp,yAp-15);
+	ctx.fillText("B",xBp,yBp-15);
+	ctx.fillText("C",xCp,yCp-15);
+	ctx.fillText("D",xDp,yDp-15);
+
+	// dimensions		
+	cDrawDoubleArrow(cid,xAp,yAp+25,xBp,yAp+25,"black",1,true);
+	cDrawTextBG(cid," L ",(xAp+xBp)/2-10,yAp+17);
+	cDrawDoubleArrow(cid,xBp,yAp+25,xCp,yAp+25,"black",1,true);		
+	cDrawTextBG(cid," df ",(xBp+xCp)/2-10,yAp+17);	
+	cDrawDoubleArrow(cid,xCp,yAp+25,xDp,yAp+25,"black",1,true);	
+	cDrawTextBG(cid," L ",(xCp+xDp)/2-10,yAp+17);	
+	
+	cDrawLine(cid,xAp,yAp+13,xAp,yAp+45,"black",1,"butt");
+	cDrawLine(cid,xBp,yAp+13,xBp,yAp+45,"black",1,"butt");	
+	cDrawLine(cid,xCp,yAp+13,xCp,yAp+45,"black",1,"butt");
+	cDrawLine(cid,xDp,yAp+13,xDp,yAp+45,"black",1,"butt");		
+
+	
+	// part (b) ----------------------------------------------------------------
+	var y0= 200;
+	var hp=  40;	// sag distance	
+	
+	var xAp= x0; 
+	var yAp= y0;
+	var xBp= xAp+Lp-20;
+	var yBp= yAp+hp;
+	var xDp= xAp+2*Lp+dfp;
+	var yDp= yAp;		
+	
+	var xCp= xDp-Lp+20;
+	var yCp= yAp+hp;
+
+
+	// label
+	ctx.fillStyle="black";
+	ctx.font="bold 16px Arial";
+	ctx.fillText("(b)",xAp-120,yAp+5);	
+	
+	cDrawLine(cid,xAp,yAp,xDp,yDp,"gray",1,"butt");
+	cDrawLine(cid,xAp,yAp,xBp,yBp,"black",2,"butt");
+	cDrawLine(cid,xBp,yBp,xCp,yCp,"black",2,"butt");	
+	cDrawLine(cid,xCp,yCp,xDp,yDp,"black",2,"butt");	
+	
+	cDrawDot(cid,xAp,yAp,3,"black");			
+	cDrawDot(cid,xBp,yBp,3,"black");	
+	cDrawDot(cid,xCp,yCp,3,"black");
+	cDrawDot(cid,xDp,yDp,3,"black");	
+		
+	ctx.fillStyle="black";
+	ctx.font="bold 14px Arial";
+	ctx.fillText("A",xAp-5,yAp-10);
+	ctx.fillText("B",xBp-15,yBp+20);
+	ctx.fillText("C",xCp+5,yCp+20);
+	ctx.fillText("D",xDp-5,yDp-10);	
+	
+	// forces
+	cDrawArrow(cid,xBp,yBp-60,xBp,yBp-2,"red",3,true);		// FL
+	cDrawArrow(cid,xCp,yBp-60,xCp,yBp-2,"red",3,true);		// FL	
+	ctx.fillStyle="red";
+	ctx.fillText("FL",xBp+10,yBp-60);
+	ctx.fillText("FL",xCp+10,yBp-60);	
+}
+
+// doANS -------------------------------------------------------------------->
+function doANS(partn)
+{	
+	var strb= "&#160;&#160;&#160;Answer ".concat(partn,": ");
+
+	var ansS= gvPart[partn].ansS;
+	//var ansSlist= ansS.split(",");	
+	if (partn <3) {
+		strb= strb.concat(ansS," N/m");	
+	}
+	else if (partn <4) {
+		strb= strb.concat(ansS," N");
+	}
+	document.getElementById("msgline").innerHTML= strb;
+}
+</script>
+
+<!-- Page must load completely before this can run properly ------------------->
+<script>
+	var Ninst= gvNinst;
+	if (Ninst == 0 ) {
+		setIVs("hide");
+		drawBody1();
+		doINSTANCE("new");
+	}
+</script>
+ 
+</body>
+</html>

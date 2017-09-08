@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>FM_P03.html</title>
+<link href="../style_ipp_prob.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../lib_gvSetup.js"></script>
+
+<script>
+gvprobid= "U06_P08";
+gvgridon= false;
+
+// Geometric variables for active display
+
+// Instance variables
+var gvNinst= 0;		// counter
+
+var gvIV1= {typ:"N",nam:"W1", val:0, min:1,max:2 };
+var gvIV2= {typ:"N",nam:"W2", val:0, min:2,max:3 };
+var gvIV3= {typ:"N",nam:"c",  val:0, min:3,max:6 };
+var gvIV4= {typ:"N",nam:"d",  val:0, min:13,max:16 };
+var gvIV=  [4,gvIV1,gvIV2,gvIV3,gvIV4];
+
+// Answers
+var gvPart1= {act:"enter",nam:"RA",typ:"m2.N.N",ansS:"",ansP:"",ntries:0};
+var gvPart2= {act:"enter",nam:"RB",typ:"m2.N.N",ansS:"",ansP:"",ntries:0};
+var gvPart3= {act:"enter",nam:"FE",typ:"m2.N.N",ansS:"",ansP:"",ntries:0};
+var gvPart4= {act:"enter",nam:"ME",typ:"N",     ansS:"",ansP:"",ntries:0};
+var gvPart5= {act:"enter",nam:"FF",typ:"m2.N.N",ansS:"",ansP:"",ntries:0};
+var gvPart6= {act:"enter",nam:"MF",typ:"N",     ansS:"",ansP:"",ntries:0};
+var gvPart=  [6,gvPart1,gvPart2,gvPart3,gvPart4,gvPart5,gvPart6];
+//alert("gv completed");
+</script>
+
+<script type="text/javascript" src="../lib_Actions.js"></script>
+<script type="text/javascript" src="../lib_cDraw1.js"></script>
+ 
+</head>
+
+<body id="bodywrap" onload="initialize2()">
+
+<!-- Wrap for entire page ----------------------------------------------------->
+<div id="pagewrap">
+
+<!-- Wrap for header and canvas ----------------------------------------------->
+<div>
+<div id="hdrwrap"> <!-- postioned relative to parent div-->
+<p class="hdr2">FM_P03</p>
+<p style="padding:5px;"> &#160;An assembly shop frame carries two loads, as shown below. Point E is a marker at x=1 ft; point F is a marker at x=12 ft.</p>
+<p style="padding:5px;"> &#160;(1) Find RA, the reaction at A.</p>
+<p style="padding:5px;"> &#160;(2) Find RB, the reaction at B.</p>
+<p style="padding:5px;"> &#160;(3) Find FE, the internal force at marker E.</p>
+<p style="padding:5px;"> &#160;(4) Find ME, the internal moment at marker E.</p>
+<p style="padding:5px;"> &#160;(5) Find FF, the internal force at marker F.</p>
+<p style="padding:5px;"> &#160;(6) Find MF, the internal moment at marker F.</p>
+</div>
+
+<!-- Canvases ----------------------------------------------------------------->
+<div id="cvswrap" style="width:804px; height:364px;">
+ <canvas id="layer1" width="800px" height="360px"></canvas>
+ <canvas id="layer2" width="800px" height="360px"></canvas>
+ <script>
+	gvgrid.xmax= 800;
+	gvgrid.ymax= 360;
+	gvgrid.dx=   20;
+	gvgrid.dy=   20;
+ </script>	
+</div>
+</div>
+
+<!-- New Instance section -----------------------------------------------------> 
+<div id="instwrap">
+ <div id="INST"><button onclick="doINSTANCE('new')"><b>INSTANCE</b></button></div>
+ <div id="instmsg"><p id="msgInstance">&#160;</p></div>
+</div>
+
+<!-- Set IV section -----------------------------------------------------------> 
+<div id="ivsetctrl">
+ <div id="ivSET_IV"><button onclick="setIVs('set')"><b>SET IVs</b></button></p></div> 
+ <div id="ivSUBMIT"><button onclick="setIVs('submit')"><b>SUBMIT IVs</b></button></p></div>
+ <div id="ivCLR_IV"><button onclick="setIVs('clr')"><b>CLR MSG</b></button></div>
+ <div id="ivmsgline"><p id="ivmsg"></p></div>
+</div>
+<!-- header block -->
+<div id="ivsethdr">
+ <div class="ivnam"><p id="ivnamh">Name</p></div>
+ <div class="ivmin"><p id="ivminh">Min</p></div>
+ <div class="ivmax"><p id="ivmaxh">Max</p></div>
+ <div class="ivval"><p id="ivvalh">Value</p></div> 
+</div>
+<!-- entry blocks -->
+<div id="ivsetwrap"> 
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam1"></p></div>
+  <div class="ivmin"><p id="ivmin1"></p></div>
+  <div class="ivmax"><p id="ivmax1"></p></div>
+  <div class="ivval"><input type="text" size="10" id="enteriv1" value=""></p></div>
+ </div>
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam2"></p></div>
+  <div class="ivmin"><p id="ivmin2"></p></div>
+  <div class="ivmax"><p id="ivmax2"></p></div>
+  <div class="ivval"><input type="text" size="10" id="enteriv2" value=""></p></div>
+ </div>
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam3"></p></div>
+  <div class="ivmin"><p id="ivmin3"></p></div>
+  <div class="ivmax"><p id="ivmax3"></p></div>
+  <div class="ivval"><input type="text" size="10" id="enteriv3" value=""></p></div>
+ </div>
+ <div class="ivsetline">
+  <div class="ivnam"><p id="ivnam4"></p></div>
+  <div class="ivmin"><p id="ivmin4"></p></div>
+  <div class="ivmax"><p id="ivmax4"></p></div>
+  <div class="ivval"><input type=4"text" size="10" id="enteriv4" value=""></p></div>
+ </div>
+</div>
+<hr>
+
+<!-- Part 1 -------------------------------------------------------------------> 
+<div class="partans">
+ <div class="partseg" style="left:3%; width:8%;"><p id="data1">(1) &#160;RAx=</p></div>
+ <div class="partseg" style="left:12%;width:10%;"><input type="text" size="8"
+ id="enterP1.1" value=" "></div>
+ <div class="partseg" style="left:26%; width:4%;"><p id="data1a">RAy=</p></div>
+ <div class="partseg" style="left:31%;width:10%;"><input type="text" size="8"
+ id="enterP1.2" value=" "></div>
+ <div class="ENTER"><button onclick="doENTERn(1,2)"><b>ENTER</b></button></div>
+ <div class="ansres"><p id="resP1"></p></div>
+ <div class="ntries"><p id="tryP1"></p></div>
+ <div class="ANS"><button onclick="doANS(1)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(1)"><b>CLR</b></button></div> 
+</div>
+<!-- Part 2 -------------------------------------------------------------------> 
+<div class="partans">
+ <div class="partseg" style="left:3%; width:8%;"><p id="data2">(2) &#160;RBx=</p></div>
+ <div class="partseg" style="left:12%;width:10%;"><input type="text" size="8"
+ id="enterP2.1" value=" "></div>
+ <div class="partseg" style="left:26%; width:4%;"><p id="data2a">RBy=</p></div>
+ <div class="partseg" style="left:31%;width:10%;"><input type="text" size="8"
+ id="enterP2.2" value=" "></div>
+ <div class="ENTER"><button onclick="doENTERn(2,2)"><b>ENTER</b></button></div>
+ <div class="ansres"><p id="resP2"></p></div>
+ <div class="ntries"><p id="tryP2"></p></div>
+ <div class="ANS"><button onclick="doANS(2)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(2)"><b>CLR</b></button></div> 
+</div>
+<!-- Part 3 -------------------------------------------------------------------> 
+<div class="partans">
+ <div class="partseg" style="left:3%; width:8%;"><p id="data3">(3) &#160;FEx=</p></div>
+  <div class="partseg" style="left:12%;width:10%;"><input type="text" size="8"
+ id="enterP3.1" value=" "></div>
+ <div class="partseg" style="left:26%; width:4%;"><p id="data3a">FEy=</p></div>
+ <div class="partseg" style="left:31%;width:10%;"><input type="text" size="8"
+ id="enterP3.2" value=" "></div>
+ <div class="ENTER"><button onclick="doENTERn(3,2)"><b>ENTER</b></button></div>
+ <div class="ansres"><p id="resP3"></p></div>
+ <div class="ntries"><p id="tryP3"></p></div>
+ <div class="ANS"><button onclick="doANS(3)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(3)"><b>CLR</b></button></div> 
+</div>
+<!-- Part 4 -------------------------------------------------------------------> 
+<div class="partans">
+ <div class="partseg" style="left:3%; width:8%;"><p id="data4">(4) &#160;ME=</p></div>
+ <div class="ansENTER" style="left:12%; width:10%;"><input type="text" size="8" id="enterP4" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(4)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP4"></p></div>
+ <div class="ntries"><p id="tryP4"></p></div>
+ <div class="ANS"><button onclick="doANS(4)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(4)"><b>CLR</b></button></div> 
+</div>
+<!-- Part 5 -------------------------------------------------------------------> 
+<div class="partans">
+ <div class="partseg" style="left:3%; width:8%;"><p id="data5">(5) &#160;FFx=</p></div>
+  <div class="partseg" style="left:12%;width:10%;"><input type="text" size="8"
+ id="enterP5.1" value=" "></div>
+ <div class="partseg" style="left:26%; width:4%;"><p id="data5a">FFy=</p></div>
+ <div class="partseg" style="left:31%;width:10%;"><input type="text" size="8"
+ id="enterP5.2" value=" "></div>
+ <div class="ENTER"><button onclick="doENTERn(5,2)"><b>ENTER</b></button></div>
+ <div class="ansres"><p id="resP5"></p></div>
+ <div class="ntries"><p id="tryP5"></p></div>
+ <div class="ANS"><button onclick="doANS(5)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(5)"><b>CLR</b></button></div> 
+</div>
+<!-- Part 6 -------------------------------------------------------------------> 
+<div class="partans">
+ <div class="partseg" style="left:3%; width:8%;"><p id="data6">(6) &#160;MF=</p></div>
+ <div class="ansENTER" style="left:12%; width:10%;"><input type="text" size="8" id="enterP6" value=" "></div>
+ <div class="ENTER"><button onclick="doENTER(6)"><b>ENTER</b></button></div> 
+ <div class="ansres"><p id="resP6"></p></div>
+ <div class="ntries"><p id="tryP6"></p></div>
+ <div class="ANS"><button onclick="doANS(6)"><b>ANS</b></button></div>
+ <div class="CLR"><button onclick="doCLR(6)"><b>CLR</b></button></div> 
+</div>
+
+<hr>
+<!-- MESSAGE line instance request -------------------------------------------->
+<div id="msgwrap"> 
+ <p id="msgline"><b>&#160;&#160;&#160;Message:</b></p>
+</div>
+<br>
+<!-- General control requests -------------------------------------------------> 
+<div id="ctlwrap">
+ <div id="FEEDBACK1"><button onclick="doFEEDBACK()"><b>FEEDBACK</b></button></div>
+ <div id="HELP1">  <button onclick="doHELP()"><b>HELP</b></button></div>
+ <div id="CLRMSG1"><button onclick="doCLRMSG()"><b>CLEAR MSG</b></button></div>
+ <div id="WORKSH1"><button onclick="doWORKSHEET()"><b>WORKSHEET</b></button></div>
+ <div id="SOLUTION1"><button onclick="doSOLUTION()"><b>SOLUTION</b></button></div>
+</div>
+
+<hr>
+<!-- Footer ------------------------------------------------------------------->
+<div id="ftrwrap">
+<p id="ftrlin1"><b>MSU - CoE</b></p>
+</div>
+
+<!-- Inline scripts specific to this problem ---------------------------------->
+<script type="text/javascript">
+
+// doINSTANCE ----------------------------------------------------------------->
+function doINSTANCE(act)
+{
+	// initialize
+	var strb= "";
+	var part= "";
+	var nbr=  0;
+	var ans=  "";
+
+	if ( act == "new" ) {
+		// generate new instance vbls
+		var W1= 1 +1*Math.random();
+		var W2= 2 +1*Math.random();
+		var c=  3 +3*Math.random();
+		var d=  13 +3*Math.random();
+		gvIV1.val= W1;
+		gvIV2.val= W2;
+		gvIV3.val= c;
+		gvIV4.val= d;
+		gvNinst=   gvNinst +1;
+	}
+	else if ( act == "set" ){
+		W1= Number(gvIV1.val);
+		W2= Number(gvIV2.val);
+		c=  Number(gvIV3.val);
+		d=  Number(gvIV4.val);
+	}
+	var ninst= gvNinst;
+	
+	// display instance line text	
+	var W1f= W1.toPrecision(3);
+	var W2f= W2.toPrecision(3);
+	var cf=  c.toPrecision(3);
+	var df=  d.toPrecision(3);
+	var strb=  " ".concat(ninst,": W1= ",W1f," tons,&#160; W2= ",W2f," tons");
+	strb= strb.concat(",&#160; c= ",cf," ft,&#160; d= ",df," ft.");
+	document.getElementById("msgInstance").innerHTML= strb.bold();
+
+	// clear all enter and message data text
+	doCLR(0);
+
+	// display instance data
+	//drawINSTANCE('INSTANCE');
+
+	// get new solution
+	var L=   24;
+	var h=   12;
+	var RAx= 0;
+	var RBx= 0;
+	var RBy= (c*W1 +d*W2)/L;
+	var RAy= W1 +W2 -RBy;
+	
+	var FEx= 0;
+	var FEy= -RAy;
+	var ME=  1*RAy;
+	
+	var FFx= 0;
+	var FFy= W1 -RAy;
+	var MF=  -12*FFy +c*W1;
+
+	// save the solution
+	RAx= RAx.toPrecision(3);
+	RAy= RAy.toPrecision(3);
+	gvPart[1].ansS= String(RAx).concat(",",String(RAy));
+
+	RBx= RBx.toPrecision(3);
+	RBy= RBy.toPrecision(3);
+	gvPart[2].ansS= String(RBx).concat(",",String(RBy));
+
+	FEx= FEx.toPrecision(3);
+	FEy= FEy.toPrecision(3);
+	gvPart[3].ansS= String(FEx).concat(",",String(FEy));	
+	ME=  ME.toPrecision(3);
+	gvPart[4].ansS= String(ME);
+	
+	FFx= FFx.toPrecision(3);
+	FFy= FFy.toPrecision(3);
+	gvPart[5].ansS= String(FFx).concat(",",String(FFy));	
+	MF=  MF.toPrecision(3);
+	gvPart[6].ansS= String(MF);	
+}	
+	
+// Draw body1 only once, on load ---------------------------------------------->
+function drawBody1()
+{
+	var cid= "layer1";
+	var c1=   document.getElementById(cid);
+	var ctx = c1.getContext('2d');
+	
+	var x0=  220;
+	var y0=  280;
+	gv00.x0= x0;
+	gv00.y0= y0;
+	
+	gvDscal= 100/1;
+	gvFscal= 100/100;
+
+	var wp= 320;		// frame width
+	var hp= 160;		// frame height
+	
+	var xAp= x0;
+	var yAp= y0;
+	var xBp= xAp+wp;
+	var yBp= yAp;
+	var xCp= xAp+wp/3;
+	var yCp= yAp-hp;
+	var xDp= xAp+2*wp/3;
+	var yDp= yCp;
+	var xEp= xAp+wp/11;
+	var yEp= yCp;
+	var xFp= xAp+wp/2;
+	var yFp= yCp;	
+
+	// axes
+	cDrawArrow(cid,x0,y0,x0+wp+80,y0,"gray",1,true);		// x axis	
+	cDrawArrow(cid,x0,y0,x0,y0-hp-100,"gray",1,true);		// y axis		
+	ctx.fillStyle="black";
+	ctx.font="bold 14px Arial";
+	ctx.fillText("X",x0+wp+70,y0+20);
+	ctx.fillText("Y",x0-20,y0-hp-90);
+	
+	// frame
+	cDrawLine(cid,xAp,yAp,xAp,yAp-hp,"gray",16,"butt");
+	cDrawLine(cid,xBp,yBp,xBp,yBp-hp,"gray",16,"butt");
+	cDrawLine(cid,xAp-8,yCp,xBp+8,yCp,"gray",16,"butt");
+	
+	// support at A
+	cDrawLine(cid,xAp-20,yAp+2,xAp+20,yAp+2,"gray",4,"butt");
+	cDrawDot(cid,xAp-8,yAp+7,4,"gray");		
+	cDrawDot(cid,xAp+8,yAp+7,4,"gray");
+	cDrawLine(cid,xAp-20,yAp+12,xAp+20,yAp+12,"black",4,"butt");
+	cDrawDot(cid,xAp,yAp,3,"black");
+	
+	// support at B
+	cDrawDot(cid,xBp,yBp,12,"white");	
+	cDrawLine(cid,xBp,yBp,xBp,yBp+10,"gray",20,"butt");
+	cDrawDot(cid,xBp,yBp,10,"gray");		
+	cDrawLine(cid,xBp-20,yAp+12,xBp+20,yAp+12,"black",4,"butt");
+	cDrawDot(cid,xBp,yBp,6,"white");
+	cDrawDot(cid,xBp,yBp,4,"black");
+		
+	// key points
+	cDrawDot(cid,xCp,yCp,3,"black");
+	cDrawDot(cid,xDp,yDp,3,"black");	
+	cDrawDot(cid,xEp,yEp,2,"blue");
+	cDrawDot(cid,xFp,yFp,2,"blue");	
+	
+	ctx.fillStyle="black";
+	ctx.font="bold 14px Arial";
+	ctx.fillText("A",xAp-25,yAp-5);
+	ctx.fillText("B",xBp+15,yBp-5);
+	ctx.fillText("C",xCp-15,yCp+25);
+	ctx.fillText("D",xDp-15,yDp+25);
+	ctx.fillText("E",xEp-15,yEp+25);
+	ctx.fillText("F",xFp-15,yFp+25);	
+
+	// dimensions
+	cDrawDoubleArrow(cid,xAp,yCp-25,xCp,yCp-25,"gray",1,true);
+	cDrawLine(cid,xCp,yCp-7,xCp,yCp-35,"black",1,"butt");		
+	cDrawDoubleArrow(cid,xAp,yCp-45,xDp,yCp-45,"gray",1,true);
+	cDrawLine(cid,xDp,yCp-7,xDp,yCp-55,"black",1,"butt");
+	cDrawDoubleArrow(cid,xAp,yCp-65,xBp,yCp-65,"gray",1,true);	
+	cDrawLine(cid,xBp,yCp-7,xBp,yCp-75,"black",1,"butt");
+	
+	cDrawTextBG(cid," c ",(xAp+xCp)/2-9,yCp-35);		
+	cDrawTextBG(cid," d ",(xAp+xDp)/2-9,yCp-55);			
+	cDrawTextBG(cid," 24 ft ",(xAp+xBp)/2-9,yCp-75);
+
+	// forces
+	cDrawArrow(cid,xCp,yCp+5,xCp,yCp+45,"red",3,true);		// W1
+	cDrawArrow(cid,xDp,yDp+5,xDp,yDp+65,"red",3,true);		// W2
+	ctx.fillStyle="red";
+	ctx.fillText("W1",xCp+10,yCp+60);
+	ctx.fillText("W2",xDp+10,yDp+80);
+}
+
+// doANS -------------------------------------------------------------------->
+function doANS(partn)
+{	
+	var strb= "&#160;&#160;&#160;Answer ".concat(partn,": ");
+
+	var ansS= gvPart[partn].ansS;
+	//var ansSlist= ansS.split(",");	
+	if ((partn <4)||(partn==5)) {
+		strb= strb.concat(ansS," tons");	
+	}
+	else if ((partn ==4)||(partn==6)) {
+		strb= strb.concat(ansS," ton-ft");
+	}
+	document.getElementById("msgline").innerHTML= strb;
+}
+</script>
+
+<!-- Page must load completely FMfore this can run properly ------------------->
+<script>
+	var Ninst= gvNinst;
+	if (Ninst == 0 ) {
+		setIVs("hide");
+		drawBody1();
+		doINSTANCE("new");
+	}
+</script>
+ 
+</body>
+</html>

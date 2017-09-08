@@ -1,0 +1,1 @@
+{"unitid":"Cables","prbnum":"1","prblin":["A load weighing W N is attached to a cable by a frictionless slide ring. The cable is anchored at A and C. Its length is Lc meters.","(1) What is the equilibrium position of the ring, xB,yB?","(2) What is Tc, the tension in the cable, in N?"],"ivlin":["W,N,80,120,RU","Lc,m,4.5,6.0,RU"],"avlin":["xB,yB","Tc"]}

@@ -1,0 +1,1 @@
+{"unitid":"Coords","prbnum":"4","prblin":["A point (r,@theta|,@phi|) is shown in Spherical coordinates below. The challenge is to express the point location in Cartesian coordinates x,y and z.","(1) What is the value of x?","(2) What is the value of y?","(3) What is the value of z?"],"ivlin":["r,,50,250,RU","@theta|,,-150,150,RU","@phi|,,10,170,RU"],"avlin":["x","y","z"]}
